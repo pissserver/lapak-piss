@@ -142,52 +142,58 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li><a class="active" href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
-                            <li> 
+                            <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
+
+                            <li class="<?= isParentActive(['lapak.php', 'lapak_edit.php', 'block.php', 'block_edit.php', 'instalment.php', 'instalment_edit.php']); ?>"> 
                                 <a href="#"><i class="fa fa-building fa-fw"></i> Data Master<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
-                                    <li><a href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
-                                    <li><a href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li>
+                                    <li><a class="<?= isActive(['lapak.php', 'lapak_edit.php']); ?>" href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
+                                    <li><a class="<?= isActive(['block.php', 'block_edit.php']); ?>" href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
+                                    <li><a class="<?= isActive(['instalment.php', 'instalment_edit.php']); ?>" href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li>
                                 </ul>
                             </li>
-                            <li>
+
+                            <li class="<?= isParentActive(['register.php', 'register_edit.php', 'register2.php', 'register_edit2.php', 'register_view.php', 'register_acc_edit2.php', 'merchant.php', 'merchant_edit.php']); ?>">
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
-                                    <li><a href="register2.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Tambah Lapak</a></li>
-                                    <li><a href="register_view.php"><i class="fa fa-user-plus fa-fw"></i> Permohonan Yg Disetujui</a></li>
-                                    <li><a href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pedagang</a></li>
+                                    <li><a class="<?= isActive(['register.php', 'register_edit.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
+                                    <li><a class="<?= isActive(['register2.php', 'register_edit2.php']); ?>" href="register2.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Tambah Lapak</a></li>
+                                    <li><a class="<?= isActive(['register_view.php', 'register_acc_edit2.php']); ?>" href="register_view.php"><i class="fa fa-user-plus fa-fw"></i> Permohonan Yg Disetujui</a></li>
+                                    <li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pedagang</a></li>
                                 </ul>
                             </li>
-                            <li>
+
+                            <li class="<?= isParentActive(['rent.php', 'rent2.php', 'rent_edit.php']); ?>">
                                 <a href="#"><i class="fa fa-money fa-fw"></i> Angsuran Lapak<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="rent.php"><i class="fa fa-money fa-fw"></i> Pembayaran Angsuran</a></li>
-                                    <li><a href="rent2.php"><i class="fa fa-money fa-fw"></i> Angsuran Yg Terlambat</a></li>
+                                    <li><a class="<?= isActive(['rent.php', 'rent_edit.php']); ?>" href="rent.php"><i class="fa fa-money fa-fw"></i> Pembayaran Angsuran</a></li>
+                                    <li><a class="<?= isActive(['rent2.php']); ?>" href="rent2.php"><i class="fa fa-money fa-fw"></i> Angsuran Yg Terlambat</a></li>
                                 </ul>
                             </li>
-                            <li >
+
+                            <li class="<?= isParentActive(['move_select.php', 'move.php', 'move_select2.php', 'move_log.php']); ?>">
                                 <a href="#"><i class="fa fa-retweet fa-fw"></i> Perpindahan lapak<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="move_select.php"><i class="fa fa-retweet fa-fw"></i> Pindah Ke Lapak Kosong</a></li>
-                                    <li><a href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Tukar Lapak</a></li>
-                                    <li><a href="move_log.php"><i class="fa fa-book fa-fw"></i> Histori Perpindahan</a></li>
+                                    <li><a class="<?= isActive(['move_select.php', 'move.php']); ?>" href="move_select.php"><i class="fa fa-retweet fa-fw"></i> Pindah Ke Lapak Kosong</a></li>
+                                    <li><a class="<?= isActive(['move_select2.php']); ?>" href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Tukar Lapak</a></li>
+                                    <li><a class="<?= isActive(['move_log.php']); ?>" href="move_log.php"><i class="fa fa-book fa-fw"></i> Histori Perpindahan</a></li>
                                 </ul>
                             </li>
-                            <li >
+
+                            <li class="<?= isParentActive(['nonactive_merchant.php', 'nonactive_lapak.php', 'nonactive_log.php']); ?>">
                                 <a href="#"><i class="fa fa-window-close fa-fw"></i> NonAktif<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="nonactive_merchant.php"><i class="fa fa-user-times fa-fw"></i> NonAktif Pedagang</a></li>
-                                    <li><a href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li>
-                                    <li><a href="nonactive_log.php"><i class="fa fa-book fa-fw"></i> Histori NonAktif</a></li>
+                                    <li><a class="<?= isActive(['nonactive_merchant.php']); ?>" href="nonactive_merchant.php"><i class="fa fa-user-times fa-fw"></i> NonAktif Pedagang</a></li>
+                                    <li><a class="<?= isActive(['nonactive_lapak.php']); ?>" href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li>
+                                    <li><a class="<?= isActive(['nonactive_log.php']); ?>" href="nonactive_log.php"><i class="fa fa-book fa-fw"></i> Histori NonAktif</a></li>
                                 </ul>
                             </li>
-                            <li>
+
+                            <li class="<?= isParentActive(['report_merchant.php', 'report_credit.php']); ?>">
                                 <a href="#"><i class="fa fa-book fa-fw"></i> Laporan<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="report_merchant.php"><i class="fa fa-user fa-fw"></i> Data Pedagang</a></li>
-                                    <li><a href="report_credit.php"><i class="fa fa-user fa-fw"></i> Piutang Lapak</a></li>
+                                    <li><a class="<?= isActive(['report_merchant.php', 'move.php']); ?>" href="report_merchant.php"><i class="fa fa-user fa-fw"></i> Data Pedagang</a></li>
+                                    <li><a class="<?= isActive(['report_credit.php', 'move.php']); ?>" href="report_credit.php"><i class="fa fa-user fa-fw"></i> Piutang Lapak</a></li>
                                 </ul>
                             </li>
                         </ul>
