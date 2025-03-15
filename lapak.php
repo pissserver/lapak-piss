@@ -2,6 +2,11 @@
 	session_start();
 	include "connection.php";
 	include "components/role_session.php";
+
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,16 +20,7 @@
 		<link rel="shortcut icon" href="img/logo.png" />
 		<title>Lapak | PISS</title>
 
-		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<!-- MetisMenu CSS -->
-		<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-		<!-- Timeline CSS -->
-		<link href="css/plugins/timeline.css" rel="stylesheet">
-		<!-- Custom CSS -->
-		<link href="css/sb-admin-2.css" rel="stylesheet">
-		<!-- Custom Fonts -->
-		<link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <?php echo headScript(); ?>
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,8 +61,7 @@
 			<div id="page-wrapper">
 				<br><br><br><br>
 				<div class="row">
-					<div class="col-md-3" style="padding:10px;">
-						<br /><br /><br />
+					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<i class="fa fa-pencil fa-fw"></i> Tambah Data Lapak
@@ -84,16 +79,16 @@
 											<?php } ?>
 										</select>
 										<div class="row">
-											<div class="col-md-6" style="padding:10px;">
+											<div class="col-md-6" style="margin-top:20px;">
 												<label>Panjang</label><sup> ( m )</sup>
 												<input class="form-control" id="p" name="p" type="number" step="0.01" value="0" required />
 											</div>
-											<div class="col-md-6" style="padding:10px;">
+											<div class="col-md-6" style="margin-top:20px;">
 												<label>Lebar</label><sup> ( m )</sup>
 												<input class="form-control" id="l" name="l" type="number" step="0.01" value="0" required />
 											</div>
 										</div>
-										<div class="form-group" style="padding:10px; margin-top: -10px;">
+										<div class="form-group" style="padding:0 15px; margin-top: 15px;">
 											<label>Harga</label><sup> ( /m<sup>2</sup> - /tahun )</sup>
 											<input class="form-control" id="price" name="price" type="text" value="0" required />
 											<script>
@@ -108,7 +103,7 @@
 												});
 											</script>
 										</div>
-										<div class="form-group" style="padding:10px; margin-top: -15px;">
+										<div class="form-group" style="padding:0 15px; margin-top: 15px;">
 											<label>Masa Pakai</label><sup> ( tahun )</sup>
 											<input class="form-control" id="dur" name="dur" type="text" value="0" required />
 											<script>
@@ -120,7 +115,7 @@
 												});
 											</script>
 										</div>
-										<div class="form-group" style="padding:10px; margin-top: -15px;">
+										<div class="form-group" style="padding:0 15px; margin-top: 15px;">
 											<label>Jenis</label>
 											<select class="form-control" name="type" id="type" required>
 												<option value="">- Pilih Jenis Lapak -</option>
@@ -129,24 +124,41 @@
 												<option value="Lainnya">Lainnya</option>
 											</select>
 										</div>
-										<div class="form-group" style="padding:10px; margin-top: -10px; margin-bottom: -10px;">
-											<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>
+										<div class="form-group" style="padding:0 15px; margin-top: 25px;">
+											<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
 										</div>
 									</fieldset>
 								</form> 
 							</div>
 						</div>
 					</div>
-					<div class="col-md-9" style="margin-top:20px;">
-						<div id="Area1">
-							<div class="alert alert-info" onclick="clearNotif()">
-								<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+
+					<div class="col-md-12" style="margin-top:10px;">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<i class="fa fa-building fa-fw"></i> Data Lapak
+							</div>
+							<div class="panel-body">
+								<div id="Area1">
+									<div class="alert alert-info" onclick="clearNotif()">
+										<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- End Main Content ============================================================================================================== -->
+		</div>
+
+		<!-- Modal Edit -->
+		<div id="modalEditLapak" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Meload modal "lapak_modal.php" file -->
+				</div>
+			</div>
 		</div>
 
 		<script>
