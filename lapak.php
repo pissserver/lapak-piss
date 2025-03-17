@@ -81,16 +81,16 @@
 										<div class="row">
 											<div class="col-md-6" style="margin-top:20px;">
 												<label>Panjang</label><sup> ( m )</sup>
-												<input class="form-control" id="p" name="p" type="number" step="0.01" value="0" required />
+												<input class="form-control" id="p" name="p" type="number" placeholder="0" required />
 											</div>
 											<div class="col-md-6" style="margin-top:20px;">
 												<label>Lebar</label><sup> ( m )</sup>
-												<input class="form-control" id="l" name="l" type="number" step="0.01" value="0" required />
+												<input class="form-control" id="l" name="l" type="number" placeholder="0" required />
 											</div>
 										</div>
 										<div class="form-group" style="padding:0 15px; margin-top: 15px;">
 											<label>Harga</label><sup> ( /m<sup>2</sup> - /tahun )</sup>
-											<input class="form-control" id="price" name="price" type="text" value="0" required />
+											<input class="form-control" id="price" name="price" type="text" placeholder="0" required />
 											<script>
 												$("input[name='price']").TouchSpin({
 													min: 0,
@@ -105,7 +105,7 @@
 										</div>
 										<div class="form-group" style="padding:0 15px; margin-top: 15px;">
 											<label>Masa Pakai</label><sup> ( tahun )</sup>
-											<input class="form-control" id="dur" name="dur" type="text" value="0" required />
+											<input class="form-control" id="dur" name="dur" type="text" placeholder="0" required />
 											<script>
 												$("input[name='dur']").TouchSpin({
 												verticalbuttons: true,
@@ -134,7 +134,7 @@
 					</div>
 
 					<div class="col-md-12" style="margin-top:10px;">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" style="overflow-x: auto">
 							<div class="panel-heading">
 								<i class="fa fa-building fa-fw"></i> Data Lapak
 							</div>
@@ -179,5 +179,24 @@
 		<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<script src="js/sb-admin-2.js"></script>
+		<!-- Sweet Alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 	</body>
 </html>

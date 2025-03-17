@@ -2,6 +2,11 @@
 	session_start();
 	include "connection.php";
 	include "components/role_session.php";
+
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,20 +16,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="icon" href="../images/icon.png">
-		<link rel="shortcut icon" href="../images/icon.png" />
+		<link rel="icon" href="img/logo.png">
+		<link rel="shortcut icon" href="img/logo.png" />
 		<title>Blok | PISS</title>
 
-		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<!-- MetisMenu CSS -->
-		<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-		<!-- Timeline CSS -->
-		<link href="css/plugins/timeline.css" rel="stylesheet">
-		<!-- Custom CSS -->
-		<link href="css/sb-admin-2.css" rel="stylesheet">
-		<!-- Custom Fonts -->
-		<link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<?php echo headScript(); ?>
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,8 +60,7 @@
 			<div id="page-wrapper">
 				<br><br><br><br>
 				<div class="row">
-					<div class="col-md-3" style="padding:10px;">
-						<br /><br /><br />
+					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<i class="fa fa-pencil fa-fw"></i> Tambah Data Blok
@@ -73,34 +68,56 @@
 							<div class="panel-body">
 								<form class="form-horizontal" id="formBlock" name = "formBlock" method="POST" action="block_action.php?task=insert">
 									<fieldset>
-										<div class="form-group" style="padding:10px; margin-top:-20px;">
-											<label>Blok</label>
-											<input class="form-control" id="block" name="block" type="text" placeholder="Nama Blok"  autofocus="autofocus" required/>
-										</div>
-										<div class="form-group" style="padding:10px; margin-top:-20px;">
-											<label>Jumlah Max Unit</label>
-											<input class="form-control" id="max" name="max" min="1" type="number" placeholder="Unit Blok" required/>
-										</div>
-										<div class="form-group" style="padding:10px; margin-top:-20px;">
-											<label>Jenis</label>
-											<select class="form-control" name="type" id="type">
-												<option value="Buah">Buah</option>
-												<option value="Sayur">Sayur</option>
-												<option value="Campuran">Campuran</option>
-											</select>
-										</div>
-										<div class="form-group" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-											<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group" style="padding:0 15px;">
+													<label>Nama Blok</label>
+													<input class="form-control" id="block" name="block" type="text" placeholder="Nama Blok"  autofocus="autofocus" required/>
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group" style="padding:0 15px;">
+													<label>Jumlah Max Unit</label>
+													<input class="form-control" id="max" name="max" min="1" type="number" placeholder="Jumlah Max Unit Blok" required/>
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group" style="padding:0 15px;">
+													<label>Jenis</label>
+													<select class="form-control" name="type" id="type" required>
+														<option value="">- Pilih Jenis Blok -</option>
+														<option value="Buah">Buah</option>
+														<option value="Sayur">Sayur</option>
+														<option value="Campuran">Campuran</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<div class="form-group" style="padding:0 15px; margin-top: 10px;">
+													<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
+												</div>
+											</div>
 										</div>
 									</fieldset>
 								</form> 
 							</div>
 						</div>
 					</div>
-					<div class="col-md-9" style="margin-top:20px;">
-						<div id="Area1">
-							<div class="alert alert-info" onclick="clearNotif()">
-								<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+
+					<div class="col-md-12" style="margin-top:10px;">
+						<div class="panel panel-primary" style="overflow-x: auto">
+							<div class="panel-heading">
+								<i class="fa fa-sort-alpha-asc fa-fw"></i> Data Block
+							</div>
+							<div class="panel-body">
+								<div id="Area1">
+									<div class="alert alert-info" onclick="clearNotif()">
+										<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -108,6 +125,25 @@
 			</div>
 			<!-- End Main Content -->
 		</div>
+
+		<!-- Modal Edit -->
+		<div id="modalEditBlock" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Meload modal "block_modal.php" file -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Delete -->
+		<div id="modalDeleteBlock" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Meload modal "block_modal_delete.php" file -->
+				</div>
+			</div>
+		</div>
+
 		<script>
 			$(document).ready(function(){
 				// Auto Refresh Page
@@ -126,5 +162,24 @@
 		<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<script src="js/sb-admin-2.js"></script>
+		<!-- Sweet Alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 	</body>
 </html>

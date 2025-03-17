@@ -8,33 +8,35 @@
 	
 	// Input 
 	if ($task == 'insert'){
-		if($_POST['block']==''){
-			echo "<script>window.alert('Block Belum Dipilih');
-			window.history.back()</script>";
-			exit();
-		}
-		if($_POST['p']==0||$_POST['l']==0){
-			echo "<script>window.alert('Mohon Isikan Panjang dan Lebar Lapak');
-			window.history.back()</script>";
-			exit();
-		}
-		if($_POST['price']==0){
-			echo "<script>window.alert('Mohon Isikan Harga Lapak');
-			window.history.back()</script>";
-			exit();
-		}
-		if($_POST['dur']==0){
-			echo "<script>window.alert('Mohon Isikan Masa Pakai Lapak');
-			window.history.back()</script>";
-			exit();
-		}
+		// if($_POST['block']==''){
+		// 	echo "<script>window.alert('Block Belum Dipilih');
+		// 	window.history.back()</script>";
+		// 	exit();
+		// }
+		// if($_POST['p']==0||$_POST['l']==0){
+		// 	echo "<script>window.alert('Mohon Isikan Panjang dan Lebar Lapak');
+		// 	window.history.back()</script>";
+		// 	exit();
+		// }
+		// if($_POST['price']==0){
+		// 	echo "<script>window.alert('Mohon Isikan Harga Lapak');
+		// 	window.history.back()</script>";
+		// 	exit();
+		// }
+		// if($_POST['dur']==0){
+		// 	echo "<script>window.alert('Mohon Isikan Masa Pakai Lapak');
+		// 	window.history.back()</script>";
+		// 	exit();
+		// }
 		$no 	= executeScalar("select count(lapak_id) from lapak where block_id = '".$_POST['block']."' ");
 		$no		= $no+1;
 		$exist 	= executeScalar("select count(lapak_id) from lapak where block_id = '".$_POST['block']."' and lapak_no = '".$no."' ");
 		
 		if($exist>0){
-			echo "<script>window.alert('Lokasi Lapak Sudah Ada, Mohon Dicek Lagi');
-			window.history.back()</script>";
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Lokasi Lapak Sudah Ada, Mohon Dicek Lagi";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 		else{
@@ -49,8 +51,11 @@
 			}
 			elseif($btype=='Buah'||$btype=='Sayur'){
 				if($_POST['type']!=$btype){
-					echo "<script>window.alert('Tipe lapak berbeda dengan tipe block, Mohon Dicek Lagi');
-					window.history.back()</script>";
+					// Alert Information
+					$_SESSION['success'] = false;
+					$_SESSION['title'] = 'Gagal';
+					$_SESSION['message'] = "Tipe lapak berbeda dengan tipe block";
+					echo "<script>window.history.back()</script>";
 					exit();
 				}
 				else{
@@ -58,25 +63,35 @@
 				}
 			}
 			$insert = mysql_query("INSERT INTO `lapak` (`lapak_id`, `lapak_type`, `block_id`, `lapak_no`,
-			`lapak_name`, `p`, `l`, `lapak_size`, `lapak_price`, `lapak_total`, `duration`)
+			`lapak_name`, `p`, `l`, `lapak_size`, `lapak_price`, `lapak_total`, `duration`, `lapak_status`)
 			VALUES ('', '".$type."', '".$_POST['block']."', '".$no."', '".$name."', '".$_POST['p']."', 
-			'".$_POST['l']."', '".$size."', '".$_POST['price']."', '".$total."', '".$_POST['dur']."')");
+			'".$_POST['l']."', '".$size."', '".$_POST['price']."', '".$total."', '".$_POST['dur']."', 'Kosong')");
 			
 			if($insert){
 				$update	= mysql_query("update block set block_now = '".$no."' where block_id = '".$_POST['block']."'");
 				if($update){
+					// Alert Information
+					$_SESSION['success'] = true;
+					$_SESSION['title'] = 'Berhasil';
+					$_SESSION['message'] = "Menambahkan data lapak baru";
 					echo "<script>window.location=('lapak.php')</script>";
 					exit();
 				}
 				else{
-					echo "<script>window.alert('Data Gagal Masuk');
-					window.history.back()</script>";
+					// Alert Information
+					$_SESSION['success'] = false;
+					$_SESSION['title'] = 'Gagal';
+					$_SESSION['message'] = "Menambahkan data lapak baru";
+					echo "<script>window.history.back()</script>";
 					exit();
 				}
 			}
 			else{
-				echo "<script>window.alert('Data Gagal Masuk');
-				window.history.back()</script>";
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Menambahkan data lapak baru";
+				echo "<script>window.history.back()</script>";
 				exit();
 			}
 		}
@@ -89,8 +104,9 @@
 		$total	= 0;
 		$size	= $_POST['p']*$_POST['l'];
 		$total	= $size*$_POST['price'];
-		//$name	= $_POST['block'].'-'.$_POST['no'];
+		$name	= $_POST['name'];
 		$update	= mysql_query("update lapak set lapak_type 	= '".$_POST['type']."',
+											lapak_name		= '".$_POST['name']."',
 											p				= '".$_POST['p']."',
 											l 				= '".$_POST['l']."',
 											lapak_size		= '".$size."',
@@ -100,12 +116,19 @@
 											duration 		= '".$_POST['dur']."'
 											where lapak_id 	= '".$id."'");
 		if($update){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "update data lapak";
 			echo "<script>window.location=('lapak.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Update Data Gagal');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "update data lapak";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 	}

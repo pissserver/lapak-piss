@@ -24,7 +24,7 @@
         <form class="form-horizontal" id="formlapak" name="formlapak" method="POST" action="lapak_action.php?task=update&id=<?php echo $r[0]; ?>">
 			<fieldset>
 				<div class="row">
-					<div class="col-md-6" style="padding-left:40px; padding-right: 10px; margin-top: -10px;">
+					<div class="col-md-4" style="padding-left:40px; padding-right: 10px;">
 						<label>Blok</label>
 						<select class="form-control" name="block" id="block" disabled>
 							<option value="<?php echo $r['block_id']; ?>"><?php echo $r['block_id']; ?></option>
@@ -35,20 +35,27 @@
 									<?php } ?>
 						</select>
 					</div>
-					<div class="col-md-6" style="padding-left:10px; padding-right: 40px; margin-top: -10px;">
+					<div class="col-md-4" style="padding-left:15px; padding-right: 10px;">
 						<label>No</label>
 						<input class="form-control" id="no" name="no" type="number" value="<?php echo $r['lapak_no']; ?>" disabled/>
 					</div>
-					<div class="row">
-						<div class="col-md-6" style="padding-left:55px; padding-right: 10px; margin-top: 10px;">
-							<label>Panjang</label>
-							<input class="form-control" id="p" name="p" type="number" step="0.01" value="<?php echo $r['p']; ?>" required />
-						</div>
-					<div class="col-md-6" style="padding-left:10; padding-right: 55px; margin-top: 10px;">
+					<div class="col-md-4" style="padding-left:15px; padding-right: 40px;">
+						<label>Nama Lapak</label>
+						<input class="form-control" id="name" name="name" type="text" value="<?php echo $r['lapak_name']; ?>"/>
+					</div>
+					<div class="col-md-4" style="padding-left:40px; margin-top: 10px;">
+						<label>Panjang</label>
+						<input class="form-control" id="p" name="p" type="number" step="0.01" value="<?php echo $r['p']; ?>" required />
+					</div>
+					<div class="col-md-4" style="padding-right: 10px; margin-top: 10px;">
 						<label>Lebar</label>
 						<input class="form-control" id="l" name="l" type="number" step="0.01" value="<?php echo $r['l']; ?>" required />
 					</div>
-					<div class="form-group" style="padding-left:70px; padding-right: 70px;">
+					<div class="col-md-4" style="padding-right: 40px; margin-top: 10px;">
+						<label>Luas</label>
+						<input class="form-control" id="size" name="size" type="number" step="0.01" value="<?php echo $r['lapak_size']; ?>" required disabled/>
+					</div>
+					<div class="col-md-12" style="padding-left:40px; padding-right: 40px; margin-top: 10px">
 						<label>Harga Per (M<sup>2</sup>)</label>
 						<input class="form-control" id="price" name="price" type="text" value="<?php echo $r['lapak_price']; ?>" required />
 							<script>
@@ -63,7 +70,7 @@
 								});
 							</script>
 					</div>
-					<div class="form-group" style="padding-left:70px; padding-right: 70px;">
+					<div class="col-md-12" style="padding-left:40px; padding-right: 40px; margin-top: 10px">
 						<label>Masa Pakai</label>
 						<input class="form-control" id="dur" name="dur" type="text" value="<?php echo $r['duration']; ?>" required />
 						<script>
@@ -75,7 +82,7 @@
 							});
 						</script>
 					</div>
-					<div class="form-group" style="padding-left:70px; padding-right: 70px;">
+					<div class="col-md-12" style="padding-left:40px; padding-right: 40px; margin-top: 10px">
 					    <label>Jenis</label>
 						<select class="form-control" name="type" id="type">
 							<option value="<?php echo $r['lapak_type']; ?>" required ><?php echo $r['lapak_type']; ?></option>
@@ -84,23 +91,23 @@
 							<option value="Lainnya">Lainnya</option>
 						</select>
 					</div>
-					<div class="form-group" style="padding-left:70px; padding-right: 70px;">
+					<div class="col-md-12" style="padding-left:40px; padding-right: 40px; margin-top: 10px">
 						<label>Status</label>
 						<select class="form-control" name="status" id="status">
-						    <option value="<?php echo $r['lapak_status']; ?>" required ><?php echo $r['lapak_status']; ?></option>
-						    <option value="Terisi">Terisi</option>
-						    <option value="">Kosong</option>
+						    <!-- <option value="<?php echo $r['lapak_status']; ?>" required ><?php echo $r['lapak_status']; ?></option> -->
+						    <option value="Terisi" <?php echo ($r['lapak_status'] == 'Terisi') ? 'Selected' : ''; ?> >Terisi</option>
+						    <option value="Kosong" <?php echo ($r['lapak_status'] == 'Kosong' || $r['lapak_status'] == NULL) ? 'Selected' : ''; ?> >Kosong</option>
 						</select>
 					</div>
-					<div class="row" style="margin-top: -10px;">
-					    <div class="col-md-6">
+					<div class="row" style="margin-top: 20px;">
+					    <!-- <div class="col-md-6">
 						    <div class="form-group" style="padding:10px; margin-top: -10px; margin-bottom: -10px;">
 								<button class="btn btn-outline btn-success btn-block" type="button" onclick="history.go(-1);">Batal</button>
 							</div>
-						</div>
-					<div class="col-md-6">
-					    <div class="form-group" style="padding:10px; margin-top: -10px; margin-bottom: -10px;">
-							<button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button>
+						</div> -->
+					<div class="col-md-12">
+					    <div class="form-group" style="padding: 0 55px; margin-top: 20px; ">
+							<button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
 						</div>
 					</div>
 				</div>

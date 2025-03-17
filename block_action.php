@@ -11,8 +11,10 @@
 		$exist 	= executeScalar("select count(block_id) from block where block_id = '".$_POST['block']."' ");
 		
 		if($exist>0||$_POST['block']==''){
-			echo "<script>window.alert('Nama Block Sudah Ada, Mohon Dicek Lagi');
-			window.history.back()</script>";
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Nama Block Sudah Ada, Mohon Dicek Lagi";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 		else{
@@ -20,12 +22,19 @@
 			VALUES ('".$_POST['block']."', '".$_POST['max']."', '".$_POST['type']."')");
 			
 			if($insert){
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Menambahkan data blok baru";
 				echo "<script>window.location=('block.php')</script>";
 				exit();
 			}
 			else{
-				echo "<script>window.alert('Data Gagal Masuk');
-				window.history.back()</script>";
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Menambahkan data blok baru";
+				echo "<script>window.history.back()</script>";
 				exit();
 			}
 		}
@@ -38,25 +47,40 @@
 											block_type 		= '".$_POST['type']."'
 											where block_id 	= '".$id."'");
 		if($update){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Update data blok";
 			echo "<script>window.location=('block.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Update Data Gagal');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = fasle;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Update data blok";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 	}
 	
 	elseif ($task=='delete'){
-		//$delete = mysql_query("delete block where block_id = '".$id."'");
+		$id		= $_GET['id'];
+		$delete = mysql_query("delete from block where block_id = '".$id."'");
 		if($delete){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Hapus data blok";
 			echo "<script>window.location=('block.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Delete Failled');
-			window.location=('block.php')</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Hapus data blok";
+			echo "<script>window.location=('block.php')</script>";
 			exit();
 		}
 	}

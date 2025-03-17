@@ -15,16 +15,17 @@
 <table id="lapakView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="text-align:center" >NO</th>
-			<th style="text-align:center" >LAPAK</th>
-			<th style="text-align:center" >P <sup>( M )</sup></th>
-			<th style="text-align:center" >L <sup>( M )</sup></th>
-			<th style="text-align:center" >LUAS <sup>( M<sup>2</sup> )</sup></th>
-			<th style="text-align:center" >HARGA <sup>( /M<sup>2</sup> )</sup></th>
-			<th style="text-align:center" >TOTAL</th>
-			<th style="text-align:center" >DURASI <sup>( TAHUN )</sup></th>
-			<th style="text-align:center" >STATUS</th>
-			<th style="text-align:center" >AKSI</th>
+			<th style="width: 6%; text-align:center" >NO</th>
+			<th style="width: 9%; text-align:center" >LAPAK</th>
+			<th style="width: 9%; text-align:center" >JENIS</th>
+			<th style="width: 8%; text-align:center" >P <sup>( M )</sup></th>
+			<th style="width: 8%; text-align:center" >L <sup>( M )</sup></th>
+			<th style="width: 10%; text-align:center" >LUAS <sup>( M<sup>2</sup> )</sup></th>
+			<th style="width: 10%; text-align:center" >HARGA <sup>( /M<sup>2</sup> )</sup></th>
+			<th style="width: 10%; text-align:center" >TOTAL</th>
+			<th style="width: 10%; text-align:center" >DURASI <sup>( TAHUN )</sup></th>
+			<th style="width: 10%; text-align:center" >STATUS</th>
+			<th style="width: 10%; text-align:center" >AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -39,6 +40,7 @@
 		<tr>
 			<td style="text-align:center; vertical-align: middle;"><?php echo $data['lapak_id']; ?></td>
 			<td style="text-align:center; vertical-align: middle;"><?php echo $data['lapak_name']; ?></td>
+			<td style="text-align:center; vertical-align: middle;"><?php echo $data['lapak_type']; ?></td>
 			<td style="text-align:center; vertical-align: middle;"><?php echo $data['p']; ?></td>
 			<td style="text-align:center; vertical-align: middle;"><?php echo $data['l']; ?></td>
 			<td style="text-align:center; vertical-align: middle;"><?php echo $data['lapak_size']; ?></td>
