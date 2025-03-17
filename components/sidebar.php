@@ -153,10 +153,10 @@
                                 </ul>
                             </li>
 
-                            <li class="<?= isParentActive(['register.php', 'register_edit.php', 'register2.php', 'register_edit2.php', 'register_view.php', 'register_acc_edit2.php', 'merchant.php', 'merchant_edit.php']); ?>">
+                            <li class="<?= isParentActive(['register.php', 'register_edit.php', 'register_acc.php', 'register2.php', 'register_edit2.php', 'register_view.php', 'register_acc_edit2.php', 'merchant.php', 'merchant_edit.php']); ?>">
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a class="<?= isActive(['register.php', 'register_edit.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
+                                    <li><a class="<?= isActive(['register.php', 'register_edit.php', 'register_acc.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
                                     <li><a class="<?= isActive(['register2.php', 'register_edit2.php']); ?>" href="register2.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Tambah Lapak</a></li>
                                     <li><a class="<?= isActive(['register_view.php', 'register_acc_edit2.php']); ?>" href="register_view.php"><i class="fa fa-user-plus fa-fw"></i> Permohonan Yg Disetujui</a></li>
                                     <li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pedagang</a></li>

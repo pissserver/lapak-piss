@@ -2,6 +2,11 @@
 	session_start();
 	include "connection.php";
 	include "components/role_session.php";
+
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,18 +18,9 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Admin</title>
+    <title>Detail Pemohon Lapak | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php echo headScript(); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -89,101 +85,141 @@
 		<div id="page-wrapper">
 		<br><br><br><br>
             <div class="row">
-                <div class="col-lg-12" style="padding:10px;">
+				<div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-pencil fa-fw"></i> Permohonan Menempati Lapak PIOS
+                            <i class="fa fa-user fa-fw"></i> Detail Pemohon Lapak
                         </div>
                         <div class="panel-body">
-                            	<fieldset>
-								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-								<form action="register_action.php?task=update&id=<?php echo $id; ?>" id="formRegisterAcc" name = "formRegisterAcc" method="POST" class="form-horizontal">
-									<div class="form-group" style="padding:10px; margin-right:10px;">
-										<label>No. PL</label>
-										<input id="pl" name="pl" value="<?php 
-											$idq = sprintf("%03d", $id);echo 'PL'.$idq; ?>" type="text" class="form-control" disabled /> 
-										<br />
-										<label>Nama</label>
-										<input id="name1" name="name1" value="<?php echo $r['req_name']; ?>" type="text" class="form-control" required /> 
-										<input id="name2" name="name2" value="<?php echo $r['req_nick']; ?>" type="text" class="form-control" > 
-										<br />
-										<label>Alamat</label>
-										<input id="adrs1" name="adrs1" value="<?php echo $r['address1']; ?>" type="text" class="form-control" required />
-										<input id="adrs2" name="adrs2" value="<?php echo $r['address2']; ?>" type="text" class="form-control" required />
-										
+							<form action="register_action.php?task=update&id=<?php echo $id; ?>" id="formRegisterAcc" name = "formRegisterAcc" method="POST" class="form-horizontal">
+								<fieldset>
+									<div class="row">
+										<div class="col-lg-12" style="padding:0 20px 15px 20px">
+											<label>No. PL</label>
+											<input id="pl" name="pl" value="<?php $idq = sprintf("%03d", $id);echo 'PL'.$idq; ?>" type="text" class="form-control" disabled />
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px; margin-right:10px;">
-										<label>Telepon</label>
-										<input id="tlp1" name="tlp1" value="<?php echo $r['phone1']; ?>" maxlength="11" onkeydown="return isNumber(event);" type="text" class="form-control" />
-										<input id="tlp2" name="tlp2" value="<?php echo $r['phone2']; ?>" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
-										<br />
-										<label>No Identitas</label>
-										<input id="ktp" name="ktp" value="<?php echo $r['nid_ktp']; ?>" maxlength="16" onkeydown="return isNumber(event);" type="text" class="form-control" />
-										<input id="sim" name="sim" value="<?php echo $r['nid_sim']; ?>" maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
-										<input id="lain" name="lain" value="<?php echo $r['nid_lain']; ?>"  maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
-										<select class="form-control" name="nid" id="nid">
-											<option value="<?php echo $r['nid_type']; ?>"><?php echo $r['nid_type']; ?></option>
-											<option value="KTP">KTP</option>
-											<option value="SIM">SIM</option>
-											<option value="PASPOR">PASPOR</option>
-											<option value="Pelajar">Kartu Pelajar/Mahasiswa</option>
-											<option value="Lainnya">Lainnya</option>
-										</select>
+
+									<div class="row">
+										<div class="col-lg-6" style="padding:0 10px 0 20px">
+											<label>Nama</label>
+											<input id="name1" name="name1" value="<?php echo $r['req_name']; ?>" placeholder="Nama Sesuai KTP" type="text" class="form-control" required />   
+											<input style="margin-top: 5px;" id="name2" name="name2" value="<?php echo $r['req_nick']; ?>" placeholder="Nama Alias" type="text" class="form-control">          
+										</div>
+
+										<div class="col-lg-6" style="padding:0 20px 0 10px;">
+											<label>Alamat</label>
+											<input id="adrs1" name="adrs1" value="<?php echo $r['address1']; ?>" placeholder="Alamat Sesuai KTP" type="text" class="form-control" required />
+											<input style="margin-top: 5px;" id="adrs2" name="adrs2" value="<?php echo $r['address2']; ?>" placeholder="Alamat Surat (Opsional)" type="text" class="form-control" />
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px;">
-										<label>Lapak</label>
-										<select class="form-control" name="lapak" id="lapak">
-											<?php 
-												$lapak 	= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_id='".$r['lapak_id']."'");
-												while($d = mysql_fetch_array($lapak)){
-													echo '<option value="'.$d['lapak_id'].'">'.$d['lapak_name'].' / '.$d['lapak_type'].'</option>';
-												}
-												$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status is null ");
-												while($data = mysql_fetch_array($sql)){?>
-												<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>
-											<?php } ?>
-										</select>
+
+									<div class="row">
+										<div class="col-lg-6" style="padding:0 10px 0 20px; margin-top: 15px;">
+											<label>Telepon</label>
+											<input id="tlp1" name="tlp1" value="<?php echo $r['phone1']; ?>" maxlength="11" onkeydown="return isNumber(event);" placeholder="Telepon Rumah" type="text" class="form-control" />
+											<input style="margin-top: 5px;" id="tlp2" name="tlp2" value="<?php echo $r['phone2']; ?>" maxlength="13" onkeydown="return isNumber(event);" placeholder="Handphone (HP)" type="text" class="form-control" />
+										</div>
+
+										<div class="col-lg-6" style="padding:0 20px 0 10px; margin-top: 15px;">
+											<label>No Identitas</label>
+											<div class="row">
+												<div class="col-lg-4">
+													<input id="ktp" name="ktp" value="<?php echo $r['nid_ktp']; ?>" maxlength="16" onkeydown="return isNumber(event);" placeholder="KTP" type="text" class="form-control" />
+												</div>
+												<div class="col-lg-4">
+													<input id="sim" name="sim" value="<?php echo $r['nid_sim']; ?>" maxlength="12" onkeydown="return isNumber(event);" placeholder="SIM (Opsional)" type="text"  class="form-control" />
+												</div>
+												<div class="col-lg-4">
+													<input id="lain" name="lain" value="<?php echo $r['nid_lain']; ?>"  maxlength="20" onkeydown="return isNumber(event);" placeholder="Lainnya (Opsional)" type="text" class="form-control"/>
+												</div>
+											</div>
+
+											<select style="margin-top: 5px;" class="form-control" name="nid" id="nid">
+												<option value="<?php echo $r['nid_type']; ?>"><?php echo $r['nid_type']; ?></option>
+												<option value="KTP">KTP</option>
+												<option value="SIM">SIM</option>
+												<option value="PASPOR">PASPOR</option>
+												<option value="Pelajar">Kartu Pelajar/Mahasiswa</option>
+												<option value="Lainnya">Lainnya</option>
+											</select>
+										</div>
 									</div>
-									<div class="form-group" style="padding:10px; margin-top:-20px;">
-										<label>Jenis Jualan</label>
-										<select class="form-control" name="type" id="type">
-											<option value="<?php echo $r['merchant_type']; ?>"><?php echo $r['merchant_type']; ?></option>
-											<option value="Sayur">Sayur</option>
-											<option value="Buah">Buah</option>
-											<option value="Sembako">Sembako</option>
-											<option value="Lainnya">Lainnya</option>
-										</select>
+
+									<div class="row">
+										<div class="col-lg-4" style="padding:0 10px 0 20px; margin-top: 15px;">
+											<label>Lapak</label>
+											<select class="form-control" name="lapak" id="lapak">
+												<?php 
+													$lapak 	= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_id='".$r['lapak_id']."'");
+													while($d = mysql_fetch_array($lapak)){
+														echo '<option value="'.$d['lapak_id'].'">'.$d['lapak_name'].' / '.$d['lapak_type'].'</option>';
+													}
+													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status is null ");
+													while($data = mysql_fetch_array($sql)){?>
+													<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>
+												<?php } ?>
+											</select>
+										</div>
+
+										<div class="col-lg-4" style="padding:0 10px 0 10px; margin-top: 15px;">
+											<label>Jenis Jualan</label>
+											<select class="form-control" name="type" id="type">
+												<!-- <option value="<?php echo $r['merchant_type']; ?>"><?php echo $r['merchant_type']; ?></option> -->
+												<option value="Sayur" <?php echo $r['merchant_type'] == "Sayur" ? 'Selected' : ''; ?> >Sayur</option>
+												<option value="Buah" <?php echo $r['merchant_type'] == "Buah" ? 'Selected' : ''; ?> >Buah</option>
+												<option value="Sembako" <?php echo $r['merchant_type'] == "Sembako" ? 'Selected' : ''; ?> >Sembako</option>
+												<option value="Lainnya" <?php echo $r['merchant_type'] == "Lainnya" ? 'Selected' : ''; ?> >Lainnya</option>
+											</select>
+										</div>
+
+										<div class="col-lg-4" style="padding:0 20px 0 10px; margin-top: 15px;">
+											<label>Asal Pasar</label>
+											<select class="form-control chzn-select" name="asal_pasar" id="asal_pasar" >
+												<!-- <option value="0" selected disabled>-- Pilih Asal Pasar --</option> -->
+												<option value="Belum Pernah" <?php echo $r['asal_pasar'] == "Belum Pernah" ? 'Selected' : ''; ?> >Belum Pernah</option>
+												<option value="Pasar Osowilangun" <?php echo $r['asal_pasar'] == "Pasar Osowilangun" ? 'Selected' : ''; ?> >Pasar Osowilangun</option>
+												<option value="Pasar Pandegiling" <?php echo $r['asal_pasar'] == "Pasar Pandegiling" ? 'Selected' : ''; ?> >Pasar Pandegiling</option>
+												<option value="Pasar Keputran" <?php echo $r['asal_pasar'] == "Pasar Keputran" ? 'Selected' : ''; ?> >Pasar Keputran</option>
+												<option value="Pasar Mangga Dua" <?php echo $r['asal_pasar'] == "Pasar Mangga Dua" ? 'Selected' : ''; ?> >Pasar Mangga Dua</option>
+												<option value="Pasar Pabean" <?php echo $r['asal_pasar'] == "Pasar Pabean" ? 'Selected' : ''; ?> >Pasar Pabean</option>
+												<option value="Pasar Wonokusumo" <?php echo $r['asal_pasar'] == "Pasar Wonokusumo" ? 'Selected' : ''; ?> >Pasar Wonokusumo</option>
+												<option value="Pasar Lainnya" <?php echo $r['asal_pasar'] == "Pasar Lainnya" ? 'Selected' : ''; ?> >Pasar Lainnya</option>
+											</select>
+										</div>
 									</div>
-									<div class="form-group" style="padding:10px; margin-top:-20px;">
-										<center>
-											<button type="submit" class="btn btn-outline btn-block btn-primary">Ubah Data</button>
-										</center>
-									</form>
-										<center>
-											<a href="htmltopdf/permohonan_pedagang.php?id=<?php echo $id;?>" target="_blank">
-												<button style="margin-top:10px;" class="btn btn-outline btn-block btn-info" type="button">
-													Cetak Form Permohonan
-												</button>
-											</a>
-										</center>
-										<?php 
-											if($r['req_status']!='Disetujui'){
-												echo '<center>
-												<a href="register_acc.php?id='.$id.'">
-													<button style="margin-top:10px;" class="btn btn-outline btn-block btn-info">Setujui (Ke form Selanjutnya)</button>
-												</a></center>';
-											}
-											else{
-												echo '';
-											}
-										?>
+									
+									<div class="row">
+										<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 30px;">
+											<button type="submit" class="btn btn-block btn-primary">Ubah Data</button>
+										</div>
 									</div>
-								</div>
 								</fieldset>
+							</form> 
+
+							<div class="row">
+								<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 10px;">
+									<a style="text-decoration: none;" href="htmltopdf/permohonan_pedagang.php?id=<?php echo $id;?>" target="_blank">
+										<button style="margin-top:10px;" class="btn btn-block btn-info" type="button">
+											Cetak Form Permohonan
+										</button>
+									</a>
+								</div>
+
+								<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 10px;">
+									<?php 
+										if($r['req_status']!='Disetujui'){
+											echo '<center>
+											<a style="text-decoration: none;" href="register_acc.php?id='.$id.'">
+												<button style="margin-top:10px;" class="btn btn-block btn-info">Setujui (Ke form Selanjutnya)</button>
+											</a></center>';
+										}
+										else{
+											echo '';
+										}
+									?>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>

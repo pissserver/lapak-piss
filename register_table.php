@@ -11,19 +11,19 @@
 	$('#requestView').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3>Daftar Pemohon Lapak Pasar Induk Surabaya Sidotopo</h3></br>
+<!-- <h3>Daftar Pemohon Lapak Pasar Induk Surabaya Sidotopo</h3></br> -->
 <table id="requestView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;">No</th>
-			<th style="width:15%;">Pedagang</th>
-			<th style="width:9%;">Lapak</th>
-			<th style="width:26%;">Alamat</th>
-			<th style="width:10%;">Telp Rumah</th>
-			<th style="width:10%;">Telp HP</th>
-			<th style="width:10%;">Jualan</th>
-			<th style="width:8%;">Status</th>
-			<th style="width:7%;">Aksi</th>
+			<th style="text-align: center; vertical-align: middle; width:5%;">NO</th>
+			<th style="text-align: center; vertical-align: middle; width:15%;">NAMA PEDAGANG</th>
+			<th style="text-align: center; vertical-align: middle; width:9%;">LAPAK</th>
+			<th style="text-align: center; vertical-align: middle; width:26%;">ALAMAT</th>
+			<th style="text-align: center; vertical-align: middle; width:10%;">TELP. RUMAH</th>
+			<th style="text-align: center; vertical-align: middle; width:10%;">TELP. HP</th>
+			<th style="text-align: center; vertical-align: middle; width:10%;">JENIS PEDAGANG</th>
+			<th style="text-align: center; vertical-align: middle; width:8%;">STATUS</th>
+			<th style="text-align: center; vertical-align: middle; width:7%;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -34,25 +34,39 @@
 			while($data=mysql_fetch_array($query)){ 
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $data['req_name']; ?>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:left;">
+				<?php echo $data['req_name']; ?>
 			</td>
-			<td><?php 
+			<td style="vertical-align: middle; text-align: center;">
+				<?php 
 				$lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$data['lapak_id']."' ");
 				echo $lapak; ?>
 			</td>
-			<td><?php echo $data['address1']; ?></td>
-			<td><?php echo $data['phone1']; ?></td>
-			<td><?php echo $data['phone2']; ?></td>
-			<td><?php echo $data['merchant_type']; ?></td>
-			<td><?php echo $data['req_status']; ?></td>
-			<td><center><a href="register_edit.php?id=<?php echo $data['req_id']; ?>">
+			<td style="vertical-align: middle; text-align: left;"><?php echo $data['address1']; ?></td>
+			<td style="vertical-align: middle; text-align: center;">
+				<?php echo $data['phone1'] == NULL ? 'Tidak ada' : $data['phone1']; ?>
+			</td>
+			<td style="vertical-align: middle; text-align: center;">
+				<?php echo $data['phone2'] == NULL ? 'Tidak ada' : $data['phone2']; ?>
+			</td>
+			<td style="vertical-align: middle; text-align: center;">
+				<div style="vertical-align: middle; background-color: <?php echo $data['merchant_type'] == 'Buah' ? '#428bca' : ($data['merchant_type'] == 'Sayur' ? 'green' : '#EB8317'); ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa fa-cube fa-fw"></i>&nbsp;<?php echo $data['merchant_type']; ?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align: center;">
+				<div style="vertical-align: middle; background-color: <?php echo $data['req_status'] == 'Disetujui' ? 'green' : '#EB8317'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $data['req_status'] == 'Disetujui' ? 'fa-check' : 'fa-spinner' ?> fa-fw"></i>&nbsp;<?php echo $data['req_status']; ?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align: center;"><center><a href="register_edit.php?id=<?php echo $data['req_id']; ?>">
 				<button class="btn btn-outline btn-block btn-primary btn-xs">Lihat Detail</button>
 			</a></center>
 			<?php 
 				if($data['req_status']!='Disetujui'){
 					echo '<center><a href="register_acc.php?id='.$data['req_id'].'">
-						<button class="btn btn-outline btn-block btn-primary btn-xs">Setujui</button>
+						<button style="margin-top: 5px;" class="btn btn-outline btn-block btn-success btn-xs"><i class="fa fa-check fa-fw"></i>Setujui</button>
 					</a></center>';
 				}
 				else{

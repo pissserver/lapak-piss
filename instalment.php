@@ -137,7 +137,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
     <!-- Sweet Alert -->
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 		<?php
 			// Menampilkan SweetAlert jika session success ada dan bernilai true
 			if (isset($_SESSION['success'])) {
