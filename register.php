@@ -100,7 +100,7 @@
 													</div>
 												</div>
 												
-											<select style="margin-top: 5px;" class="form-control" name="nid" id="nid">
+											<select style="margin-top: 5px;" class="form-control" name="nid" id="nid" required>
 												<option value="">Jenis Identitas Yang Diisi</option>
 												<option value="KTP">KTP</option>
 												<option value="SIM">SIM</option>
@@ -117,7 +117,7 @@
 											<select class="form-control chzn-select" name="lapak" id="lapak" required>
 												<option value="">- Pilih Lapak -</option>
 												<?php 
-													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status is null");
+													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status = 'Kosong' or lapak_status is NULL ");
 													while($data = mysql_fetch_array($sql))
 												{?>
 													<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>

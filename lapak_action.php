@@ -119,7 +119,7 @@
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';
-			$_SESSION['message'] = "update data lapak";
+			$_SESSION['message'] = "Update data lapak";
 			echo "<script>window.location=('lapak.php')</script>";
 			exit();
 		}
@@ -127,7 +127,7 @@
 			// Alert Information
 			$_SESSION['success'] = false;
 			$_SESSION['title'] = 'Gagal';
-			$_SESSION['message'] = "update data lapak";
+			$_SESSION['message'] = "Update data lapak";
 			echo "<script>window.history.back()</script>";
 			exit();
 		}

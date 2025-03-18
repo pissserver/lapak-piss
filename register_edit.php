@@ -149,13 +149,13 @@
 									<div class="row">
 										<div class="col-lg-4" style="padding:0 10px 0 20px; margin-top: 15px;">
 											<label>Lapak</label>
-											<select class="form-control" name="lapak" id="lapak">
+											<select class="form-control chzn-select" name="lapak" id="lapak">
 												<?php 
 													$lapak 	= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_id='".$r['lapak_id']."'");
 													while($d = mysql_fetch_array($lapak)){
 														echo '<option value="'.$d['lapak_id'].'">'.$d['lapak_name'].' / '.$d['lapak_type'].'</option>';
 													}
-													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status is null ");
+													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status = 'Kosong' or lapak_status is NULL ");
 													while($data = mysql_fetch_array($sql)){?>
 													<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>
 												<?php } ?>
@@ -191,7 +191,7 @@
 									
 									<div class="row">
 										<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 30px;">
-											<button type="submit" class="btn btn-block btn-primary">Ubah Data</button>
+											<button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Edit Data</button>
 										</div>
 									</div>
 								</fieldset>
@@ -201,7 +201,7 @@
 								<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 10px;">
 									<a style="text-decoration: none;" href="htmltopdf/permohonan_pedagang.php?id=<?php echo $id;?>" target="_blank">
 										<button style="margin-top:10px;" class="btn btn-block btn-info" type="button">
-											Cetak Form Permohonan
+											<i class="fa fa-print"></i>&nbsp;&nbsp;Cetak Form Permohonan
 										</button>
 									</a>
 								</div>
@@ -249,5 +249,28 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+	<script src="js/plugins/chosen/chosen.jquery.js"></script>
+	<script type="text/javascript">
+    	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
+    </script>
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>

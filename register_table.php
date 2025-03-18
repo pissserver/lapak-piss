@@ -60,12 +60,12 @@
 					<i class="fa <?php echo $data['req_status'] == 'Disetujui' ? 'fa-check' : 'fa-spinner' ?> fa-fw"></i>&nbsp;<?php echo $data['req_status']; ?>
 				</div>
 			</td>
-			<td style="vertical-align: middle; text-align: center;"><center><a href="register_edit.php?id=<?php echo $data['req_id']; ?>">
-				<button class="btn btn-outline btn-block btn-primary btn-xs">Lihat Detail</button>
+			<td style="vertical-align: middle; text-align: center;"><center><a style="text-decoration: none;" href="register_edit.php?id=<?php echo $data['req_id']; ?>">
+				<button class="btn btn-outline btn-block btn-primary btn-xs"><i class="fa fa-eye"></i>&nbsp;Lihat Detail</button>
 			</a></center>
 			<?php 
 				if($data['req_status']!='Disetujui'){
-					echo '<center><a href="register_acc.php?id='.$data['req_id'].'">
+					echo '<center><a style="text-decoration: none;" href="register_acc.php?id='.$data['req_id'].'">
 						<button style="margin-top: 5px;" class="btn btn-outline btn-block btn-success btn-xs"><i class="fa fa-check fa-fw"></i>Setujui</button>
 					</a></center>';
 				}

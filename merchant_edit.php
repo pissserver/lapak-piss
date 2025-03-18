@@ -3,6 +3,11 @@
 	include "connection.php";
 	include "components/role_session.php";
 
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
+
 	//$id		= $_GET['id'];
 	$edit	= mysql_query("select * from merchant where merchant_id = '".$_GET['id']."'");
 	while ($r = mysql_fetch_array($edit)){
@@ -17,18 +22,9 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Admin</title>
+    <title>Detail Pedagang | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php echo headScript(); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,41 +48,47 @@
 		<div id="page-wrapper">
 		<br><br><br><br>
             <div class="row">
-                <div class="col-lg-12" style="padding:10px;">
+                <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-user fa-fw"></i> Detail Data Pedagang (<b><?php echo $r['merchant_id']; ?></b>)
+                            <i class="fa fa-user fa-fw"></i> Detail Data Pedagang
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" id="formMerchant" name = "formMerchant" method="POST" action="merchant_action.php?task=update&id=<?php echo $r[0]; ?>">
 								<fieldset>
-								<div class="row">
+								<div class="row" style="padding: 0 10px;">
+									<div class="col-lg-12">
+										<div class="form-group" style="padding: 0 10px;">
+											<label>Kode Pedagang</label>
+											<input type="text" class="form-control" id="name" name="name" value="<?php echo $r['merchant_id']; ?>" disabled>                
+										</div>
+									</div>
 									<div class="col-lg-3" style="margin-top:-10px;">
 										<div class="form-group" style="padding:10px;">
 											<label>Nama</label>
-											<input type="text" class="form-control" id="name" name="name" value="<?php echo $r['merchant_name']; ?>">                
+											<input type="text" class="form-control" id="name" name="name" placeholder="Nama Pedagang" value="<?php echo $r['merchant_name']; ?>">                
 										</div>
 										<div class="form-group" style="padding:10px;margin-top:-20px;">
 											<label>Alias</label>
-											<input type="text" class="form-control" id="nick" name="nick" value="<?php echo $r['merchant_nick']; ?>">
+											<input type="text" class="form-control" id="nick" name="nick" placeholder="Nama Alias Pedagang" value="<?php echo $r['merchant_nick']; ?>">
 										</div>
 										<div class="form-group" style="padding:10px;margin-top:-20px;">
 											<label>Alamat (KTP)</label>
-											<input class="form-control" id="adrs1" name="adrs1" type="text" value="<?php echo $r['address1']; ?>" />
+											<input class="form-control" id="adrs1" name="adrs1" type="text" placeholder="Alamat (KTP)" value="<?php echo $r['address1']; ?>" />
 										</div>
 										<div class="form-group" style="padding:10px;margin-top:-20px;">
 											<label>Alamat (Surat)</label>
-											<input class="form-control" id="adrs2" name="adrs2" type="text" value="<?php echo $r['address2']; ?>" />
+											<input class="form-control" id="adrs2" name="adrs2" type="text" placeholder="Alamat (Surat)" value="<?php echo $r['address2']; ?>" />
 										</div>
 									</div>
 									<div class="col-lg-3" style="margin-top:-10px;">
 										<div class="form-group" style="padding:10px;">
 											<label>Telepon Rumah</label>
-											<input id="tlp1" name="tlp1" value="<?php echo $r['phone1']; ?>" maxlength="11" onkeydown="return isNumber(event);" type="text" class="form-control" />
+											<input id="tlp1" name="tlp1" placeholder="Telepon Rumah" value="<?php echo $r['phone1']; ?>" maxlength="11" onkeydown="return isNumber(event);" type="text" class="form-control" />
 										</div>
 										<div class="form-group" style="padding:10px;margin-top:-20px;">
 											<label>Handphone</label>
-											<input id="tlp2" name="tlp2" value="<?php echo $r['phone2']; ?>" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
+											<input id="tlp2" name="tlp2" placeholder="Handphone" value="<?php echo $r['phone2']; ?>" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
 										</div>
 										<div class="form-group" style="padding:10px;margin-top:-20px;">
 											<label>Jenis Jualan</label>
@@ -97,62 +99,29 @@
 												<option value="Lainnya">Lainnya</option>
 											</select>
 										</div>
-										<div class="form-group" style="padding:10px;margin-top:-20px;">
-										<label>Status Pedagang</label>
-											<div class="row">
-												<div class="col-lg-6">
-													<select class="form-control" name="sts" id="sts" disabled>
-														<option value="<?php echo $r['merchant_status'];?>"><?php echo $r['merchant_status'];?></option>
-														<option value="Aktif">Aktif</option>
-														<option value="Tidak Aktif">Tidak Aktif</option>
-													</select>
-												</div>
-												<div class="col-lg-6">
-													<select class="form-control" name="sts2" id="sts2">
-														<option value="<?php echo $r['merchant_status2'];?>"><?php echo $r['merchant_status2'];?></option>
-														<option value="Lama Sewa">Lama Sewa</option>
-														<option value="Baru Sewa">Baru Sewa</option>
-													</select>
-												</div>
-											</div>
+										<div class="form-group" style="padding:10px; margin-top: -20px;">
+											<label>Blok Aktif</label>
+											<input type="text" class="form-control" id="block" name="block" placeholder="Blok Aktif" value="<?php echo $r['active_block']; ?>" disabled>   
 										</div>
 									</div>
-									<div class="col-lg-3" style="margin-top:-10px;">
-										<div class="form-group" style="padding:10px;">
+									<div class="col-lg-6" style="margin-top:0px;">
 											<label>No Identitas</label>
-											<input id="ktp" name="ktp" <?php 
-												if($r['nid_ktp']!=''){
-													echo 'value="'.$r['nid_ktp'].'"';
-												}
-												else{ 
-													echo 'placeholder="KTP"';
-												} ?> maxlength="16" onkeydown="return isNumber(event);" type="text" class="form-control" />
-											<br /><input id="sim" name="sim" 
-											<?php 
-												if($r['nid_sim']!=''){
-													echo 'value="'.$r['nid_sim'].'"';
-												}
-												else{
-													echo 'placeholder="SIM"';
-												} ?> maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
-											<br /><input id="lain" name="lain" 
-											<?php 
-												if($r['nid_lain']!=''){
-													echo 'value="'.$r['nid_lain'].'"';
-												}
-												else{
-													echo 'placeholder="Lainnya"';
-												} ?>maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
-											<br />
-											<select class="form-control" name="nid" id="nid">
-												<option value="<?php echo $r['nid_type']; ?>">
-												<?php if($r['nid_type']==''){
-													echo '- Pilih Jenis Identitas -';
-												}
-												else{
-													echo $r['nid_type'];
-												} ?>
-												</option>
+												<div class="row">
+													<div class="col-lg-4">
+														<input id="ktp" name="ktp" placeholder="KTP" maxlength="16" onkeydown="return isNumber(event);" type="text" class="form-control" />
+													</div>
+													<div class="col-lg-4">
+														<input id="sim" name="sim" placeholder="SIM (Opsional)" maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
+													</div>
+													<div class="col-lg-4">
+														<input id="lain" name="lain" placeholder="Lainnya (Opsional)"  maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
+													</div>
+												</div>
+												
+										<div class="form-group" style="margin-top: 15px; margin-left: 0px; margin-right: 0px">
+											<label>Jenis Identitas</label>
+											<select class="form-control" name="nid" id="nid" required>
+												<option value="">Jenis Identitas Yang Diisi</option>
 												<option value="KTP">KTP</option>
 												<option value="SIM">SIM</option>
 												<option value="PASPOR">PASPOR</option>
@@ -160,12 +129,9 @@
 												<option value="Lainnya">Lainnya</option>
 											</select>
 										</div>
-										<div class="form-group" style="padding:10px;margin-top:0px;">
-											<label>Blok Yang Aktif: <?php echo $r['active_block'];?></label>
-										</div>
 									</div>
-									<div class="col-lg-3" style="margin-top:-10px;">
-										<div class="form-group" style="padding:10px;">
+									<div class="col-lg-3" style="margin-top:0px;">
+										<div class="form-group" style="padding:0 15px;">
 											<label>Jenis Pedagang</label>
 											<select class="form-control" name="kat_merchant" id="kat_merchant">
 												<option value="<?php echo $r['kat_merchant']; ?>">
@@ -181,7 +147,31 @@
 												<option value="Trial Lapak Jalan">Trial Lapak Jalan</option>
 											</select>
 										</div>
-										<div class="form-group" style="padding:10px;">
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group" style="padding: 0 15px;margin-top:0px;">
+											<label>Status Pedagang</label>
+											<div class="row">
+												<div class="col-lg-12">
+													<select class="form-control" name="sts" id="sts" disabled>
+														<option value="<?php echo $r['merchant_status'];?>"><?php echo $r['merchant_status'];?></option>
+														<option value="Aktif">Aktif</option>
+														<option value="Tidak Aktif">Tidak Aktif</option>
+													</select>
+												</div>
+												<!-- <div class="col-lg-6">
+													<select class="form-control" name="sts2" id="sts2">
+														<option value="<?php echo $r['merchant_status2'];?>"><?php echo $r['merchant_status2'];?></option>
+														<option value="Lama Sewa">Lama Sewa</option>
+														<option value="Baru Sewa">Baru Sewa</option>
+													</select>
+												</div> -->
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										
+									<div class="form-group" style="padding:0 15px; margin-top: 0px">
 											<label>Asal Pasar</label>
 											<select class="form-control" name="asal_pasar" id="asal_pasar">
 												<option value="<?php echo $r['asal_pasar']; ?>">
@@ -201,9 +191,11 @@
 											</select>
 										</div>
 									</div>
-									<center>
-										<button style="margin-top:10px;" class="btn btn-outline btn-block btn-primary">Simpan</button>
-									</center>
+									<div class="row">
+										<div class="col-lg-12" style="padding: 0 27px 0 25px;">
+											<button class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
+										</div>
+									</div>
 								</div>
 								</fieldset>
 							</form> 
@@ -223,8 +215,8 @@
 								$query3	= mysql_query("select * from lapak where lapak_id = '".$lid."'");
 								while ($q3 = mysql_fetch_array($query3)){
 					?>
-						<div class="panel panel-info">
-                        <div class="panel-heading">
+					<div class="panel panel-success">
+                        <div class="panel-heading" style="background: green; color: #fff;">
                             <i class="fa fa-building fa-fw"></i> Detail Data Lapak (<b><?php echo $q3['lapak_name'];?></b>)
                         </div>
                         <div class="panel-body">
@@ -284,7 +276,7 @@
 											</div>
 											<div class="col-md-6" >
 												<label>Bunga /Tahun</label>
-												<input class="form-control" value="<?php echo $q2['interest'];?> %" disabled />
+												<input class="form-control" value="<?php echo $q2['interest'];?>%" disabled />
 											</div>
 										</div>
 									</div>
@@ -300,15 +292,15 @@
 								<div class="col-lg-3">
 									<div class="form-group" >
 										<label>Tanggal Masuk</label>
-										<input type="text" class="form-control" value="<?php echo date("d-m-Y", strtotime($q2['rent_date']));?>" disabled>                
+										<input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_date']));?>" disabled>                
 									</div>
 									<div class="form-group" >
 										<label>Tanggal Berakhir</label>
-										<input type="text" class="form-control" value="<?php echo date("d-m-Y", strtotime($q2['rent_expired']));?>" disabled>
+										<input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_expired']));?>" disabled>
 									</div>
 									<div class="form-group" >
 										<label>Jatuh Tempo Angsuran</label>
-										<input type="text" class="form-control" value="<?php echo date("d-m-Y", strtotime($q2['rent_dl']));?>" disabled>
+										<input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_dl']));?>" disabled>
 									</div>
 									<div class="form-group" >
 										<label>Status Lapak</label>
@@ -322,13 +314,11 @@
 								<div class="col-lg-3">
 									<div class="form-group" >
 										<label>Keterangan</label><br />
-										<textarea class="form-control" cols="20" rows="5" disabled><?php echo $q2['rent_desc'];?></textarea>
+										<textarea class="form-control" cols="20" rows="12" disabled><?php echo $q2['rent_desc'];?></textarea>
 									</div>
 									<div class="form-group" >
 										<form action="htmltopdf/instalment_table.php?id=<?php echo $q2['rent_id']; ?>" target="_blank" class="form-horizontal" id="formAngs" name="formAngs" method="POST">
-											<center>
-												<button style="margin-top:35px;" class="btn btn-outline btn-block btn-primary">Cetak Tabel Angsuran</button>
-											</center>
+											<button style="margin-top:40px;" class="btn btn-block btn-success">Cetak Tabel Angsuran</button>
 										</form>
 									</div>
 								</div>
