@@ -6,7 +6,7 @@
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<i class="fa fa-money fa-fw"></i> Pembayaran Tunai <?php echo $id; ?>
+		<i class="fa fa-money fa-fw"></i> Pembayaran Tunai (<?php echo $id; ?>)
 	</div>
 	<div class="panel-body">
 		<form id="formInstalment" name="formInstalment" method="POST" action="rent_action.php?task=ins&sts=cash&id=<?php echo $id; ?>" class="form-horizontal" >
@@ -25,7 +25,7 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group" style="padding:10px; margin-top:15px;">
-						<button type="submit" class="btn btn-outline btn-block btn-primary">Bayar Angsuran</button>
+						<button type="submit" class="btn btn-block btn-primary"><i class="fa fa-money"></i>&nbsp;&nbsp;Bayar Angsuran</button>
 					</div>
 				</div>
 			</div>

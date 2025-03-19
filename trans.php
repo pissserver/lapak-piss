@@ -37,7 +37,7 @@
 						<input id="date" name="date" type="date" class="form-control" required />
 					</div>
 					<div class="form-group" style="padding:10px; margin-top:30px;">
-						<button type="submit" class="btn btn-outline btn-block btn-primary">Bayar Angsuran</button>
+						<button type="submit" class="btn btn-block btn-primary"><i class="fa fa-money"></i>&nbsp;&nbsp;Bayar Angsuran</button>
 					</div>
 				</div>
 			</div>

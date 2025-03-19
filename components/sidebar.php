@@ -171,11 +171,11 @@
                                 </ul>
                             </li>
 
-                            <li class="<?= isParentActive(['move_select.php', 'move.php', 'move_select2.php', 'move_log.php']); ?>">
+                            <li class="<?= isParentActive(['move_select.php', 'move.php', 'move_select2.php', 'move2.php', 'move_log.php']); ?>">
                                 <a href="#"><i class="fa fa-retweet fa-fw"></i> Perpindahan lapak<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['move_select.php', 'move.php']); ?>" href="move_select.php"><i class="fa fa-retweet fa-fw"></i> Pindah Ke Lapak Kosong</a></li>
-                                    <li><a class="<?= isActive(['move_select2.php']); ?>" href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Tukar Lapak</a></li>
+                                    <li><a class="<?= isActive(['move_select2.php', 'move2.php']); ?>" href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Tukar Lapak</a></li>
                                     <li><a class="<?= isActive(['move_log.php']); ?>" href="move_log.php"><i class="fa fa-book fa-fw"></i> Histori Perpindahan</a></li>
                                 </ul>
                             </li>

@@ -15,19 +15,19 @@
 		"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3 style="text-align:center;">Data Angsuran Lapak PIOS Yang Terlambat</h3>
+<!-- <h3 style="text-align:center;">Data Angsuran Lapak PIOS Yang Terlambat</h3> -->
 <table id="rentView2" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;">No</th>
-			<th style="width:7%;">NIP</th>
-			<th style="width:20%;">Pedagang</th>
-			<th style="width:7%;">Lapak</th>
-			<th style="width:10%;text-align:right;">Sisa Angsuran</th>
-			<th style="width:10%;text-align:right;">Angsuran</th>
-			<th style="width:10%;text-align:right;">Angsuran Ke</th>
-			<th style="width:10%;text-align:center;">Jatuh Tempo</th>
-			<th style="width:10%;text-align:center;">Aksi</th>
+			<th style="width:5%; text-align:center;">NO</th>
+			<th style="width:7%; text-align:center;">NIP</th>
+			<th style="width:20%; text-align:center;">PEDAGANG</th>
+			<th style="width:7%; text-align:center;">LAPAK</th>
+			<th style="width:10%;text-align:center;">SISA ANGSURAN</th>
+			<th style="width:10%;text-align:center;">ANGSURAN</th>
+			<th style="width:10%;text-align:center;">ANGSURAN KE-</th>
+			<th style="width:10%;text-align:center;">JATUH TEMPO</th>
+			<th style="width:10%;text-align:center;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,9 +60,9 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $r['merchant_id']; ?></td>
-			<td><?php echo $r['merchant_name']; ?></td>
-			<td><?php echo $lapak; ?></td>
+			<td style="text-align:center;"><?php echo $r['merchant_id']; ?></td>
+			<td style="text-align:left;"><?php echo $r['merchant_name']; ?></td>
+			<td style="text-align:center;"><?php echo $lapak; ?></td>
 			<td style="text-align:right;"><?php
 				if($sisa<=0){
 					echo '-';
@@ -71,10 +71,10 @@
 					echo format_rupiah($sisa);
 				}?></td>
 			<td style="text-align:right;"><?php echo format_rupiah($r['rent_instalment']); ?></td>
-			<td style="text-align:right;"><?php echo $angsrn; ?></td>
-			<td style="text-align:center;"><?php echo date("d-m-Y", strtotime($r['rent_dl'])); ?></td>
+			<td style="text-align:center;"><?php echo $angsrn; ?></td>
+			<td style="text-align:center;"><?php echo date("d M Y", strtotime($r['rent_dl'])); ?></td>
 			<td><center><a href="rent_edit.php?id=<?php echo $r['rent_id']; ?>">
-			<button class="btn btn-outline btn-block btn-primary btn-xs">Bayar</button>
+			<button class="btn btn-outline btn-block btn-primary btn-xs"><i class="fa fa-money"></i>&nbsp;&nbsp;Bayar</button>
 			</a></center></td>
 		</tr>
 		<?php $no++; } ?>

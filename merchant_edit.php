@@ -108,20 +108,20 @@
 											<label>No Identitas</label>
 												<div class="row">
 													<div class="col-lg-4">
-														<input id="ktp" name="ktp" placeholder="KTP" maxlength="16" onkeydown="return isNumber(event);" type="text" class="form-control" />
+														<input id="ktp" name="ktp" value="<?php echo $r['nid_ktp']; ?>" maxlength="16" onkeydown="return isNumber(event);" placeholder="KTP" type="text" class="form-control" />
 													</div>
 													<div class="col-lg-4">
-														<input id="sim" name="sim" placeholder="SIM (Opsional)" maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
+														<input id="sim" name="sim" value="<?php echo $r['nid_sim']; ?>" placeholder="SIM (Opsional)" maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
 													</div>
 													<div class="col-lg-4">
-														<input id="lain" name="lain" placeholder="Lainnya (Opsional)"  maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
+														<input id="lain" name="lain" value="<?php echo $r['nid_lain']; ?>" placeholder="Lainnya (Opsional)"  maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
 													</div>
 												</div>
 												
 										<div class="form-group" style="margin-top: 15px; margin-left: 0px; margin-right: 0px">
 											<label>Jenis Identitas</label>
 											<select class="form-control" name="nid" id="nid" required>
-												<option value="">Jenis Identitas Yang Diisi</option>
+												<option value="<?php echo $r['nid_type']; ?>"><?php echo $r['nid_type']; ?></option>
 												<option value="KTP">KTP</option>
 												<option value="SIM">SIM</option>
 												<option value="PASPOR">PASPOR</option>
@@ -349,7 +349,25 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
-
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+			<?php
+				// Menampilkan SweetAlert jika session success ada dan bernilai true
+				if (isset($_SESSION['success'])) {
+					$title = $_SESSION['title'];
+					$message = $_SESSION['message'];
+					$icon = $_SESSION['success'] ? 'success' : 'error';
+					echo "<script>
+						Swal.fire({
+							title: '$title',
+							text: '$message',
+							icon: '$icon'
+						});
+					</script>";
+					unset($_SESSION['success']);
+					unset($_SESSION['message']);
+				}
+			?>
 </body>
 
 </html>

@@ -3,6 +3,11 @@
 	include "connection.php";
 	include "components/role_session.php";
 
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
+
 	//Ambil id_rent
 	$id		= $_GET['id'];
 	$lid 	= executeScalar("select lapak_id from rent where rent_id = '".$id."'");
@@ -17,20 +22,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<link rel="icon" href="../images/icon.png">
-    <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+	<link rel="icon" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png" />
+    <title>Pembayaran Angsuran Lapak | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php echo headScript(); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,7 +65,7 @@
 		<br><br><br><br>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<i class="fa fa-pencil fa-fw"></i> Data Angsuran Pedagang <?php echo $mid; ?>
+					<i class="fa fa-money fa-fw"></i> Detail Data Angsuran
 				</div>
 				<div class="panel-body">
 					<?php
@@ -91,132 +87,141 @@
 						$exp 		= strtotime($date_plus, strtotime($date_in));
 						$dateline 	= date('Y-m-j' , $exp);
 					?>
+					<div class="row">
+						<div class="col-md-12" style="padding:0 35px; margin-bottom:20px;">
+							<label>Kode Pedagang</label>
+							<input class="form-control" value="<?php echo $mid; ?>" disabled></inp>
+						</div>
+					</div>
 					<div class="col-lg-4" style="padding:10px; margin-bottom:-20px;">
 						<div class="form-group" style="padding:10px; margin-top:-20px;">
 							<label>Nama</label>
-							<div><?php echo $r['merchant_name']; ?> / <?php echo $r['merchant_nick']; ?></div>               
+							<input class="form-control" value="<?php echo $r['merchant_name']; ?> / <?php echo $r['merchant_nick']; ?>" disabled></input>               
 						</div>
 						<div class="form-group" style="padding:10px; margin-top:-20px;">
 							<label>Alamat</label>
-							<div><?php echo $r['address1']; ?></div>
+							<input class="form-control" value="<?php echo $r['address1']; ?>" disabled></input>
 						</div>
 						<div class="form-group" style="padding:10px; margin-top:-20px;">
 							<label>Telepon</label>
-							<div><?php echo $r['phone1']; ?> / <?php echo $r['phone2']; ?></div>
+							<input class="form-control" value="<?php echo $r['phone1']; ?> / <?php echo $r['phone2']; ?>" disabled></input>
 						</div>
 						<div class="form-group" style="padding:10px; margin-top:-20px;">
 							<label>No Identitas</label>
-							<div><?php echo $r['nid_ktp'].$r['nid_sim'].$r['nid_lain']; ?> <?php if($r['nid_type']!=''){echo '('.$r['nid_type'].')';} ?></div>
+							<input class="form-control" value="<?php echo $r['nid_ktp'].$r['nid_sim'].$r['nid_lain']; ?> <?php if($r['nid_type']!=''){echo '('.$r['nid_type'].')';} ?>" disabled></input>
 						</div>
 						<div class="form-group" style="padding:10px; margin-top:-20px;">
 							<label>Jenis Jualan</label>
-							<div><?php echo $r['merchant_type']; ?></div>
+							<input class="form-control" value="<?php echo $r['merchant_type']; ?>" disabled></input>
 						</div>
 						<div class="form-group" style="padding:10px; margin-top:-20px;">
 							<label>Tanggal Masuk</label>
-							<div><?php echo date("d-m-Y", strtotime($r['rent_date'])); ?></div>
+							<input class="form-control" value="<?php echo date("d M Y", strtotime($r['rent_date'])); ?>" disabled></input>
 						</div>
 					</div>
-					<div class="col-lg-5" style="padding:10px; margin-bottom:-20px;">
-						<div class="form-group" style="padding:10px; margin-top:-20px;">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-6">
-											<label>Lapak</label>
-											<div><?php echo $r['lapak_name']; ?></div>
-										</div>
-										<div class="col-md-6" style="text-align:left;">
-											<label>Ukuran</label>
-											<div><?php echo $r['lapak_size']; ?> M<sup>2</sup></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6" style="text-align:left;">
-									<div class="row">
-										<div class="col-md-6">
-											<label>Angsuran</label>
-											<div><?php echo $ins; ?>x</div>
-										</div>
-										<div class="col-md-6">
-											<label>Bunga</label>
-											<div><?php echo $r['interest']; ?>%</div>
-										</div>
-									</div>
-								</div>
+					<div class="col-lg-5" style="padding:0 10px; margin-bottom:-20px;">
+						<div class="row">
+							<div class="col-md-6">
+								<label>Lapak</label>
+								<input class="form-control" value="<?php echo $r['lapak_name']; ?>" disabled></input>
+							</div>
+							<div class="col-md-6">
+								<label>Angsuran</label>
+								<input class="form-control" value="<?php echo $ins.'x'; ?>" disabled></input>
 							</div>
 						</div>
-						<div class="form-group" style="padding:10px; margin-top:-20px;">
-							<div class="row">
-								<div class="col-md-6">
-									<label>Harga /M<sup>2</sup></label>
-									<div><?php echo format_rupiah($r['lapak_price']); ?></div>
-								</div>
-								<div class="col-md-6" style="text-align:left;">
-									<label>Total Harga</label>
-									<div><?php echo format_rupiah($r['rent_total']); ?></div>
-								</div>
+						<div class="row" style="margin-top: 15px;">
+							<div class="col-md-6" style="text-align:left;">
+								<label>Ukuran M<sup>2</sup></label>
+								<input class="form-control" value="<?php echo $r['lapak_size']; ?>" disabled></input>
+							</div>
+							<div class="col-md-6">
+								<label>Bunga</label>
+								<input class="form-control" value="<?php echo $r['interest'].'%'; ?>" disabled></input>
 							</div>
 						</div>
-						<div class="form-group" style="padding:10px; margin-top:-20px;">
-							<div class="row">
-								<div class="col-md-6">
-									<label>Pembayaran DP</label>
-									<div><?php echo format_rupiah($r['rent_dp']); ?></div>
-								</div>
-								<div class="col-md-6" >
-									<label>Sisa Pokok</label>
-									<div><?php echo format_rupiah($r['leftover']);?></div>
-								</div>
+						<div class="row" style="margin-top: 15px;">
+							<div class="col-md-6">
+								<label>Harga /M<sup>2</sup></label>
+								<input class="form-control" value="<?php echo format_rupiah($r['lapak_price']); ?>" disabled></input>
+							</div>
+							<div class="col-md-6" style="text-align:left;">
+								<label>Total Harga</label>
+								<input class="form-control" value="<?php echo format_rupiah($r['rent_total']); ?>" disabled></input>
 							</div>
 						</div>
-						<div class="form-group" style="padding:10px; margin-top:-20px;">
-							<div class="row">
-								<div class="col-md-6">
-									<label>Total Angsuran</label>
-									<div><?php echo format_rupiah($r['leftover2']); ?></div>
-								</div>
-								<div class="col-md-6">
-									<label>Angsuran Perbulan</label>
-									<div><?php echo format_rupiah($r['rent_instalment']); ?></div>
-								</div>
+						<div class="row" style="margin-top: 15px;">
+							<div class="col-md-6">
+								<label>Pembayaran DP</label>
+								<input class="form-control" value="<?php echo format_rupiah($r['rent_dp']); ?>" disabled></input>
+							</div>
+							<div class="col-md-6" >
+								<label>Sisa Pokok</label>
+								<input class="form-control" value="<?php echo format_rupiah($r['leftover']);?>" disabled></input>
 							</div>
 						</div>
-						<div class="form-group" style="padding:10px; margin-top:-20px;">
-							<div class="row">
-								<div class="col-md-6">
-									<label>Sisa Angsuran</label>
-									<div><?php echo format_rupiah($leftover3); ?></div>
-								</div>
-								<div class="col-md-6">
-									<label>Kajian</label>
-									<div><?php echo $r['rent_desc']; ?></div>
-								</div>
+						<div class="row" style="margin-top: 15px;">
+							<div class="col-md-6">
+								<label>Total Angsuran</label>
+								<input class="form-control" value="<?php echo format_rupiah($r['leftover2']); ?>" disabled></input>
+							</div>
+							<div class="col-md-6">
+								<label>Angsuran Perbulan</label>
+								<input class="form-control" value="<?php echo format_rupiah($r['rent_instalment']); ?>" disabled></input>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 15px;">
+							<div class="col-md-6">
+								<label>Sisa Angsuran</label>
+								<input class="form-control" value="<?php echo format_rupiah($leftover3); ?>" disabled></input>
+							</div>
+							<div class="col-md-6">
+								<label>Keterangan</label>
+								<input class="form-control" value="<?php echo $r['rent_desc']; ?>" disabled></input>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3" style="padding:10px; margin-bottom:-30px;">
+					<div class="col-lg-3" style="padding:25px 25px; margin-bottom:-30px;">
 						<?php 
 							//Jika Angsuran Telat
 							if($r['rent_dl']<$date_now){
 								//Hitung Perbedaan Tanggal
-								$diff 	= abs(strtotime($r['rent_dl']) - strtotime($date_now));
+								// $diff 	= abs(strtotime($r['rent_dl']) - strtotime($date_now));
 								
-								$years	= floor($diff / (365*60*60*24));
-								$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-								$days 	= floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-								if($years==0){
-									$a = '';
-								}
-								else{
-									$a = $years.' Tahun';
-								}
-								echo '<div class="panel panel-danger" style="margin-top:-10px;">
-										<div class="panel-body" style="margin-top:-10px;">
-											<label>Keterangan Angsuran</label>
-											Angsuran Lapak Ini Terlambat <br />
-											'.$a.' '.$months.' Bulan '.$days.' Hari <br /><br />
-											<label>Total Angsuran (Terlambat)</label>
+								// $years	= floor($diff / (365*60*60*24));
+								// $months = floor(($diff - $years * 365*60*60*24) / (365*60*60*24));
+								// $days 	= floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+								// if($years==0){
+								// 	$a = '';
+								// }
+								// else{
+								// 	$a = $years.' Tahun';
+								// } 
+
+								$date_now = date('Y-m-d'); // Pastikan format tanggal sesuai
+								$rent_dl = $r['rent_dl']; // Tanggal dari database atau input
+
+								$datetime1 = new DateTime($rent_dl);
+								$datetime2 = new DateTime($date_now);
+								$interval = $datetime1->diff($datetime2);
+
+								$years = $interval->y;
+								$months = $interval->m;
+								$days = $interval->d;
+
+								$total_months = $years * 12 + $months;
+								$totalLeftPay = $r['rent_total'] * $total_months;
+
+								echo '<div class="panel panel-danger" style="margin-top:-5px;">
+										<div class="panel-heading" style="background-color: red; color: #fff;">
+											<i class="fa fa-clock-o"></i>&nbsp;Angsuran Terlambat
+										</div>
+										<div class="panel-body" style="margin-top:0px;">
+											<label>Keterangan Angsuran</label><br>
+											<input class="form-control" value="'.$years.' Tahun '.$months.' Bulan '.$days.' Hari" disabled></input>
+											<br />
+											<label>Total Angsuran</label><br>
+											<input class="form-control" value="'.format_rupiah($totalLeftPay).'" disabled></input>
 										</div>
 									</div>';
 							}
@@ -224,24 +229,30 @@
 							$angsrn = executeScalar("select sum(trans_total+cash_total) from rent_detail where rent_id = '".$id."'");
 							$lo2 	= executeScalar("select leftover2 from rent where rent_id = '".$id."'");
 							if($angsrn>=$lo2){
-								echo '<div class="panel panel-info">
-									<div class="panel-body" style="margin-top:-10px;">
-										<label>Angsuran Lapak Ini Telah Lunas</label>
-									</div>
+								echo '<div class="panel panel-primary">
+										<div class="panel-heading">
+											<i class="fa fa-money"></i>&nbsp;Angsuran Lunas
+										</div>
+										<div class="panel-body" style="margin-top:-10px;">
+											<label>Angsuran Lapak Ini Telah Lunas</label>
+										</div>
 								</div>';
 							}
 							else{
 						?>
 						<form id="formInstalment" name="formInstalment" method="POST" action="rent_action.php?task=ins&id=<?php echo $id; ?>" class="form-horizontal" >
-							<div class="panel panel-info">
-								<div class="panel-body" style="margin-top:-10px;">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<i class="fa fa-money"></i>&nbsp;Pembayaran
+								</div>
+								<div class="panel-body" style="margin-top:0px;">
 									<div class="form-group" style="padding:10px; margin-top:-10px;">
 										<label>Pembayaran Angsuran Ke-<?php echo $did; ?></label>
-										<div><?php echo format_rupiah($r['rent_instalment']); ?></div>
+										<input class="form-control" value="<?php echo format_rupiah($r['rent_instalment']); ?>" disabled></input>
 									</div>
 									<div class="form-group" style="padding:10px; margin-top:-20px;">
 										<label>Jatuh Tempo</label>
-										<div><?php echo date("d-m-Y", strtotime($dateline)); ?></div>
+										<input class="form-control" value="<?php echo date("d M Y", strtotime($dateline)); ?>" disabled></input>
 									</div>
 									<div class="form-group" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
 										<!--<button type="submit" class="btn btn-outline btn-block btn-primary">Bayar Cicilan</button>-->
