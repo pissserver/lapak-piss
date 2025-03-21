@@ -43,7 +43,7 @@
             </tr>
         </table>
     </page_footer>
-    <h4 style="text-align:center; margin-top: -30px;">LAPORAN DATA PIUTANG PEDAGANG PER BLOCK</h4><br> 
+    <h4 style="text-align:center; margin-top: -30px;">LAPORAN DATA PIUTANG PEDAGANG PER BLOK</h4><br> 
     <h4 style="text-align:center; margin-top: -30px;">PASAR INDUK SURABAYA SIDOTOPO (PISS)</h4><br><br> 
 	Jumlah Pedagang: <?php echo $total; ?> Orang <br /><br>
 	Blok: <?php echo $block; ?><br /><br>
@@ -51,7 +51,7 @@
 		<thead>
 			<tr>
 				<th style="vertical-align: middle; width:4%; text-align: center; border: solid 1px black;">NO</th>
-				<th style="vertical-align: middle; width:6%; text-align:center; border: solid 1px black;">NIP</th>
+				<th style="vertical-align: middle; width:6%; text-align:center; border: solid 1px black;">KODE</th>
 				<th style="vertical-align: middle; width:20%; text-align:center; border: solid 1px black;">NAMA PEDAGANG</th>
 				<th style="vertical-align: middle; width:15%; text-align:center; border: solid 1px black;">LAPAK</th>
 				<th style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;">TOTAL LUAS</th>

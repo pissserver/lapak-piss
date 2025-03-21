@@ -74,7 +74,7 @@
 		<thead>
 			<tr>
 				<th style="width:4%; text-align: center; border: solid 1px black;">NO</th>
-				<th style="width:6%; text-align:center; border: solid 1px black;">NIP</th>
+				<th style="width:6%; text-align:center; border: solid 1px black;">KODE</th>
 				<th style="width:24%; text-align:center; border: solid 1px black;">NAMA PEDAGANG</th>
 				<th style="width:8%; text-align:center; border: solid 1px black;">LAPAK</th>
 				<th style="width:8%; text-align:center; border: solid 1px black;">LUAS</th>

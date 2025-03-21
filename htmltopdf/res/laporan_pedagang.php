@@ -56,13 +56,13 @@
 		<thead>
 			<tr>
 				<th style="vertical-align: middle; width:4%; text-align: center; border: solid 1px black;">NO</th>
-				<th style="vertical-align: middle; width:5%; text-align:center; border: solid 1px black;">ID</th>
+				<th style="vertical-align: middle; width:5%; text-align:center; border: solid 1px black;">KODE</th>
 				<th style="vertical-align: middle; width:16%; text-align:center; border: solid 1px black;">NAMA PEDAGANG</th>
 				<th style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;">TLP RUMAH</th>
 				<th style="vertical-align: middle; width:11%; text-align:center; border: solid 1px black;">HANDPHONE</th>
 				<th style="vertical-align: middle; width:27%; text-align:center; border: solid 1px black;">ALAMAT</th>
 				<th style="vertical-align: middle; width:12%; text-align:center;  border: solid 1px black;">LAPAK</th>
-				<th style="vertical-align: middle; width:6%; text-align:center; border: solid 1px black;">JENIS PEDAGANG</th>
+				<th style="vertical-align: middle; width:8%; text-align:center; border: solid 1px black;">JENIS PEDAGANG</th>
 				<th style="vertical-align: middle; width:7%; text-align:center;  border: solid 1px black;">STATUS</th>
 			</tr>
 		</thead>
