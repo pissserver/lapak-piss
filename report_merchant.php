@@ -51,7 +51,7 @@
 					<div id="Area1"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-                            <i class="fa fa-book fa-fw"></i> Laporan Data Pedagang Per Jenis Jualan
+                            <i class="fa fa-file-text-o fa-fw"></i> Laporan Data Pedagang Per Jenis Jualan
                         </div>
 						<div class="panel-body">
 							<form class="form-horizontal" id="reportMerchant" name = "reportMerchant" method="POST">
@@ -99,7 +99,7 @@
 					<div id="Area2"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-                            <i class="fa fa-book fa-fw"></i> Laporan Data Pedagang Per Block
+                            <i class="fa fa-file-text-o fa-fw"></i> Laporan Data Pedagang Per Block
                         </div>
 						<div class="panel-body">
 							<form class="form-horizontal" id="reportMerchant2" name = "reportMerchant2" method="POST">

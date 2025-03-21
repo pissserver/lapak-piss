@@ -178,7 +178,7 @@
                             <div id="revenue" class="tab-pane fade">
                                 <br />
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div id="Area5"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
                                     </div>
                                 </div>

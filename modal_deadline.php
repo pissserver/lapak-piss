@@ -1,12 +1,7 @@
 <?php
 	session_start();
 	include "connection.php";
-	//Validasi role
-	if($_SESSION['role']!='admin'){
-		if($_SESSION['role']!='super_admin'){
-			header("Location:index.php");
-		}
-	}
+	include "components/role_session.php"
 ?>
 <!-- jquery -->
 <script src="dataTables/jquery.dataTables.js"></script>
