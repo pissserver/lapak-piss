@@ -11,20 +11,20 @@
 	$('#merchantView').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3>Data Pedagang PISS</h3>
+<!-- <h3>Data Pedagang PISS</h3> -->
 <table id="merchantView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;">No</th>
-			<th style="width:5%;">ID</th>
-			<th style="width:14%;">Nama</th>
-			<th style="width:20%;">Alamat</th>
-			<th style="width:9%;">Lapak</th>
-			<th style="width:7%;">Jualan</th>
-			<th style="width:7%;">Status</th>
-			<th style="width:7%;">Status 2</th>
-			<th style="width:7%;">Status Pedagang</th>
-			<th style="width:8%;">Aksi</th>
+			<th style="vertical-align: middle; text-align: center; width:5%;">NO</th>
+			<th style="vertical-align: middle; text-align: center; width:5%;">ID</th>
+			<th style="vertical-align: middle; text-align: center; width:14%;">NAMA PEDAGANG</th>
+			<th style="vertical-align: middle; text-align: center; width:20%;">ALAMAT</th>
+			<th style="vertical-align: middle; text-align: center; width:9%;">LAPAK</th>
+			<th style="vertical-align: middle; text-align: center; width:7%;">JENIS PEDAGANG</th>
+			<th style="vertical-align: middle; text-align: center; width:7%;">STATUS</th>
+			<!-- <th style="vertical-align: middle; text-align: center; width:7%;">STATUS 2</th> -->
+			<th style="vertical-align: middle; text-align: center; width:7%;">STATUS PEDAGANG</th>
+			<th style="vertical-align: middle; text-align: center; width:5%;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -59,19 +59,27 @@
 		$lapak 	= "".$string;
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $data['merchant_id']; ?></td>
-			<td><?php echo $data['merchant_name']; ?></td>
-			<td><?php echo $data['address1']; ?></td>
-			<td><?php echo $lapak; ?></td>
-			<td><?php echo $data['merchant_type']; ?></td>
-			<td><?php echo $data['merchant_status']; ?></td>
-			<td><?php echo $data['merchant_status2']; ?></td>
-			<td><center><?php echo $data['kat_merchant']; ?></center></td>
-			<td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align: center;"><?php echo $data['merchant_id']; ?></td>
+			<td style="vertical-align: middle; text-align: left;"><?php echo $data['merchant_name']; ?></td>
+			<td style="vertical-align: middle; text-align: left;"><?php echo $data['address1']; ?></td>
+			<td style="vertical-align: middle; text-align: center;"><?php echo $lapak != NULL ? $lapak : 'Tidak ada'; ?></td>
+			<td style="vertical-align: middle; text-align: center;"><?php echo $data['merchant_type']; ?></td>
+			<td style="vertical-align: middle; text-align: center;">
+				<div style="vertical-align: middle; background-color: <?php echo $data['merchant_status'] == 'Aktif' ? 'green' : 'red'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $data['merchant_status'] == 'Aktif' ? 'fa-check' : 'fa-remove'; ?> fa-fw"></i>&nbsp;<?php echo $data['merchant_status']; ?>
+				</div>
+			</td>
+			<!-- <td style="vertical-align: middle; text-align: center;"><?php echo $data['merchant_status2']; ?></td> -->
+			<td style="vertical-align: middle; text-align: center;">
+				<div style="vertical-align: middle; background-color: <?php echo $data['kat_merchant'] == 'Tetap' ? 'green' : '#E3AB57'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $data['kat_merchant'] == 'Tetap' ? 'fa-check' : 'fa-circle-o'; ?> fa-fw"></i>&nbsp;<?php echo $data['kat_merchant']; ?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align: center;">
 				<center>
-					<a href="merchant_edit.php?id=<?php echo $data['merchant_id']; ?>">
-						<button class="btn btn-outline btn-block btn-primary btn-xs">Lihat Detail</button>
+					<a style="text-decoration: none;" href="merchant_edit.php?id=<?php echo $data['merchant_id']; ?>">
+						<button class="btn btn-outline btn-block btn-primary btn-xs"><i class="fa fa-eye"></i>&nbsp;Lihat Detail</button>
 					</a>
 				</center>
 			</td>

@@ -17,16 +17,26 @@
 			$insert = mysql_query("insert into nonactive_log (nonactive_id, spv_name, merchant_id, lapak_id, nonactive_reason, nonactive_date) 
 			value('', '".$spv."', '".$mid."', '', '".$reason."', '".$dt_now."')");
 			if($insert){
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Aktifkan Pedagang";
 				echo "<script>window.location=('nonactive_merchant.php')</script>";
 				exit();
 			}else{
-				echo "<script>window.alert('PengAktifan Gagal 1');
-				window.history.back()</script>";
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Aktifkan Pedagang";
+				echo "<script>window.history.back()</script>";
 				exit();
 			}
 		}else{
-			echo "<script>window.alert('PengAktifan Gagal 2');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Aktifkan Pedagang";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 	}
@@ -42,16 +52,26 @@
 			$insert = mysql_query("insert into nonactive_log (nonactive_id, spv_name, merchant_id, lapak_id, nonactive_reason, nonactive_date) 
 			value('', '".$spv."', '".$mid."', '', '".$reason."', '".$dt_now."')");
 			if($insert){
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "NonAktifkan Pedagang";
 				echo "<script>window.location=('nonactive_merchant.php')</script>";
 				exit();
 			}else{
-				echo "<script>window.alert('PenonAktifan Gagal 1');
-				window.history.back()</script>";
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "NonAktifkan Pedagang";
+				echo "<script>window.history.back()</script>";
 				exit();
 			}
 		}else{
-			echo "<script>window.alert('PenonAktifan Gagal 2');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "NonAktifkan Pedagang";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 	}

@@ -118,12 +118,19 @@
 		
 		if($insert){
 			//echo "<script>window.location=('register_edit.php?id=".$rid."')</script>";
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Menambah data pemohon lapak";
 			echo "<script>window.location=('register.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Data Gagal Masuk');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Menambah data pemohon lapak";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 	}
@@ -188,12 +195,17 @@
 			var_dump($insert);
 			if($insert){
 				//echo "<script>window.location=('register_edit.php?id=".$rid."')</script>";
-				echo "<script>window.location=('register_edit2.php?id=$rid')</script>";
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Menambah permohonan lapak";
+				echo "<script>window.location=('register2.php?id=$rid')</script>";
 				exit();
 			}
 			else{
-				echo "<script>window.alert('Data Gagal Masuk');
-				window.history.back()</script>";
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Menambah permohonan lapak";
+				echo "<script>window.history.back()</script>";
 				exit();
 			}
 		}
@@ -224,17 +236,28 @@
 		if($update){
 			$reffer = executeScalar("select req_reffer from request where req_id = '".$id."'");
 			if($reffer!=''){
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Update data pemohon lapak";
 				echo "<script>window.location=('register_edit2.php?id=$id')</script>";
 				exit;
 			}else{
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Update data pemohon lapak";
 				echo "<script>window.location=('register_edit.php?id=$id')</script>";
 				exit;
 			}
 			
 		}
 		else{
-			echo "<script>window.alert('Update Failled');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Update data pemohon lapak";
+			echo "<script>window.history.back()</script>";
 			exit;
 		}
 	}
@@ -446,24 +469,37 @@
 								if($update2){
 									//pergi ke halaman cetak form perizinan
 									//echo "<script>window.location=('htmltopdf/persetujuan_pedagang.php?id=$rid')</script>";
+									// Alert Information
+									$_SESSION['success'] = true;
+									$_SESSION['title'] = 'Berhasil';
+									$_SESSION['message'] = "Setujui permohonan lapak";
 									echo "<script>window.location=('register.php')</script>";
 									exit();
 								}
 								else{
-									echo "<script>window.alert('Data Gagal Masuk 1');
-									window.history.back()</script>";
+									// Alert Information
+									$_SESSION['success'] = false;
+									$_SESSION['title'] = 'Gagal';
+									$_SESSION['message'] = "Setujui permohonan lapak 1";
+									echo "<script>window.history.back()</script>";
 									exit();
 								}
 							}
 							else{
-								echo "<script>window.alert('Data Gagal Masuk 1');
-								window.history.back()</script>";
+								// Alert Information
+								$_SESSION['success'] = false;
+								$_SESSION['title'] = 'Gagal';
+								$_SESSION['message'] = "Setujui permohonan lapak 2";
+								echo "<script>window.history.back()</script>";
 								exit();
 							}
 						}
 						else{
-							echo "<script>window.alert('Data Gagal Masuk 2');
-							window.history.back()</script>";
+							// Alert Information
+							$_SESSION['success'] = false;
+							$_SESSION['title'] = 'Gagal';
+							$_SESSION['message'] = "Setujui permohonan lapak 3";
+							echo "<script>window.history.back()</script>";
 							exit();
 						}
 					}
@@ -585,24 +621,36 @@
 						if($update2){
 							//pergi ke halaman cetak form perizinan
 							//echo "<script>window.location=('htmltopdf/persetujuan_pedagang.php?id=$rid')</script>";
+							$_SESSION['success'] = true;
+							$_SESSION['title'] = 'Berhasil';
+							$_SESSION['message'] = "Setujui permohonan lapak";
 							echo "<script>window.location=('register2.php')</script>";
 							exit();
 						}
 						else{
-							echo "<script>window.alert('Data Gagal Masuk 1');
-							window.history.back()</script>";
+							// Alert Information
+							$_SESSION['success'] = false;
+							$_SESSION['title'] = 'Gagal';
+							$_SESSION['message'] = "Setujui permohonan lapak 1";
+							echo "<script>window.history.back()</script>";
 							exit();
 						}
 					}
 					else{
-						echo "<script>window.alert('Data Gagal Masuk 1');
-						window.history.back()</script>";
+						// Alert Information
+						$_SESSION['success'] = false;
+						$_SESSION['title'] = 'Gagal';
+						$_SESSION['message'] = "Setujui permohonan lapak 2";
+						echo "<script>window.history.back()</script>";
 						exit();
 					}
 				}
 				else{
-					echo "<script>window.alert('Data Gagal Masuk 2');
-					window.history.back()</script>";
+					// Alert Information
+					$_SESSION['success'] = false;
+					$_SESSION['title'] = 'Gagal';
+					$_SESSION['message'] = "Setujui permohonan lapak 3";
+					echo "<script>window.history.back()</script>";
 					exit();
 				}
 			}

@@ -101,7 +101,7 @@
 
 <!-- Tombol untuk memunculkan offcanvas -->
 <button class="btn btn-canvas btn-primary" onclick="toggleOffcanvas()">
-    <i class="fa fa-bell" style="padding-top: 5px;"></i>
+    <i class="fa fa-bell"></i>
     <!-- <div class="notification">1</div> -->
 </button>
 

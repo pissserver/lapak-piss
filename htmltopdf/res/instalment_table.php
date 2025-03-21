@@ -24,11 +24,11 @@
 ?>
 <page backtop="10mm" backbottom="10mm" backleft="10mm" backright="10mm">
     <page_header>
-        <table style="width:95%; border:0px; margin-top:30px; margin-left:10px; margin-right:10px;">
+		<table style="width:100%; font-size: 16px; border:0px; margin-top:30px; margin-left:35px; margin-right:10px;">
             <tr>
-                <td style="text-align: left;width: 33%">www.paskomnas.com</td>
-                <td style="text-align: center;width: 34%"></td>
-                <td style="text-align: right;width: 33%">No: <?php echo $no.$r['merchant_id']; ?></td>
+                <td><b>NO</b></td>
+                <td><b> : </b></td>
+                <td><b><?php echo "(".$no.") ".$r['merchant_id']; ?></b></td>
             </tr>
         </table>
     </page_header>
@@ -41,27 +41,28 @@
         </table>
     </page_footer>
 	<br/>
-    <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:30px;">
-		Angsuran Lapak PIOS
+	<div style="font-size: 16px; font-weight: bold; text-align: center; margin-top:30px;">
+		ANGSURAN LAPAK
+		<br>PASAR INDUK SURABAYA SIDOTOPO
 	</div>
-	<br/><br/>
+	<br/><br/><br>
 	<table style="margin-bottom: 5px;font-size:12pt;" id="tableInstalment">
 		<tr><td>ID Pedagang			</td><td> : <?php echo $r['merchant_id']; ?></td></tr>
 		<tr><td>Nama       			</td><td> : <?php echo $name; ?> </td></tr>
 		<tr><td>Lapak				</td><td> : <?php echo $lapak; ?></td></tr>
 		<tr><td>Total Angsuran 		</td><td> : <?php echo format_rupiah($r['leftover2']); ?></td></tr>
 		<tr><td>Angsuran Saat Ini	</td><td> : <?php echo $ins_total; ?></td></tr>
-		<tr><td>Tanggal Masuk		</td><td> : <?php echo date("d-m-Y", strtotime($r['rent_date'])); ?></td></tr>
+		<tr><td>Tanggal Masuk		</td><td> : <?php echo date("d M Y", strtotime($r['rent_date'])); ?></td></tr>
 	</table>
-    <br />
+    <br /><br><br>
 	<div style="font-size: 16px; font-weight: bold; text-align: center; margin-top:0px; margin-bottom:10px;">
-		Tabel Angsuran Lapak <?php echo $lapak; ?>
-	</div>
-	<table style="width:95%;border:1px black;border-collapse: collapse; margin-left:100px; width:500px;font-size:12pt;">
+		TABEL ANGSURAN LAPAK <?php echo $lapak; ?>
+	</div><br>
+	<table style="width:100%;border:1px black;border-collapse: collapse; font-size:11pt;">
 		<tr>
-			<th style="text-align: center;width: 10%; border: solid 1px black;">No</th>
-			<th style="text-align: right;width: 45%; border: solid 1px black;">Jumlah Angsuran</th>
-			<th style="text-align: right;width: 35%;border: solid 1px black;">Jatuh Tempo</th>
+			<th style="text-align: center;width: 10%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 45%;border: solid 1px black;">JATUH TEMPO</th>
+			<th style="text-align: center;width: 45%; border: solid 1px black;">JUMLAH ANGSURAN</th>
 		</tr>
 		<?php
 			$date 	= $r['rent_dl'];
@@ -76,8 +77,8 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $i; ?>.</td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d M Y", strtotime($dateline)); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_rupiah($r['rent_instalment']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($dateline)); ?></td>
 		</tr>
 		<?php } ?>
 	</table>

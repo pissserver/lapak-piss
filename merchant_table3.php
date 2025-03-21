@@ -21,18 +21,18 @@
 		} );
 	});
 </script>
-<h3 style="text-align:center;">Daftar Pedagang</h3>
+<!-- <h3 style="text-align:center;">Daftar Pedagang</h3> -->
 <table id="merchantView3" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;">No</th>
-			<th style="width:8%;">ID</th>
-			<th style="width:14%;">Nama</th>
-			<th style="width:25%;">Alamat</th>
-			<th style="width:12%;">Lapak</th>
-			<th style="width:8%;">Jualan</th>
-			<th style="width:8%;">Status</th>
-			<th style="width:8%;">Aksi</th>
+			<th style="text-align: center; width:5%;">NO</th>
+			<th style="text-align: center; width:8%;">ID</th>
+			<th style="text-align: center; width:14%;">NAMA</th>
+			<th style="text-align: center; width:25%;">ALAMAT</th>
+			<th style="text-align: center; width:12%;">LAPAK</th>
+			<th style="text-align: center; width:8%;">JUALAN</th>
+			<th style="text-align: center; width:8%;">STATUS</th>
+			<th style="text-align: center; width:8%;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,17 +58,37 @@
 		$lapak = "".$string;
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $data['merchant_id']; ?></td>
-			<td><?php echo $data['merchant_name']; ?></td>
-			<td><?php echo $data['address1']; ?></td>
-			<td><?php echo $lapak; ?></td>
-			<td><?php echo $data['merchant_type']; ?></td>
-			<td><?php echo $data['merchant_status']; ?></td>
-			<td><center><a href="move.php?id=<?php echo $data['merchant_id']; ?>">
-			<button class="btn btn-outline btn-block btn-primary btn-xs">Pindah</button>
-			</a></center></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_id']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $data['merchant_name']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $data['address1']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $lapak; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_type']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_status']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><center>
+				<button class="btn btn-outline btn-block btn-primary btn-xs modalMoveLapak" data-toggle="modal" data-target="#modalMoveLapak" data-id="<?php echo $data['merchant_id']; ?>">
+					<i class="fa fa-retweet"></i>&nbsp;&nbsp;Pindah
+				</button>
+			</td>
 		</tr>
 		<?php $no++;} ?>
 	</tbody>
 </table>
+
+<script>
+	$(document).ready(function() {
+		$('body').on('click', '.modalMoveLapak', function() {
+			var goodsID = $(this).data('id'); 
+
+			$.ajax({
+				url: 'move_modal.php',
+				type: 'GET',
+				data: { id: goodsID }, 
+				success: function(response) {
+					$('#modalMoveLapak .modal-content').html(response);
+					$('#modalMoveLapak').modal('show');
+				}
+			});
+		});
+	});
+</script>

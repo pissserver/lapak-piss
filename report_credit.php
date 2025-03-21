@@ -3,6 +3,11 @@
 	include "connection.php";
 	include "components/role_session.php";
 
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
+
 	$merchant 	= executeScalar("select count(merchant_id) from merchant");
 	$lapak 		= executeScalar("select count(lapak_id) from lapak");
 ?>
@@ -16,19 +21,9 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Admin</title>
+    <title>Laporan Piutang Lapak | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <?php echo headScript(); ?>
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,12 +54,13 @@
                             <i class="fa fa-book fa-fw"></i> Laporan Data Piutang PerPedagang
                         </div>
 						<div class="panel-body">
-							<form class="form-horizontal" action="htmltopdf/laporan_piutang.php" id="reportMerchant" name = "reportMerchant" method="POST" target="_blank">
+							<form class="form-horizontal" id="reportMerchant" name = "reportMerchant" method="POST">
 								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
+									<div class="col-md-12">
+										<div class="form-group" style="padding:0 15px; margin-top:-10px;">
 											<label>Jenis Pedagang</label>
 											<select class="form-control" name="mtype" id="mtype" autofocus="autofocus" required>
+												<option value="">- Pilih Jenis Pedagang -</option>
 												<option value="Semua">Semua</option>
 												<?php 
 													$sql 		= mysql_query("SELECT distinct(merchant_type) as type_m FROM `merchant`");
@@ -75,8 +71,13 @@
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:15px;">
-											<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										<div class="form-group" style="margin-top:5px; margin-right:0px; margin-left:0px">
+												<button type="submit" class="btn btn-primary btn-block"  onclick="setAction('pdf')"><i class="fa fa-file-pdf-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Print PDF</button>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-left:0px; margin-right: 0px">
+											<button type="submit" class="btn btn-success btn-block" style="background-color: #008000;" onclick="setAction('excel')"><i class="fa fa-file-excel-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Export Excel</button>
 										</div>
 									</div>
 								</div>
@@ -88,12 +89,13 @@
                             <i class="fa fa-book fa-fw"></i> Laporan Data Piutang PerLapak
                         </div>
 						<div class="panel-body">
-							<form class="form-horizontal" action="htmltopdf/laporan_piutang3.php" id="reportMerchant" name = "reportMerchant" method="POST" target="_blank">
+							<form class="form-horizontal" id="reportMerchant2" name = "reportMerchant2" method="POST">
 								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
+									<div class="col-md-12">
+										<div class="form-group" style="padding:0 15px; margin-top:-10px;">
 											<label>Jenis Pedagang</label>
 											<select class="form-control" name="mtype" id="mtype" autofocus="autofocus" required>
+											<option value="">- Pilih Jenis Pedagang -</option>
 												<option value="Semua">Semua</option>
 												<?php 
 													$sql 		= mysql_query("SELECT distinct(merchant_type) as type_m FROM `merchant`");
@@ -104,8 +106,13 @@
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:15px;">
-											<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										<div class="form-group" style="margin-top:5px; margin-right:0px; margin-left:0px">
+												<button type="submit" class="btn btn-primary btn-block"  onclick="setAction('pdf')"><i class="fa fa-file-pdf-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Print PDF</button>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-left:0px; margin-right: 0px">
+											<button type="submit" class="btn btn-success btn-block" style="background-color: #008000;" onclick="setAction('excel')"><i class="fa fa-file-excel-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Export Excel</button>
 										</div>
 									</div>
 								</div>
@@ -121,10 +128,10 @@
                             <i class="fa fa-book fa-fw"></i> Laporan Data Piutang Pedagang Per Block
                         </div>
 						<div class="panel-body">
-							<form class="form-horizontal" action="htmltopdf/laporan_piutang2.php" id="reportMerchant" name = "reportMerchant" method="POST" target="_blank">
+							<form class="form-horizontal" id="reportMerchant3" name = "reportMerchant3" method="POST">
 								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
+									<div class="col-md-12">
+										<div class="form-group" style="padding:0 15px; margin-top:-10px;">
 											<label>Blok</label>
 											<select class="form-control" name="block" id="block" autofocus="autofocus" required>
 												<option value="">- Pilih Block -</option>
@@ -137,8 +144,13 @@
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:15px;">
-											<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										<div class="form-group" style="margin-top:5px; margin-right:0px; margin-left:0px">
+												<button type="submit" class="btn btn-primary btn-block"  onclick="setAction('pdf')"><i class="fa fa-file-pdf-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Print PDF</button>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-left:0px; margin-right: 0px">
+											<button type="submit" class="btn btn-success btn-block" style="background-color: #008000;" onclick="setAction('excel')"><i class="fa fa-file-excel-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Export Excel</button>
 										</div>
 									</div>
 								</div>
@@ -182,5 +194,27 @@
 		}
 		function clearNotif(){$("#notifArea").html("");}
     </script>
+	<script>
+		function setAction(type) {
+			var form1 = document.getElementById("reportMerchant");
+			var form2 = document.getElementById("reportMerchant2");
+			var form3 = document.getElementById("reportMerchant3");
+			if (type === 'pdf') {
+				form1.action = "htmltopdf/laporan_piutang.php";
+				form2.action = "htmltopdf/laporan_piutang3.php";
+				form3.action = "htmltopdf/laporan_piutang2.php";
+				form1.target = "_blank";
+				form2.target = "_blank";
+				form3.target = "_blank";
+			} else if (type === 'excel') {
+				form1.action = "exportExcel/exportLaporanPiutang.php";
+				form2.action = "exportExcel/exportlaporanPiutang3.php";
+				form3.action = "exportExcel/exportlaporanPiutang2.php";
+				form1.target = "_self";
+				form2.target = "_self";
+				form3.target = "_self";
+			}
+		}
+	</script>
 </body>
 </html>

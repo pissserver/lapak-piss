@@ -2,6 +2,11 @@
 	session_start();
 	include "connection.php";
 	include "components/role_session.php";
+
+    function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,18 +18,9 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Admin</title>
+    <title>NonAktif Pedagang | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php echo headScript(); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,10 +44,17 @@
         <div id="page-wrapper">
         <br><br><br><br>
             <div class="row">
-				<div class="col-lg-12" style="margin-top:0px;">
-					<div id="Area1">
-						<div class="alert alert-info" onclick="clearNotif()">
-							<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                <div class="col-md-12" style="margin-top:10px;">
+					<div class="panel panel-primary" style="overflow-x: auto">
+						<div class="panel-heading">
+							<i class="fa fa-group fa-fw"></i> Data Pedagang
+						</div>
+						<div class="panel-body">
+							<div id="Area1">
+								<div class="alert alert-info" onclick="clearNotif()">
+									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -67,6 +70,7 @@
             </div>
         </div>
     </div>
+
 	<!-- Modal NonAktif -->
 	<div id="modalNonaktif" class="modal fade">
         <div class="modal-dialog">
@@ -95,5 +99,24 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+    <!-- Sweet Alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>

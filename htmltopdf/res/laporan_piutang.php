@@ -71,7 +71,7 @@
 			l.block_id = '".$_POST['block']."'");*/
 ?>
 <page backtop="20mm" backbottom="10mm" backleft="5mm" backright="5mm">
-    <page_header>
+    <!-- <page_header>
         <table style="width:95%; border:0px; margin-top:30px; margin-left:10px; margin-right:10px;">
             <tr>
                 <td style="text-align: left; width: 33%">www.paskomnas.com</td>
@@ -79,36 +79,40 @@
                 <td style="text-align: right; width: 33%"><?php echo date("d M Y", strtotime($date_now)); ?></td>
             </tr>
         </table>
-    </page_header>
+    </page_header> -->
     <page_footer>
         <table style="width: 95%; border: 0px black; margin-bottom:50px; margin-left:10px; margin-right:10px;">
-            <tr>
-                <td style="text-align: left;width: 33%">PIOS</td>
+			<tr>
+                <td style="text-align: left;width: 33%"><?php echo date("d M Y", strtotime($date_now)); ?></td>
 				<td style="text-align: left;width: 34%"></td>
                 <td style="text-align: right;width: 33%">Halaman [[page_cu]]/[[page_nb]]</td>
             </tr>
         </table>
     </page_footer>
-    <h3 style="text-align:center; margin-top: -30px;">Data Piutang Lapak PIOS</h3> 
-	Jumlah Pedagang: <?php echo $total; ?> Orang <br />
-	Jenis Pedagang: <?php echo $mtype; ?><br />
+    <h4 style="text-align:center; margin-top: -30px;">LAPORAN DATA PIUTANG PER PEDAGANG</h4><br>
+    <h4 style="text-align:center; margin-top: -30px;">PASAR INDUK SURABAYA SIDOTOPO (PISS)</h4><br>
+	Jumlah Pedagang : <?php echo $total; ?> Orang <br /><br>
+	Jenis Pedagang : <?php echo $mtype; ?><br /><br>
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:10pt; width:1050px; margin-top:10px;" id="merchant">
 		<thead>
 			<tr>
-				<th style="width:4%; text-align: center; border: solid 1px black;">No</th>
-				<th style="width:6%; text-align:center; border: solid 1px black;">NIP</th>
-				<th style="width:20%; text-align:center; border: solid 1px black;">Nama Pedagang</th>
-				<th style="width:15%; text-align:center; border: solid 1px black;">lapak</th>
-				<th style="width:10%; text-align:center; border: solid 1px black;">Luas</th>
-				<th style="width:10%; text-align:center; border: solid 1px black;">Total Harga</th>
-				<th style="width:10%; text-align:center; border: solid 1px black;">Uang Muka</th>
-				<th style="width:10%; text-align:center; border: solid 1px black;">Piutang</th>
+				<th style="vertical-align: middle; width:4%; text-align: center; border: solid 1px black;">NO</th>
+				<th style="vertical-align: middle; width:6%; text-align:center; border: solid 1px black;">KODE</th>
+				<th style="vertical-align: middle; width:20%; text-align:center; border: solid 1px black;">NAMA PEDAGANG</th>
+				<th style="vertical-align: middle; width:15%; text-align:center; border: solid 1px black;">LAPAK</th>
+				<th style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;">LUAS</th>
+				<th style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;">TOTAL HARGA (RP)</th>
+				<th style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;">UANG MUKA (RP)</th>
+				<th style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;">PIUTANG (RP)</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
 				$query 	= mysql_query($sql);
 				$no		= 1;
+				$totalPrice = 0;
+				$totalDP = 0;
+				$totalLeftPay = 0;
 				while($data = mysql_fetch_array($query)) {
 					$sql2 	= mysql_query("select l.lapak_name from rent r, lapak l
 					where r.lapak_id = l.lapak_id and 
@@ -142,18 +146,28 @@
 						$lo = $row['lo'];
 						$counter++;
 					}
+
+				$totalPrice += $total;
+				$totalDP += $dp;
+				$totalLeftPay += $lo;
 			?>
 			<tr>
-				<td style="width:4%; text-align:center; vertical-align:top; border: solid 1px black;"><?php echo $no; ?></td>
-				<td style="width:6%; text-align:left; vertical-align:top; border: solid 1px black;"><?php echo $data['merchant_id']; ?></td>
-				<td style="width:20%; text-align:left; vertical-align:top; border: solid 1px black;"><?php echo $data['merchant_name']; ?></td>
-				<td style="width:18%; text-align:left; vertical-align:top; border: solid 1px black;"><?php echo $lapak; ?></td>
-				<td style="width:10%; text-align:right; vertical-align:top; border: solid 1px black;"><?php echo $size; ?> M<sup>2</sup></td>
-				<td style="width:12%; text-align:right; vertical-align:top; border: solid 1px black;"><?php echo format_rupiah($total); ?></td>
-				<td style="width:12%; text-align:right; vertical-align:top; border: solid 1px black;"><?php echo format_rupiah($dp); ?></td>
-				<td style="width:12%; text-align:right; vertical-align:top; border: solid 1px black;"><?php echo format_rupiah($lo); ?></td>
+				<td style="width:4%; text-align:center; vertical-align:middle; border: solid 1px black;"><?php echo $no; ?></td>
+				<td style="width:6%; text-align:center; vertical-align:middle; border: solid 1px black;"><?php echo $data['merchant_id']; ?></td>
+				<td style="width:20%; text-align:left; vertical-align:middle; border: solid 1px black;"><?php echo $data['merchant_name']; ?></td>
+				<td style="width:18%; text-align:left; vertical-align:middle; border: solid 1px black;"><?php echo $lapak; ?></td>
+				<td style="width:10%; text-align:right; vertical-align:middle; border: solid 1px black;"><?php echo $size; ?> M<sup>2</sup></td>
+				<td style="width:12%; text-align:right; vertical-align:middle; border: solid 1px black;"><?php echo format_rupiah($total); ?></td>
+				<td style="width:12%; text-align:right; vertical-align:middle; border: solid 1px black;"><?php echo format_rupiah($dp); ?></td>
+				<td style="width:12%; text-align:right; vertical-align:middle; border: solid 1px black;"><?php echo format_rupiah($lo); ?></td>
 			</tr>
 			<?php $no++;} ?>
+			<tr>
+				<td style="width:12%; text-align:center; vertical-align:middle; border: solid 1px black;" colspan="5"><b>TOTAL</b></td>
+				<td style="width:12%; text-align:right; vertical-align:middle; border: solid 1px black;"><b><?php echo format_rupiah($totalPrice); ?></b></td>
+				<td style="width:12%; text-align:right; vertical-align:middle; border: solid 1px black;"><b><?php echo format_rupiah($totalDP); ?></b></td>
+				<td style="width:12%; text-align:right; vertical-align:middle; border: solid 1px black;"><b><?php echo format_rupiah($totalLeftPay); ?></b></td>
+			</tr>
 		</tbody>
 	</table>
 </page>

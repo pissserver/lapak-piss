@@ -2,6 +2,11 @@
 	session_start();
 	include "connection.php";
 	include "components/role_session.php";
+
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,18 +20,8 @@
     <link rel="shortcut icon" href="img/logo.png" />
     <title>Pertukaran Lapak | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<!-- CSS Search dropdown -->
-	<link href="css/plugins/chosen/chosen.css" rel="stylesheet" />
+    <?php echo headScript(); ?>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -48,10 +43,10 @@
 		<div id="page-wrapper">
 		<br><br><br><br>
             <div class="row">
-                <div class="col-lg-12" style="padding:10px;">
+                <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-retweet fa-fw"></i> Pertukaran Lapak PISS
+                            <i class="fa fa-retweet fa-fw"></i> Pertukaran Lapak
                         </div>
                         <div class="panel-body">
                             <form action="move2.php" id="formMove2" name="formMove2" method="POST" class="form-horizontal">
@@ -87,20 +82,27 @@
 								</div>
 								<div class="col-lg-4" style="padding:10px; margin-top:5px; margin-bottom:-10px;">
 									<div class="form-group" style="padding:10px;">
-										<center><button type="submit" class="btn btn-outline btn-block btn-primary">Berikutnya <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										<center><button type="submit" class="btn btn-block btn-primary">Berikutnya <i class="fa fa-angle-double-right fa-lg"></i></button></center>
 									</div>
 								</div>
 							</form> 
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12" style="margin-top:-10px;">
-                    <div id="Area1">
-						<div class="alert alert-info" onclick="clearNotif()">
-							<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                <div class="col-md-12" style="margin-top:10px;">
+					<div class="panel panel-primary" style="overflow-x: auto">
+						<div class="panel-heading">
+							<i class="fa fa-group fa-fw"></i> Data Pedagang
+						</div>
+						<div class="panel-body">
+							<div id="Area1">
+								<div class="alert alert-info" onclick="clearNotif()">
+									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+								</div>
+							</div>
 						</div>
 					</div>
-                </div>
+				</div>
             </div>
         </div>
     </div>
@@ -128,5 +130,24 @@
 	<script type="text/javascript">
     	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
     </script>
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>

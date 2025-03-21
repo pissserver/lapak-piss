@@ -21,18 +21,18 @@
 		} );
 	});
 </script>
-<h3 style="text-align:center;">Daftar Pedagang</h3>
+<!-- <h3 style="text-align:center;">Daftar Pedagang</h3> -->
 <table id="merchantView3" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;">No</th>
-			<th style="width:8%;">ID</th>
-			<th style="width:14%;">Nama</th>
-			<th style="width:25%;">Alamat</th>
-			<th style="width:12%;">Lapak</th>
-			<th style="width:8%;">Jualan</th>
-			<th style="width:8%;">Status</th>
-			<th style="width:8%;">Aksi</th>
+			<th style="text-align: center; width:5%;">NO</th>
+			<th style="text-align: center; width:8%;">ID</th>
+			<th style="text-align: center; width:14%;">NAMA PEDAGANG</th>
+			<th style="text-align: center; width:25%;">ALAMAT</th>
+			<th style="text-align: center; width:12%;">LAPAK</th>
+			<th style="text-align: center; width:8%;">JUALAN</th>
+			<th style="text-align: center; width:8%;">STATUS</th>
+			<th style="text-align: center; width:8%;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,21 +58,25 @@
 		$lapak = "".$string;
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $data['merchant_id']; ?></td>
-			<td><?php echo $data['merchant_name']; ?></td>
-			<td><?php echo $data['address1']; ?></td>
-			<td><?php echo $lapak; ?></td>
-			<td><?php echo $data['merchant_type']; ?></td>
-			<td><?php echo $data['merchant_status']; ?></td>
-			<td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_id']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $data['merchant_name']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $data['address1']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $lapak; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_type']; ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<div style="vertical-align: middle; background-color: <?php echo $data['merchant_status'] == 'Aktif' ? 'green' : 'red'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $data['merchant_status'] == 'Aktif' ? 'fa-check' : 'fa-remove'; ?> fa-fw"></i>&nbsp;<?php echo $data['merchant_status']; ?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align:center;">
 			<?php
 			if($data['merchant_status']=='Tidak Aktif'){
-				echo '<a href="modal_active.php?id='.$data['merchant_id'].'" data-toggle="modal" data-target="#modalAktif">
-				<button class="btn btn-outline btn-block btn-primary btn-xs">Aktifkan</button></a>';
+				echo '<a style="text-decoration: none;" href="modal_active.php?id='.$data['merchant_id'].'" data-toggle="modal" data-target="#modalAktif">
+				<button class="btn btn-outline btn-block btn-success btn-xs"><i class="fa fa-check"></i>&nbsp;Aktifkan</button></a>';
 			}else{
-				echo '<a href="modal_nonactive.php?id='.$data['merchant_id'].'" data-toggle="modal" data-target="#modalNonaktif">
-				<button class="btn btn-outline btn-block btn-primary btn-xs">NonAktifkan</button></a>';
+				echo '<a style="text-decoration: none;" href="modal_nonactive.php?id='.$data['merchant_id'].'" data-toggle="modal" data-target="#modalNonaktif">
+				<button class="btn btn-outline btn-block btn-danger btn-xs"><i class="fa fa-remove"></i>&nbsp;NonAktifkan</button></a>';
 			}
 			?>
 			</td>

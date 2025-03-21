@@ -2,6 +2,11 @@
 	session_start();
 	include "connection.php";
 	include "components/role_session.php";
+
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,16 +20,7 @@
     <link rel="shortcut icon" href="img/logo.png" />
     <title>Persetujuan Lapak Baru | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php echo headScript(); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,25 +40,34 @@
     <div id="wrapper">
 		<?php include "components/sidebar.php" ?>
 
+		<?php 
+			$id			= $_GET['id'];
+			$edit		= mysql_query("select * from request where req_id = '".$id."'");
+								
+			while($r = mysql_fetch_array($edit)){
+			$lapak 		= executeScalar("select lapak_name from lapak where lapak_id = '".$r['lapak_id']."'");
+			$price	 	= executeScalar("select lapak_price from lapak where lapak_id = '".$r['lapak_id']."'");
+			$duration 	= executeScalar("select duration from lapak where lapak_id = '".$r['lapak_id']."'");
+			$total	 	= executeScalar("select lapak_total from lapak where lapak_id = '".$r['lapak_id']."'");
+		?>
 		<div id="page-wrapper">
 		<br><br><br><br>
             <div class="row">
-                <div class="col-lg-12" style="padding:10px;">
+                <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-pencil fa-fw"></i> Permohonan Menempati Lapak Pasar Induk Surabaya Sidotopo
+							<div class="row">
+								<div class="col-md-6" style="padding-top: 7px;">
+									<i class="fa fa-check fa-fw"></i> Persetujuan Permohonan Lapak
+								</div>
+								<div class="col-md-6 text-right">
+									<a href="register_edit.php?id=<?php echo $id ?>" style="text-decoration: none;">
+										<button style="border: 1px solid #fff;" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit Data</button>
+									</a>
+								</div>
+							</div>
                         </div>
                         <div class="panel-body">
-							<?php 
-								$id			= $_GET['id'];
-								$edit		= mysql_query("select * from request where req_id = '".$id."'");
-								
-								while($r = mysql_fetch_array($edit)){
-								$lapak 		= executeScalar("select lapak_name from lapak where lapak_id = '".$r['lapak_id']."'");
-								$price	 	= executeScalar("select lapak_price from lapak where lapak_id = '".$r['lapak_id']."'");
-								$duration 	= executeScalar("select duration from lapak where lapak_id = '".$r['lapak_id']."'");
-								$total	 	= executeScalar("select lapak_total from lapak where lapak_id = '".$r['lapak_id']."'");
-							?>
                             <form action="register_action.php?task=acc&id=<?php echo $id; ?>"  id="formRegisterAcc" name="formRegisterAcc" method="POST" class="form-horizontal">
 								<fieldset>
 								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
@@ -101,42 +106,53 @@
 									</div>
 								</div>
 								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px; margin-right:10px;">
-										<label>Uang Muka</label>
-										<input id="dp" name="dp" placeholder="Uang Muka Lapak" type="number" class="form-control" required />
-										<br />
-										<div class="row" style="margin-top:-10px;">
-											<div class="col-md-6" style="padding:10px;">
-												<label>Cicilan</label>
-												<select class="form-control" name="ins" id="ins" required>
-													<option value="">- Pilih Cicilan -</option>
-													<?php 
-														$sql1 = mysql_query("select * from instalment order by instalment_name");
-														while($d1 = mysql_fetch_array($sql1)){
-														?>
-														<option value="<?php echo $d1['instalment_id'];?>"><?php echo $d1['instalment_name'].' / '.$d1['instalment_count'].'x';?></option>
-													<?php } ?>
-												</select>
+									<div class="form-group" style="padding: 10px 15px;">
+										<div class="row">
+											<div class="col-lg-4">
+												<div class="form-group" style="padding: 0 10px">
+													<label>Uang Muka</label>
+													<input id="dp" name="dp" placeholder="0" type="number" class="form-control" required />
+												</div>
 											</div>
-											<div class="col-md-6" style="padding:10px;">
-												<label>Bunga Pertahun (%)</label>
-												<input class="form-control" id="interest" name="interest" type="number" value="0" required />
+											<div class="col-lg-4">
+												<div class="form-group" style="padding: 0 10px">
+													<label>Cicilan</label>
+													<select class="form-control" name="ins" id="ins" required>
+														<option value="">- Pilih Cicilan -</option>
+														<?php 
+															$sql1 = mysql_query("select * from instalment order by instalment_name");
+															while($d1 = mysql_fetch_array($sql1)){
+															?>
+															<option value="<?php echo $d1['instalment_id'];?>"><?php echo $d1['instalment_name'].' / '.$d1['instalment_count'].'x';?></option>
+														<?php } ?>
+													</select>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group" style="padding: 0 10px;">
+													<label>Bunga Pertahun (%)</label>
+													<input class="form-control" id="interest" name="interest" type="number" placeholder="0" required />
+												</div>
 											</div>
 										</div>
-										<div class="form-group" style="padding:10px;">
+										<div class="form-group" style="padding: 0 10px; margin-top: 5px;">
 											<label>Tanggal Masuk</label>
 											<input id="datein" name="datein" type="date" class="form-control" placeholder="Tanggal Masuk" required
 											data-fv-notempty-message="Tanggal Belum Diisi"/>
 										</div>
-										<label>Kajian</label>
-										<textarea cols="50" rows="3" id="ket" name="ket" placeholder="Alasan Mengapa Persetujuan diterbitkan ?"></textarea>
+										<div class="form-group" style="padding: 0 10px; margin-top: 7px;">
+											<label>Kajian</label>
+											<textarea class="form-control" cols="50" rows="5" id="ket" name="ket" placeholder="Alasan Mengapa Persetujuan diterbitkan ?" required></textarea>
+										</div>
 									</div>
 								</div>
-								<center>
-									<button style="margin-top:-10px;" type="submit" class="btn btn-outline btn-block btn-primary">
-										Setujui Permohonan <i class="fa fa-angle-double-right fa-lg"></i>
-									</button>
-								</center>
+								<div class="row">
+									<div class="col-lg-12" style="margin-top:-15px; padding: 0 20px; margin-bottom: 10px;">
+										<button type="submit" class="btn btn-block btn-primary">
+											<i class="fa fa-check fa-lg"></i>&nbsp;&nbsp;Setujui Permohonan 
+										</button>
+									</div>
+								</div>
 								</fieldset>
 							</form>
 							<?php }?>

@@ -10,26 +10,35 @@
 		$exist 	= executeScalar("select count(instalment_id) from instalment where instalment_name = '".$_POST['ins_val']."' ");
 		
 		if($exist>0){
-			echo "<script>window.alert('Nama Cicilan Sudah Ada, Mohon Dicek Lagi');
-			window.history.back()</script>";
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Nama Cicilan Sudah Ada, Mohon Dicek Lagi";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
-		if($_POST['ins']==''||$_POST['ins_val']==''){
-			echo "<script>window.alert('Data Belum Lengkap, Mohon Dicek Lagi');
-			window.history.back()</script>";
-			exit();
-		}
+		// if($_POST['ins']==''||$_POST['ins_val']==''){
+		// 	echo "<script>window.alert('Data Belum Lengkap, Mohon Dicek Lagi');
+		// 	window.history.back()</script>";
+		// 	exit();
+		// }
 		else{
 			$insert = mysql_query("INSERT INTO `instalment` (`instalment_id`, `instalment_name`, `instalment_count`) 
 			VALUES ('', '".$_POST['ins']."', '".$_POST['ins_val']."')");
 			
 			if($insert){
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Menambahkan data waktu angsuran baru";
 				echo "<script>window.location=('instalment.php')</script>";
 				exit();
 			}
 			else{
-				echo "<script>window.alert('Data Gagal Masuk');
-				window.history.back()</script>";
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Menambahkan data waktu angsuran baru";
+				echo "<script>window.history.back()</script>";
 				exit();
 			}
 		}
@@ -42,25 +51,40 @@
 													instalment_count 	= '".$_POST['ins_val']."'
 												where instalment_id 	= '".$id."'");
 		if($update){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Update data waktu angsuran";
 			echo "<script>window.location=('instalment.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Update Data Gagal');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Update data waktu angsuran";
+			echo "<script>window.history.back()</script>";
 			exit();
 		}
 	}
 	
 	elseif ($task == 'delete'){
-		//$delete = mysql_query("delete block where block_id = '".$id."'");
+		$id		= $_GET['id'];
+		$delete = mysql_query("delete from instalment where instalment_id = '".$id."'");
 		if($delete){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Hapus data waktu angsuran";
 			echo "<script>window.location=('instalment.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Delete Failled');
-			window.location=('instalment.php')</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Hapus data waktu angsuran";
+			echo "<script>window.location=('instalment.php')</script>";
 			exit();
 		}
 	}

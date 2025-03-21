@@ -22,15 +22,16 @@
 	});
 </script>
 
-<h3 style="text-align:center;">Histori Perpindahan Lapak</h3>
+<!-- <h3 style="text-align:center;">Histori Perpindahan Lapak</h3> -->
 <table id="moveView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:10%;">No</th>
-			<th style="width:20%;">Nama Pedagang</th>
-			<th style="width:20%;">Lapak Awal</th>
-			<th style="width:20%;">Lapak Akhir</th>
-			<th style="width:20%;">Tanggal Pindah</th>
+			<th style="text-align: center; width:10%;">NO</th>
+			<th style="text-align: center; width:10%;">KODE</th>
+			<th style="text-align: center; width:20%;">NAMA PEDAGANG</th>
+			<th style="text-align: center; width:20%;">LAPAK AWAL</th>
+			<th style="text-align: center; width:20%;">LAPAK AKHIR</th>
+			<th style="text-align: center; width:20%;">TANGGAL PINDAH</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -44,10 +45,11 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $name; ?></td>
-			<td><?php echo $awal; ?></td>
-			<td><?php echo $akhir; ?></td>
-			<td><?php echo date("d-m-Y", strtotime($data['move_date'])); ?></td>
+			<td style="text-align:center;"><?php echo $data['merchant_id']; ?></td>
+			<td style="text-align:left;"><?php echo $name; ?></td>
+			<td style="text-align:center;"><?php echo $awal; ?></td>
+			<td style="text-align:center;"><?php echo $akhir; ?></td>
+			<td style="text-align:center;"><?php echo date("d M Y", strtotime($data['move_date'])); ?></td>
 		</tr>
 		<?php
 			$no++;

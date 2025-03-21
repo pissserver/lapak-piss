@@ -105,13 +105,19 @@
 					//Update aktive block merchant
 					$update4	= mysql_query("update merchant set active_block = '".$block."' where merchant_id = '".$mid."'");
 					if($update4){
-						echo "<script>window.alert('Pindah Lapak Berhasil');
-						window.location=('move_select.php')</script>";
+						// Alert Information
+						$_SESSION['success'] = true;
+						$_SESSION['title'] = 'Berhasil';
+						$_SESSION['message'] = "Pindah lapak";
+						echo "<script>window.location=('move_select.php')</script>";
 						exit();
 					}
 					else{
-						echo "<script>window.alert('Pindah Lapak Gagal');
-						window.history.back()</script>";
+						// Alert Information
+						$_SESSION['success'] = false;
+						$_SESSION['title'] = 'Gagal';
+						$_SESSION['message'] = "Pindah lapak";
+						echo "<script>window.history.back()</script>";
 						exit();
 					}
 				}
@@ -305,13 +311,19 @@
 					$update3	= mysql_query("update merchant set active_block = '".$block2."' where merchant_id = '".$mid1."'");
 					$update4	= mysql_query("update merchant set active_block = '".$block1."' where merchant_id = '".$mid2."'");
 					if($update3&&$update4){
-						echo "<script>window.alert('Pertukaran Lapak Berhasil');
-						window.location=('move_select2.php')</script>";
+						// Alert Information
+						$_SESSION['success'] = true;
+						$_SESSION['title'] = 'Berhasil';
+						$_SESSION['message'] = "Pertukaran lapak";
+						echo "<script>window.location=('move_select2.php')</script>";
 						exit();
 					}
 					else{
-						echo "<script>window.alert('Pertukaran Lapak Gagal');
-						window.history.back()</script>";
+						// Alert Information
+						$_SESSION['success'] = false;
+						$_SESSION['title'] = 'gagal';
+						$_SESSION['message'] = "Pertukaran lapak";
+						echo "<script>window.history.back()</script>";
 						exit();
 					}
 				}
