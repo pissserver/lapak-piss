@@ -41,7 +41,7 @@
 		<thead>
 			<tr>
 				<th style="vertical-align: middle; width:5%; text-align: center; border: solid 1px black;">NO</th>
-				<th style="vertical-align: middle; width:5%; text-align:center; border: solid 1px black;">ID</th>
+				<th style="vertical-align: middle; width:5%; text-align:center; border: solid 1px black;">KODE</th>
 				<th style="vertical-align: middle; width:20%; text-align:center; border: solid 1px black;">NAMA PEDAGANG</th>
 				<th style="vertical-align: middle; width:9%; text-align:center; border: solid 1px black;">TELP RUMAH</th>
 				<th style="vertical-align: middle; width:9%; text-align:center; border: solid 1px black;">HANDPHONE</th>
