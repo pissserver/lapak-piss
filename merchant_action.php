@@ -94,14 +94,16 @@
 													nid_lain 			= '".$_POST['lain']."',
 													nid_type 			= '".$_POST['nid']."',
 													merchant_type 		= '".$_POST['type']."',
-													merchant_status2 	= '".$_POST['sts2']."',
 													active_block 		= '".$block."',
 													kat_merchant 		= '".$_POST['kat_merchant']."',
 													asal_pasar 			= '".$_POST['asal_pasar']."'
 											where 	merchant_id 		= '".$id."'");
 		if($update2){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Update data pedagang";
 			echo "	<script>
-						window.alert('Update Berhasil');
 						window.location=('merchant_edit.php?id=$id')
 					</script>";
 			exit;

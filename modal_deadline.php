@@ -1,12 +1,7 @@
 <?php
 	session_start();
 	include "connection.php";
-	//Validasi role
-	if($_SESSION['role']!='admin'){
-		if($_SESSION['role']!='super_admin'){
-			header("Location:index.php");
-		}
-	}
+	include "components/role_session.php"
 ?>
 <!-- jquery -->
 <script src="dataTables/jquery.dataTables.js"></script>
@@ -25,10 +20,10 @@
 <table id="DeadlineView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%; text-align:left;">No</th>
-			<th style="width:15%; text-align:left;">Pedagang</th>
-			<th style="width:10%; text-align:left;">Lapak</th>
-			<th style="width:10%; text-align:left;">Batas Sewa</th>
+			<th style="width:5%; text-align:center;">NO</th>
+			<th style="width:15%; text-align:center;">PEDAGANG</th>
+			<th style="width:10%; text-align:center;">LAPAK</th>
+			<th style="width:10%; text-align:center;">BATAS SEWA</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -53,10 +48,10 @@
 				$no		= $no++;
 		?>
 		<tr>
-			<td><?php $no++; echo $no; ?></td>
-			<td><?php echo $r['merchant_id'].' - '.$merchant; ?></td>
-			<td><?php echo $lapak; ?></td>
-			<td><?php echo $r['rent_expired']; ?></td>
+			<td style="vertical-align: middle; text-align: center"><?php $no++; echo $no; ?></td>
+			<td style="vertical-align: middle; text-align: left"><?php echo $r['merchant_id'].' - '.$merchant; ?></td>
+			<td style="vertical-align: middle; text-align: center"><?php echo $lapak; ?></td>
+			<td style="vertical-align: middle; text-align: center"><?php echo date('d M Y', strtotime($r['rent_expired'])); ?></td>
 		</tr>
 		<?php } ?>
 	</tbody>

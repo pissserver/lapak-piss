@@ -22,16 +22,16 @@
 	});
 </script>
 
-<h3 style="text-align:center;">Histori NonAktif</h3>
+<!-- <h3 style="text-align:center;">Histori NonAktif</h3> -->
 <table id="nonactiveView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;">No</th>
-			<th style="width:15%;">Nama SPV</th>
-			<th style="width:20%;">Pedagang</th>
-			<th style="width:10%;">Lapak</th>
-			<th style="width:25%;">Alasan</th>
-			<th style="width:15%;">Tgl & Jam</th>
+			<th style="text-align: center; width:5%;">NO</th>
+			<th style="text-align: center; width:15%;">NAMA SPV / PP</th>
+			<th style="text-align: center; width:20%;">PEDAGANG</th>
+			<th style="text-align: center; width:10%;">LAPAK</th>
+			<th style="text-align: center; width:25%;">ALASAN</th>
+			<th style="text-align: center; width:15%;">TGL & JAM</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -43,12 +43,15 @@
 				$lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$data['lapak_id']."' ");
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $data['spv_name']; ?></td>
-			<td><?php echo $name; ?></td>
-			<td><?php if($lapak!=null){echo $lapak;}else{echo ' - ';} ?></td>
-			<td><?php echo $data['nonactive_reason']; ?></td>
-			<td><?php echo date("d-m-Y H:i:s", strtotime($data['nonactive_date'])); ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $data['spv_name']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $name; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php if($lapak!=null){echo $lapak;}else{echo ' - ';} ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $data['nonactive_reason']; ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<?php echo date("d M Y", strtotime($data['nonactive_date'])); ?><br>
+				<?php echo date("H:i", strtotime($data['nonactive_date'])); ?>
+			</td>
 		</tr>
 		<?php
 			$no++;

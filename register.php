@@ -1,11 +1,11 @@
 <?php
 	session_start();
 	include "connection.php";
-	//Validasi role
-	if($_SESSION['role']!='admin'){
-		if($_SESSION['role']!='super_admin'){
-			header("Location:index.php");
-		}
+	include "components/role_session.php";
+
+	function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
 	}
 ?>
 <!DOCTYPE html>
@@ -16,22 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<link rel="icon" href="../images/icon.png">
-    <link rel="shortcut icon" href="../images/icon.png" />
+	<link rel="icon" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png" />
     <title>Permohonan Lapak Baru | PISS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<!-- CSS Search dropdown -->
-	<link href="css/plugins/chosen/chosen.css" rel="stylesheet" />
+    <?php echo headScript(); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,185 +52,130 @@
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Admin PISS</a>
-            </div>
+	<?php include "components/sidebar.php" ?>
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        Akun <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-           
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li><a href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
-						<li> 
-							<a href="#"><i class="fa fa-building fa-fw"></i> Data Master<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
-								<li><a href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Blok</a></li>
-								<li><a href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Angsuran</a></li>
-							</ul>
-						</li>
-						<li class="active">
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a class="active" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
-								<li><a href="register2.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Tambah Lapak</a></li>
-								<li><a href="register_view.php"><i class="fa fa-user-plus fa-fw"></i> Permohonan Yg Disetujui</a></li>
-								<li><a href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pedagang</a></li>
-							</ul>
-						</li>
-						<li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Angsuran Lapak<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="rent.php"><i class="fa fa-money fa-fw"></i> Pembayaran Angsuran</a></li>
-								<li><a href="rent2.php"><i class="fa fa-money fa-fw"></i> Angsuran Yg Terlambat</a></li>
-							</ul>
-						</li>
-						<li >
-                            <a href="#"><i class="fa fa-retweet fa-fw"></i> Perpindahan lapak<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="move_select.php"><i class="fa fa-retweet fa-fw"></i> Pindah Ke Lapak Kosong</a></li>
-								<li><a href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Tukar Lapak</a></li>
-								<li><a href="move_log.php"><i class="fa fa-book fa-fw"></i> Histori Perpindahan</a></li>
-							</ul>
-						</li>
-						
-						<li>
-                            <a href="#"><i class="fa fa-window-close fa-fw"></i> NonAktif<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="nonactive_merchant.php"><i class="fa fa-user-times fa-fw"></i> NonAktif Pedagang</a></li>
-								<li><a href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li>
-								<li><a href="nonactive_log.php"><i class="fa fa-book fa-fw"></i> Histori NonAktif</a></li>
-							</ul>
-						</li>
-						<li>
-                            <a href="#"><i class="fa fa-book fa-fw"></i> Laporan<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="report_merchant.php"><i class="fa fa-user fa-fw"></i> Data Pedagang</a></li>
-								<li><a href="report_credit.php"><i class="fa fa-user fa-fw"></i> Piutang Lapak</a></li>
-							</ul>
-						</li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div id="page-wrapper">
+		<div id="page-wrapper">
+		<br><br><br><br>
             <div class="row">
-                <div class="col-lg-12" style="padding:10px;">
+                <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-pencil fa-fw"></i> Permohonan Menempati Lapak Pasar Induk Surabaya Sidotopo
+                            <i class="fa fa-pencil fa-fw"></i> Permohonan Menempati Lapak
                         </div>
                         <div class="panel-body">
                             <form action="register_action.php?task=insert"  id="formRegister" name = "formRegister" method="POST" class="form-horizontal">
 								<fieldset>
-								<div class="col-lg-3" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px; margin-right:5px;">
-										<label>Nama</label>
-										<input id="name1" name="name1" placeholder="Nama Sesuai Ktp" type="text" class="form-control" autofocus="autofocus" required> 
-										<input id="name2" name="name2" placeholder="Nama Alias" type="text" class="form-control" >                
-										<br />
-										<label>Alamat</label>
-										<input id="adrs1" name="adrs1" placeholder="Alamat Sesuai KTP" type="text" class="form-control" required/>
-										<input id="adrs2" name="adrs2" placeholder="Alamat Surat (Tidak Perlu Diisi Jika Sama)" type="text" class="form-control" />
+									<div class="row">
+										<div class="col-lg-6" style="padding:0 10px 0 20px">
+											<label>Nama</label>
+											<input id="name1" name="name1" placeholder="Nama Sesuai Ktp" type="text" class="form-control" autofocus="autofocus" required>    
+											<input style="margin-top: 5px;" id="name2" name="name2" placeholder="Nama Alias" type="text" class="form-control">          
+										</div>
+
+										<div class="col-lg-6" style="padding:0 20px 0 10px;">
+											<label>Alamat</label>
+											<input id="adrs1" name="adrs1" placeholder="Alamat Sesuai KTP" type="text" class="form-control" required/>
+											<input style="margin-top: 5px;" id="adrs2" name="adrs2" placeholder="Alamat Surat (Opsional)" type="text" class="form-control" />
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-3" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px; margin-right:5px;">
-										<label>Telepon</label>
-										<input id="tlp1" name="tlp1" placeholder="Telepon Rumah" maxlength="11" onkeydown="return isNumber(event);" type="text" class="form-control" />
-										<input id="tlp2" name="tlp2" placeholder="Handphone (HP)" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
-										<br />
-										<label>Lapak</label>
-										<select class="form-control chzn-select" name="lapak" id="lapak" required>
-											<option value="">- Pilih Lapak -</option>
-											<?php 
-												$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status is null");
-												while($data = mysql_fetch_array($sql))
-											{?>
-												<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>
-											<?php } ?>
-										</select>
+
+									<div class="row">
+										<div class="col-lg-6" style="padding:0 10px 0 20px; margin-top: 15px;">
+											<label>Telepon</label>
+											<input id="tlp1" name="tlp1" placeholder="Telepon Rumah" maxlength="11" onkeydown="return isNumber(event);" type="text" class="form-control" />
+											<input style="margin-top: 5px;" id="tlp2" name="tlp2" placeholder="Handphone (HP)" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
+										</div>
+
+										<div class="col-lg-6" style="padding:0 20px 0 10px; margin-top: 15px;">
+											<label>No Identitas</label>
+												<div class="row">
+													<div class="col-lg-4">
+														<input id="ktp" name="ktp" placeholder="KTP" maxlength="16" onkeydown="return isNumber(event);" type="text" class="form-control" />
+													</div>
+													<div class="col-lg-4">
+														<input id="sim" name="sim" placeholder="SIM (Opsional)" maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
+													</div>
+													<div class="col-lg-4">
+														<input id="lain" name="lain" placeholder="Lainnya (Opsional)"  maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
+													</div>
+												</div>
+												
+											<select style="margin-top: 5px;" class="form-control" name="nid" id="nid" required>
+												<option value="">Jenis Identitas Yang Diisi</option>
+												<option value="KTP">KTP</option>
+												<option value="SIM">SIM</option>
+												<option value="PASPOR">PASPOR</option>
+												<option value="Pelajar">Kartu Pelajar/Mahasiswa</option>
+												<option value="Lainnya">Lainnya</option>
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-3" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px; margin-right:5px;">
-										<label>No Identitas</label>
-										<input id="ktp" name="ktp" placeholder="KTP" maxlength="16" onkeydown="return isNumber(event);" type="text" class="form-control" />
-										<input id="sim" name="sim" placeholder="SIM (Tidak Perlu Diisi Jika Kolom KTP Sudah)" maxlength="12" onkeydown="return isNumber(event);" type="text"  class="form-control" />
-										<input id="lain" name="lain" placeholder="Lainnya (Diisi Jika Tidak Ada KTP & SIM)"  maxlength="20" onkeydown="return isNumber(event);" type="text" class="form-control"/>
-										<select class="form-control" name="nid" id="nid">
-											<option value="">Jenis Identitas Yang Diisi</option>
-											<option value="KTP">KTP</option>
-											<option value="SIM">SIM</option>
-											<option value="PASPOR">PASPOR</option>
-											<option value="Pelajar">Kartu Pelajar/Mahasiswa</option>
-											<option value="Lainnya">Lainnya</option>
-										</select>
+
+									<div class="row">
+										<div class="col-lg-4" style="padding:0 10px 0 20px; margin-top: 15px;">
+											<label>Lapak</label>
+											<select class="form-control chzn-select" name="lapak" id="lapak" required>
+												<option value="">- Pilih Lapak -</option>
+												<?php 
+													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status = 'Kosong' or lapak_status is NULL ");
+													while($data = mysql_fetch_array($sql))
+												{?>
+													<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>
+												<?php } ?>
+											</select>
+										</div>
+
+										<div class="col-lg-4" style="padding:0 10px 0 10px; margin-top: 15px;">
+											<label>Jenis Pedagang</label>
+											<select class="form-control" name="kat_merchant" id="kat_merchant" >
+												<option value="0" selected disabled>-- Pilih Jenis Pedagang --</option>
+												<option value="Tetap">Tetap</option>
+												<option value="Trial Lapak">Trial Lapak</option>
+												<option value="Trial Lapak Jalan">Trial Lapak Jalan</option>
+											</select>
+										</div>
+
+										<div class="col-lg-4" style="padding:0 20px 0 10px; margin-top: 15px;">
+											<label>Asal Pasar</label>
+											<select class="form-control chzn-select" name="asal_pasar" id="asal_pasar" >
+												<option value="0" selected disabled>-- Pilih Asal Pasar --</option>
+												<option value="Belum Pernah">Belum Pernah</option>
+												<option value="Pasar Osowilangun">Pasar Osowilangun</option>
+												<option value="Pasar Pandegiling">Pasar Pandegiling</option>
+												<option value="Pasar Keputran">Pasar Keputran</option>
+												<option value="Pasar Mangga Dua">Pasar Mangga Dua</option>
+												<option value="Pasar Pabean">Pasar Pabean</option>
+												<option value="Pasar Wonokusumo">Pasar Wonokusumo</option>
+												<option value="Pasar Lainnya">Pasar Lainnya</option>
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-3" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
-									<div class="form-group" style="padding:10px;">
-										<label>Jenis Pedagang</label>
-										<select class="form-control" name="kat_merchant" id="kat_merchant" >
-											<option value="0" selected disabled>-- Pilih Jenis Pedagang --</option>
-											<option value="Tetap">Tetap</option>
-											<option value="Trial Lapak">Trial Lapak</option>
-											<option value="Trial Lapak Jalan">Trial Lapak Jalan</option>
-										</select>
-										</br>
-										<label>Asal Pasar</label>
-										<select class="form-control chzn-select" name="asal_pasar" id="asal_pasar" >
-											<option value="0" selected disabled>-- Pilih Asal Pasar --</option>
-											<option value="Belum Pernah">Belum Pernah</option>
-											<option value="Pasar Osowilangun">Pasar Osowilangun</option>
-											<option value="Pasar Pandegiling">Pasar Pandegiling</option>
-											<option value="Pasar Keputran">Pasar Keputran</option>
-											<option value="Pasar Mangga Dua">Pasar Mangga Dua</option>
-											<option value="Pasar Pabean">Pasar Pabean</option>
-											<option value="Pasar Pabean">Pasar Wonokusumo</option>
-											<option value="Pasar Pabean">Pasar Lainnya</option>
-										</select>
+									
+									<div class="row">
+										<div class="col-lg-12" style="padding: 0 20px; margin-top: 20px; margin-bottom: 10px;">
+											<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
+										</div>
 									</div>
-								</div>
-								<div class="form-group" style="padding:10px; margin-bottom:-10px; margin-right:0px; margin-left:0px;">
-									<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan <i class="fa fa-angle-double-right fa-lg"></i></button></center>
-								</div>
 								</fieldset>
 							</form> 
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12" style="margin-top:10px;">
-                    <div id="Area1">
-						<div class="alert alert-info" onclick="clearNotif()">
-							<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+
+                <div class="col-md-12" style="margin-top:10px;">
+					<div class="panel panel-primary" style="overflow-x: auto">
+						<div class="panel-heading">
+							<i class="fa fa-user fa-fw"></i> Data Pemohon Lapak 
+						</div>
+						<div class="panel-body">
+							<div id="Area1">
+								<div class="alert alert-info" onclick="clearNotif()">
+									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+								</div>
+							</div>
 						</div>
 					</div>
-                </div>
+				</div>
             </div>
         </div>
     </div>
@@ -268,5 +202,24 @@
 	<script type="text/javascript">
     	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
     </script>
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>

@@ -1,15 +1,18 @@
 <?php
-	include "connection.php";
-	//Validasi role
 	session_start();
-	if($_SESSION['role']!='admin'){
-		if($_SESSION['role']!='super_admin'){
-			header("Location:index.php");
-		}
-	}
+	include "connection.php";
+    include "components/role_session.php";
+    
+
 	$merchant 	= executeScalar("select count(merchant_id) from merchant where merchant_status = 'Aktif'");
 	$lapak 		= executeScalar("select count(lapak_id) from lapak");
 	$move 		= executeScalar("select count(move_log_id) from move_log");
+    $payment    = executeScalar("select sum(rent_total) from rent where rent_sts = 'Lunas' and rent_sts2 != 'Batal'");
+
+    function headScript(){
+		$headScript=file_get_contents("headScript.html");
+		return $headScript;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,21 +22,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../images/icon.png">
-        <link rel="shortcut icon" href="../images/icon.png" />
+        <link rel="icon" href="img/logo.png">
+        <link rel="shortcut icon" href="img/logo.png" />
         <title>Dashboard | PISS</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- MetisMenu CSS -->
-        <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-        <!-- Timeline CSS -->
-        <link href="css/plugins/timeline.css" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link href="css/sb-admin-2.css" rel="stylesheet">
-        <!-- Custom Fonts -->
-        <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="css/colorbox.css" />
+        <?php echo headScript(); ?>
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,91 +44,10 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="dashboard.php">Admin PISS</a>
-                </div>
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Akun <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li><a class="active" href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
-                            <li> 
-                                <a href="#"><i class="fa fa-building fa-fw"></i> Data Master<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
-                                    <li><a href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
-                                    <li><a href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
-                                    <li><a href="register2.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Tambah Lapak</a></li>
-                                    <li><a href="register_view.php"><i class="fa fa-user-plus fa-fw"></i> Permohonan Yg Disetujui</a></li>
-                                    <li><a href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pedagang</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-money fa-fw"></i> Angsuran Lapak<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="rent.php"><i class="fa fa-money fa-fw"></i> Pembayaran Angsuran</a></li>
-                                    <li><a href="rent2.php"><i class="fa fa-money fa-fw"></i> Angsuran Yg Terlambat</a></li>
-                                </ul>
-                            </li>
-                            <li >
-                                <a href="#"><i class="fa fa-retweet fa-fw"></i> Perpindahan lapak<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="move_select.php"><i class="fa fa-retweet fa-fw"></i> Pindah Ke Lapak Kosong</a></li>
-                                    <li><a href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Tukar Lapak</a></li>
-                                    <li><a href="move_log.php"><i class="fa fa-book fa-fw"></i> Histori Perpindahan</a></li>
-                                </ul>
-                            </li>
-                            <li >
-                                <a href="#"><i class="fa fa-window-close fa-fw"></i> NonAktif<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="nonactive_merchant.php"><i class="fa fa-user-times fa-fw"></i> NonAktif Pedagang</a></li>
-                                    <li><a href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li>
-                                    <li><a href="nonactive_log.php"><i class="fa fa-book fa-fw"></i> Histori NonAktif</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-book fa-fw"></i> Laporan<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="report_merchant.php"><i class="fa fa-user fa-fw"></i> Data Pedagang</a></li>
-                                    <li><a href="report_credit.php"><i class="fa fa-user fa-fw"></i> Piutang Lapak</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <?php include "components/sidebar.php" ?>
 
             <div id="page-wrapper">
+                <br><br><br><br>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
@@ -145,14 +57,14 @@
                                         <i class="fa fa-group fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo $merchant; ?></div>
-                                        <div>Pedagang</div>
+                                        <div class="huge" id="merchant"></div>
+                                        <div>Pedagang Aktif</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="merchant.php">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Lihat Detail</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -167,14 +79,14 @@
                                         <i class="fa fa-building fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo $lapak; ?></div>
-                                        <div>Lapak</div>
+                                        <div class="huge" id="lapak">0</div>
+                                        <div>Lapak Tersedia</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="lapak.php">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Lihat Detail</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -189,14 +101,14 @@
                                         <i class="fa fa-retweet fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo $move; ?></div>
-                                        <div>Perpindahan</div>
+                                        <div class="huge" id="move"></div>
+                                        <div>Perpindahan Lapak</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="move_select.php">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Lihat Detail</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -211,14 +123,14 @@
                                         <i class="fa fa-money fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">0</div>
-                                        <div>Pembayaran</div>
+                                        <div class="huge" id="payment" style="font-size: 32px; padding-top: 10px;">0</div>
+                                        <div>Omzet Pembayaran Lapak</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="rent.php">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Lihat Detail</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -226,12 +138,14 @@
                         </div>
                     </div>
                 </div>
+                
+                <br>
                 <div class="row">
                     <div class="col-lg-12">
                         <ul class="nav nav-tabs nav-justified">
-                        <li class="active"><a data-toggle="tab" href="#block">Blok & Lapak</a></li>
-                        <li><a data-toggle="tab" href="#merchant">Pedagang</a></li>
-                        <li><a data-toggle="tab" href="#revenue">Pendapatan</a></li>
+                        <li class="active"><a data-toggle="tab" href="#block" style="background-color: #428bca; color: #ffffff;">Blok & Lapak</a></li>
+                        <li><a data-toggle="tab" href="#merchant2" style="background-color: transparent; color: #428bca;">Pedagang</a></li>
+                        <li><a data-toggle="tab" href="#revenue" style="background-color: transparent; color: #428bca;">Pendapatan</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -249,7 +163,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="merchant" class="tab-pane fade">
+                            <div id="merchant2" class="tab-pane fade">
                                 <br />
                                 <div id="Area7"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
                                 <div class="row">
@@ -264,11 +178,8 @@
                             <div id="revenue" class="tab-pane fade">
                                 <br />
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div id="Area5"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                    
                                     </div>
                                 </div>
                             </div>
@@ -279,20 +190,22 @@
         </div>
         
         <!-- Modal deadline -->
-        <div class="modal fade" id="modaldl" name="modaldl" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="modaldl"  name="modaldl" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog" style="width: 1000px; margin-top: 150px;">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src='../assets/image/Delete.png' width='25' height='25'/></button>
-                        <h4 id="header_password">Batas Sewa 1 Bulan Terakhir</h4>
+                    <div class="modal-header" style="background-color: #428bca; color: #fff; border-radius: 5px 5px 0px 0px; font-size: 20px;">
+                        <i class="fa fa-credit-card fa-fw"></i> Batas Sewa 1 Bulan Terakhir
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div id="data_dl" style="margin-bottom: 0px;">
-                            <div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
+                            <div class="alert alert-info" onclick="clearNotif()">
+                                <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
+                            </div>
                         </div>
                         <input type="hidden" id="value_id" />
-                    </div>
-                    <div class="modal-footer">
                     </div>
                 </div>
             </div>
@@ -312,16 +225,31 @@
         <!-- Custom Theme JavaScript -->
         <script src="js/sb-admin-2.js"></script>
         <script>
-            function openColorBox(){
-                $.colorbox({iframe:true, width:"80%", height:"80%", href: "modal_deadline.php"});
-            }
-            setTimeout(openColorBox, 500);
+            // function openColorBox(){
+            //     $.colorbox({iframe:true, width:"80%", height:"80%", href: "modal_deadline.php"});
+            // }
+            // setTimeout(openColorBox, 500);
+            // $(document).ready(function(){
+            //     $("#notifArea").html(alertLoadProcess);
+            //     setTimeout('$("html").removeClass("js")',1000); 
+            //     loadChart();
+                
+            // });
+
             $(document).ready(function(){
+                $("#modaldl").modal('show');
                 $("#notifArea").html(alertLoadProcess);
-                setTimeout('$("html").removeClass("js")',1000); 
+                $('#data_dl').load("modal_deadline.php",function(){clearNotif();});
+                setTimeout('$("html").removeClass("js")',500); 
                 loadChart();
                 
+                //Modal Password
+                $('#modalPassword').on('shown.bs.modal', function (e) {
+                    $("#notifArea").html(alertLoadProcess);
+                    $("#data_password").load("password.php",function(){clearNotif();});
+                })
             });
+
             //Meload Chart
             function loadChart(){
                 $("#notifArea").html(alertLoadProcess);
@@ -336,6 +264,42 @@
                 //$("#Area5").load("line_block5.php",function(){clearNotif();});
             }
             function clearNotif(){$("#notifArea").html("");}
+        </script>
+        <script>
+            function animateValue(id, start, end, duration, isCurrency = false) {
+                let obj = document.getElementById(id);
+                let range = end - start;
+                let current = start;
+                let increment = end > start ? Math.ceil(range / (duration / 10)) : -1;
+                let stepTime = 10; // Kecepatan update dalam milidetik
+                let timer = setInterval(function () {
+                    current += increment;
+                    if (current >= end) {
+                        current = end;
+                        clearInterval(timer);
+                    }
+                    obj.innerHTML = isCurrency ? formatRupiah(current) : current;
+                }, stepTime);
+            }
+
+            function formatRupiah(angka) {
+                return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            $(document).ready(function () {
+                animateValue("merchant", 0, <?php echo $merchant; ?>, 1500);
+                animateValue("lapak", 0, <?php echo $lapak; ?>, 1500);
+                animateValue("move", 0, <?php echo $move; ?>, 1500);
+                animateValue("payment", 0, <?php echo $payment; ?>, 1500, true);
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.nav-tabs li a').on('click', function() {
+                    $('.nav-tabs li a').css({'background-color': 'transparent', 'color': '#428bca'}); // Reset semua tab
+                    $(this).css({'background-color': '#428bca', 'color': '#ffffff'}); // Tab yang aktif
+                });
+            });
         </script>
     </body>
 </html>

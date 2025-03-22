@@ -34,7 +34,7 @@
 					plotShadow: false
 				},
 				title: {
-					text: 'Pendapatan Lapak PIOS'
+					text: 'Pendapatan Lapak PISS'
 				},
 				tooltip: {
 					shared: false,
