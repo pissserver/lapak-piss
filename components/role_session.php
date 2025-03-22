@@ -5,10 +5,10 @@
 		if($_SESSION['username']!=''){
 			$name = executescalar("select name from admin where username = '".$_SESSION['username']."'");
 		}else{
-			header("Location:../login.html");
+			header("Location:login.php");
 		}
 	}else{
-		header("Location:../login.html");
+		header("Location:login.php");
 	}
 
 ?>

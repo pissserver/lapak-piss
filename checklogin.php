@@ -1,6 +1,6 @@
 <?php
-	include "connection.php";
 	session_start();
+	include "connection.php";
 
 	function antiInjection($data){
 		$filter_sql = mysql_real_escape_string(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
@@ -17,7 +17,8 @@
 	if($ketemu==1){
 		$_SESSION['username'] 	= $r['username'];
 		$_SESSION['role'] 		= $r['role'];
-		echo "<script>window.location=('dashboard.php')</script>";
+		include "components/welcome_animation.php";
+		echo "<script>setTimeout(function() { window.location.href = 'dashboard.php'; }, 3250);</script>";
 		exit();
 	}
 	else{
