@@ -62,7 +62,7 @@
 			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_id']; ?></td>
 			<td style="vertical-align: middle; text-align:left;"><?php echo $data['merchant_name']; ?></td>
 			<td style="vertical-align: middle; text-align:left;"><?php echo $data['address1']; ?></td>
-			<td style="vertical-align: middle; text-align:left;"><?php echo $lapak; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo ($lapak != NULL && $lapak != 'Kosong') ? $lapak : 'Tidak ada'; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_type']; ?></td>
 			<td style="vertical-align: middle; text-align:center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['merchant_status'] == 'Aktif' ? 'green' : 'red'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		

@@ -191,7 +191,7 @@
         
         <!-- Modal deadline -->
         <div class="modal fade" id="modaldl"  name="modaldl" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog" style="width: 1000px; margin-top: 150px;">
+            <div class="modal-dialog" style="width: 1000px; margin-top: 80px;">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #428bca; color: #fff; border-radius: 5px 5px 0px 0px; font-size: 20px;">
                         <i class="fa fa-credit-card fa-fw"></i> Batas Sewa 1 Bulan Terakhir
