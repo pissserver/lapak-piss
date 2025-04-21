@@ -3,11 +3,11 @@
 	include "connection.php";
 	//include "fungsi_thumb.php";
 	//Validasi role
-	if($_SESSION['role']!='admin'){
-		if($_SESSION['role']!='super_admin'){
-			header("Location:index.php");
-		}
-	}
+	// if($_SESSION['role']!='admin'){
+	// 	if($_SESSION['role']!='super_admin'){
+	// 		header("Location:index.php");
+	// 	}
+	// }
 	$task		= $_GET['task'];
 	//$id		= $_POST['id'];
 	
@@ -117,7 +117,6 @@
 				//$request 	= mysql_insert_id();
 		
 		if($insert){
-			//echo "<script>window.location=('register_edit.php?id=".$rid."')</script>";
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';

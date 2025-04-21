@@ -82,7 +82,7 @@
 									<div class="row">
 										<div class="col-lg-6" style="padding:0 10px 0 20px; margin-top: 15px;">
 											<label>Telepon</label>
-											<input id="tlp1" name="tlp1" placeholder="Telepon Rumah" maxlength="11" onkeydown="return isNumber(event);" type="text" class="form-control" />
+											<input id="tlp1" name="tlp1" placeholder="Telepon Rumah" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
 											<input style="margin-top: 5px;" id="tlp2" name="tlp2" placeholder="Handphone (HP)" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
 										</div>
 
