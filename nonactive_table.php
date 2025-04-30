@@ -44,8 +44,8 @@
 		?>
 		<tr>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
-			<td style="vertical-align: middle; text-align:left;"><?php echo $data['spv_name']; ?></td>
-			<td style="vertical-align: middle; text-align:center;"><?php echo $name; ?></td>
+			<td style="vertical-align: middle; text-align:left; text-transform: capitalize"><?php echo $data['spv_name']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php if($lapak!=null){echo $lapak;}else{echo ' - ';} ?></td>
 			<td style="vertical-align: middle; text-align:left;"><?php echo $data['nonactive_reason']; ?></td>
 			<td style="vertical-align: middle; text-align:center;">
