@@ -37,7 +37,7 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $data['lapak_id']; ?></td>
-			<td style="text-align:left"><?php echo $name; ?></td>
+			<td style="text-align:left"><?php echo $name != NULL ? $name : 'Tidak ada pedagang'; ?></td>
 			<td style="text-align:center;"><?php echo $data['lapak_name']; ?></td>
 			<td style="text-align:center"><?php echo $data['p']; ?></td>
 			<td style="text-align:center"><?php echo $data['l']; ?></td>

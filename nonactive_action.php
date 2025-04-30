@@ -14,8 +14,9 @@
 		$update = mysql_query("update merchant set merchant_status = 'Aktif' where merchant_id = '".$mid."'");
 		if($update){
 			$spv	= $_SESSION['username'];
+			$spvName = executeScalar("select name from admin where username = '".$spv."'");
 			$insert = mysql_query("insert into nonactive_log (nonactive_id, spv_name, merchant_id, lapak_id, nonactive_reason, nonactive_date) 
-			value('', '".$spv."', '".$mid."', '', '".$reason."', '".$dt_now."')");
+			value('', '".$spvName."', '".$mid."', '', '".$reason."', '".$dt_now."')");
 			if($insert){
 				// Alert Information
 				$_SESSION['success'] = true;
@@ -49,8 +50,9 @@
 		$update = mysql_query("update merchant set merchant_status = 'Tidak Aktif' where merchant_id = '".$mid."'");
 		if($update){
 			$spv	= $_SESSION['username'];
+			$spvName = executeScalar("select name from admin where username = '".$spv."'");
 			$insert = mysql_query("insert into nonactive_log (nonactive_id, spv_name, merchant_id, lapak_id, nonactive_reason, nonactive_date) 
-			value('', '".$spv."', '".$mid."', '', '".$reason."', '".$dt_now."')");
+			value('', '".$spvName."', '".$mid."', '', '".$reason."', '".$dt_now."')");
 			if($insert){
 				// Alert Information
 				$_SESSION['success'] = true;
