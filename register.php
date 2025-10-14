@@ -127,7 +127,7 @@
 
 										<div class="col-lg-4" style="padding:0 10px 0 10px; margin-top: 15px;">
 											<label>Jenis Pedagang</label>
-											<select class="form-control" name="kat_merchant" id="kat_merchant" >
+											<select class="form-control " name="kat_merchant" id="kat_merchant" >
 												<option value="0" selected disabled>-- Pilih Jenis Pedagang --</option>
 												<option value="Tetap">Tetap</option>
 												<option value="Trial Lapak">Trial Lapak</option>
@@ -137,7 +137,7 @@
 
 										<div class="col-lg-4" style="padding:0 20px 0 10px; margin-top: 15px;">
 											<label>Asal Pasar</label>
-											<select class="form-control chzn-select" name="asal_pasar" id="asal_pasar" >
+											<select class="form-control" name="asal_pasar" id="asal_pasar" >
 												<option value="0" selected disabled>-- Pilih Asal Pasar --</option>
 												<option value="Belum Pernah">Belum Pernah</option>
 												<option value="Pasar Osowilangun">Pasar Osowilangun</option>

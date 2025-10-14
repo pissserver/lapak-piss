@@ -162,13 +162,13 @@
                                 </ul>
                             </li>
 
-                            <li class="<?= isParentActive(['rent.php', 'rent2.php', 'rent_edit.php']); ?>">
+                            <!-- <li class="<?= isParentActive(['rent.php', 'rent2.php', 'rent_edit.php']); ?>">
                                 <a href="#"><i class="fa fa-credit-card fa-fw"></i> Angsuran Lapak<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['rent.php', 'rent_edit.php']); ?>" href="rent.php"><i class="fa fa-money fa-fw"></i> Pembayaran Angsuran</a></li>
                                     <li><a class="<?= isActive(['rent2.php']); ?>" href="rent2.php"><i class="fa fa-clock-o fa-fw"></i> Angsuran Yg Terlambat</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
 
                             <li class="<?= isParentActive(['move_select.php', 'move.php', 'move_select2.php', 'move2.php', 'move_log.php']); ?>">
                                 <a href="#"><i class="fa fa-retweet fa-fw"></i> Perpindahan Lapak<span class="fa arrow"></span></a>
@@ -200,7 +200,7 @@
                                 <a href="#"><i class="fa fa-clipboard fa-fw"></i> Laporan<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['report_merchant.php', 'move.php']); ?>" href="report_merchant.php"><i class="fa fa-group fa-fw"></i> Data Pedagang</a></li>
-                                    <li><a class="<?= isActive(['report_credit.php', 'move.php']); ?>" href="report_credit.php"><i class="fa fa-book fa-fw"></i> Piutang Lapak</a></li>
+                                    <!-- <li><a class="<?= isActive(['report_credit.php', 'move.php']); ?>" href="report_credit.php"><i class="fa fa-book fa-fw"></i> Piutang Lapak</a></li> -->
                                 </ul>
                             </li>
 
@@ -210,7 +210,7 @@
 									<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP / Keuangan </a></li>
                                     <li><a class="<?= isActive(['lapak.php', 'lapak_edit.php']); ?>" href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
                                     <li><a class="<?= isActive(['block.php', 'block_edit.php']); ?>" href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
-                                    <li><a class="<?= isActive(['instalment.php', 'instalment_edit.php']); ?>" href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li>
+                                    <!-- <li><a class="<?= isActive(['instalment.php', 'instalment_edit.php']); ?>" href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li> -->
                                 </ul>
                             </li>
                         </ul>
