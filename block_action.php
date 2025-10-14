@@ -67,7 +67,8 @@
 	elseif ($task=='delete'){
 		$id		= $_GET['id'];
 		$delete = mysql_query("delete from block where block_id = '".$id."'");
-		if($delete){
+		$delete2 = mysql_query("delete from lapak where block_id = '".$id."'");
+		if($delete && $delete2){
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';

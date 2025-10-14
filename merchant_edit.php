@@ -272,7 +272,8 @@
 										<div class="row">
 											<div class="col-md-6" >
 												<label>Angsuran</label>
-												<input class="form-control" value="<?php echo $ins;?>x" disabled />
+												<!-- <input class="form-control" value="<?php echo $ins;?>x" disabled /> -->
+												<input class="form-control" value="0x" disabled />
 											</div>
 											<div class="col-md-6" >
 												<label>Bunga /Tahun</label>
@@ -296,11 +297,13 @@
 									</div>
 									<div class="form-group" >
 										<label>Tanggal Berakhir</label>
-										<input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_expired']));?>" disabled>
+										<!-- <input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_expired']));?>" disabled> -->
+										<input type="text" class="form-control" value="-" disabled>
 									</div>
 									<div class="form-group" >
 										<label>Jatuh Tempo Angsuran</label>
-										<input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_dl']));?>" disabled>
+										<!-- <input type="text" class="form-control" value="<?php echo date("d M Y", strtotime($q2['rent_dl']));?>" disabled> -->
+										<input type="text" class="form-control" value="-" disabled>
 									</div>
 									<div class="form-group" >
 										<label>Status Lapak</label>
@@ -316,11 +319,11 @@
 										<label>Keterangan</label><br />
 										<textarea class="form-control" cols="20" rows="12" disabled><?php echo $q2['rent_desc'];?></textarea>
 									</div>
-									<div class="form-group" >
+									<!-- <div class="form-group" >
 										<form action="htmltopdf/instalment_table.php?id=<?php echo $q2['rent_id']; ?>" target="_blank" class="form-horizontal" id="formAngs" name="formAngs" method="POST">
 											<button style="margin-top:40px;" class="btn btn-block btn-success">Cetak Tabel Angsuran</button>
 										</form>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>

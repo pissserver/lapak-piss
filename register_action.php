@@ -521,6 +521,7 @@
 	elseif($task == 'acc2'){
 		//Ambil id pemohon
 		$id		= $_GET['id'];
+		$date_in 	= $_POST['datein'];
 		//Jika DP > total
 		$lid 	= executeScalar("select lapak_id from request where req_id = '".$id."'");
 		$total 	= executeScalar("select lapak_total from lapak where lapak_id = '".$lid."'");

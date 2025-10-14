@@ -111,13 +111,13 @@
 											<div class="col-lg-4">
 												<div class="form-group" style="padding: 0 10px">
 													<label>Uang Muka</label>
-													<input id="dp" name="dp" placeholder="0" type="number" class="form-control" required />
+													<input id="dp" name="dp" placeholder="0" type="number" class="form-control" value="0" readonly required />
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group" style="padding: 0 10px">
 													<label>Cicilan</label>
-													<select class="form-control" name="ins" id="ins" required>
+													<!-- <select class="form-control" name="ins" id="ins" required>
 														<option value="">- Pilih Cicilan -</option>
 														<?php 
 															$sql1 = mysql_query("select * from instalment order by instalment_name");
@@ -125,13 +125,15 @@
 															?>
 															<option value="<?php echo $d1['instalment_id'];?>"><?php echo $d1['instalment_name'].' / '.$d1['instalment_count'].'x';?></option>
 														<?php } ?>
-													</select>
+													</select> -->
+													<input class="form-control" type="number" value="0" readonly />
+													<input type="hidden" id="ins" name="ins" value="1" />
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group" style="padding: 0 10px;">
 													<label>Bunga Pertahun (%)</label>
-													<input class="form-control" id="interest" name="interest" type="number" placeholder="0" required />
+													<input class="form-control" id="interest" name="interest" type="number" placeholder="0" value="0" readonly required />
 												</div>
 											</div>
 										</div>
