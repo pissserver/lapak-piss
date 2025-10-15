@@ -67,15 +67,15 @@
 		</tr>
 		<tr>
 			<td style="padding-left: 15px;">KTP		</td>
-			<td> : <?php echo $r['nid_ktp']; ?></td>
+			<td> : <?php echo $r['nid_ktp'] == '' ? '-' : $r['nid_ktp']; ?></td>
 		</tr>
 		<tr>
 			<td style="padding-left: 15px;">SIM		</td>
-			<td> : <?php echo $r['nid_sim']; ?></td>
+			<td> : <?php echo $r['nid_sim'] == '' ? '-' : $r['nid_sim']; ?></td>
 		</tr>
 		<tr>
 			<td style="padding-left: 15px;">Lainnya	</td>
-			<td> : <?php echo $r['nid_lain']; ?></td>
+			<td> : <?php echo $r['nid_lain'] == '' ? '-' : $r['nid_lain']; ?></td>
 		</tr>
 		<tr>
 			<td style="padding-top: 10px;">Jenis Jualan</td>
