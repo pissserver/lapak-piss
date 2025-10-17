@@ -114,6 +114,26 @@
 			exit;
 		}
 	}
+
+	elseif ($task == 'deleteRent') {
+		$id = $_GET['id'];
+		$merchantID = $_GET['merchantID'];
+		$update = mysql_query("UPDATE rent SET rent_sts = 'Batal', rent_sts2 = 'Pindah' WHERE rent_id = '".$id."'");
+		if ($update) {
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Lapak berhasil dihapus dari sewa";
+			echo "<script>
+					window.location=('merchant_edit.php?id=$merchantID')
+				</script>";
+			exit;
+		} else {
+			echo "<script>window.alert('Update Failled');
+			window.history.back()</script>";
+			exit;
+		}
+	}
 	
 	elseif ($task == 'delete'){
 		//$delete = mysql_query("delete employee where employee_id = '".$id."'");

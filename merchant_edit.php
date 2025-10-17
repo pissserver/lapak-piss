@@ -319,11 +319,11 @@
 										<label>Keterangan</label><br />
 										<textarea class="form-control" cols="20" rows="12" disabled><?php echo $q2['rent_desc'];?></textarea>
 									</div>
-									<!-- <div class="form-group" >
-										<form action="htmltopdf/instalment_table.php?id=<?php echo $q2['rent_id']; ?>" target="_blank" class="form-horizontal" id="formAngs" name="formAngs" method="POST">
-											<button style="margin-top:40px;" class="btn btn-block btn-success">Cetak Tabel Angsuran</button>
+									<div class="form-group" >
+										<form action="merchant_action.php?task=deleteRent&id=<?php echo $q2['rent_id']; ?>&merchantID=<?php echo $q2['merchant_id']; ?>" target="_blank" class="form-horizontal" id="formAngs" name="formAngs" method="POST">
+											<button style="margin-top:40px;" class="btn btn-block btn-danger">Hapus Lapak Dari Sewa</button>
 										</form>
-									</div> -->
+									</div>
 								</div>
 							</div>
 						</div>
