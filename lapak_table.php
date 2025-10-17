@@ -30,7 +30,14 @@
 	</thead>
 	<tbody>
 		<?php
-		$sql 	= mysql_query("select * from lapak order by block_id, lapak_no");
+		$sql = mysql_query("
+			SELECT *
+			FROM lapak AS l
+			JOIN block AS b ON l.block_id = b.block_id
+			WHERE b.status_block = 'active'
+			ORDER BY b.block_id, l.lapak_no
+		");
+
 		$no		= 1;
 			while($data=mysql_fetch_array($sql)) { 
 			if($data['lapak_status']==''){

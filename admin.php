@@ -88,7 +88,7 @@
 						<div class="panel-heading">
                             <i class="fa fa-user fa-fw"></i> Data SPV
                         </div>
-						<div class="panel-body">
+						<div class="panel-body" style="overflow-x: auto;">
 							<div id="Area1">
 								<div class="alert alert-info" onclick="clearNotif()">
 									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>

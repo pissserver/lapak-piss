@@ -5,7 +5,8 @@
     
 
 	$merchant 	= executeScalar("select count(merchant_id) from merchant where merchant_status = 'Aktif'");
-	$lapak 		= executeScalar("select count(lapak_id) from lapak");
+	$lapak 		= executeScalar("select count(lapak_id) from lapak as l join block as b on l.block_id = b.block_id where b.status_block = 'active'");
+    $block 		= executeScalar("select count(block_id) from block where status_block = 'active'");
 	$move 		= executeScalar("select count(move_log_id) from move_log");
     $payment    = executeScalar("select sum(rent_total) from rent where rent_sts = 'Lunas' and rent_sts2 != 'Batal'");
 
@@ -49,7 +50,7 @@
             <div id="page-wrapper">
                 <br><br><br><br>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
@@ -71,12 +72,34 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="panel panel-yellow">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <i class="fa fa-building fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge" id="block" style="font-size: 32px; padding-top: 10px;">0</div>
+                                        <div>Blok Tersedia</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="block.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Lihat Detail</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-th fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge" id="lapak">0</div>
@@ -93,7 +116,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
                                 <div class="row">
@@ -290,7 +313,8 @@
                 animateValue("merchant", 0, <?php echo $merchant; ?>, 1500);
                 animateValue("lapak", 0, <?php echo $lapak; ?>, 1500);
                 animateValue("move", 0, <?php echo $move; ?>, 1500);
-                animateValue("payment", 0, <?php echo $payment; ?>, 1500, true);
+                // animateValue("payment", 0, <?php echo $payment; ?>, 1500, true);
+                animateValue("block", 0, <?php echo $block; ?>, 1500);
             });
         </script>
         <script>

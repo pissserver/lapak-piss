@@ -25,7 +25,7 @@
 	</thead>
 	<tbody>
 		<?php
-		$sql 	= mysql_query("select * from block order by block_id asc");
+		$sql 	= mysql_query("select * from block where status_block = 'active' order by block_id asc");
 		$no		= 1;
 			while($data=mysql_fetch_array($sql)) { 
 		?>
