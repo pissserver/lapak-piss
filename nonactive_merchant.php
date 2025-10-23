@@ -50,6 +50,18 @@
 							<i class="fa fa-group fa-fw"></i> Data Pedagang
 						</div>
 						<div class="panel-body">
+							<div class="alert alert-warning" role="alert">
+								<table>
+									<tr>
+										<td style="font-size:20px; padding-right: 10px;">
+											<i class="fa fa-info"></i> 
+										</td>
+										<td>
+											<p style="font-size: 12px; padding-top:10px;"> Menonaktifkan pedagang akan menonaktifkan juga semua lapak yang telah disewa, dan status lapak akan menjadi 'Kosong'.</p>
+										</td>
+									</tr>
+								</table>
+							</div>
 							<div id="Area1">
 								<div class="alert alert-info" onclick="clearNotif()">
 									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>

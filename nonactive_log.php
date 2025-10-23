@@ -47,9 +47,21 @@
                 <div class="col-md-12" style="margin-top:10px;">
 					<div class="panel panel-primary" style="overflow-x: auto">
 						<div class="panel-heading">
-							<i class="fa fa-clock-o fa-fw"></i> Histori NonAktif Pedagang & Lapak
+							<i class="fa fa-clock-o fa-fw"></i> Histori NonAktif Pedagang
 						</div>
 						<div class="panel-body">
+                            <div class="alert alert-warning" role="alert">
+								<table>
+									<tr>
+										<td style="font-size:20px; padding-right: 10px;">
+											<i class="fa fa-info"></i> 
+										</td>
+										<td>
+											<p style="font-size: 12px; padding-top:10px;"> Nama lapak merupakan daftar semua lapak yang pernah disewa oleh pedagang yang bersangkutan.</p>
+										</td>
+									</tr>
+								</table>
+							</div>
 							<div id="Area1">
 								<div class="alert alert-info" onclick="clearNotif()">
 									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>

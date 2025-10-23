@@ -79,7 +79,7 @@
 		//Update status rent
 		$update		= mysql_query("update rent set rent_sts = 'Batal', rent_sts2 = 'Pindah' where rent_id = '".$rid."'");
 		//Update status lapak
-		$update2 	= mysql_query("update lapak set lapak_status = NULL where lapak_id = '".$_POST['lapak1']."'");
+		$update2 	= mysql_query("update lapak set lapak_status = 'Kosong' where lapak_id = '".$_POST['lapak1']."'");
 		
 		if($update&&$update2){
 			//Generate Tgl Jatuh Tempo Pembayaran Angsuran Lapak Baru
@@ -270,7 +270,7 @@
 		$update1	= mysql_query("update rent set rent_sts = 'Batal', rent_sts2 = 'Pindah' 
 		where rent_id = '".$rid1."'");
 		$update2	= mysql_query("update rent set rent_sts = 'Batal', rent_sts2 = 'Pindah' 
-		where rent_id = '".$rid2."'");
+		where rent_id = '".$rid2."'");	
 		
 		if($update1&&$update2){
 			//Insert data M1 ke table rental

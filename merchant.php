@@ -18,7 +18,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Pedagang | PISS</title>
+    <title>Pedagang Aktif | PISS</title>
 
     <?php echo headScript(); ?>
 
@@ -61,7 +61,7 @@
                 <div class="col-md-12" style="margin-top:10px;">
 					<div class="panel panel-primary" style="overflow-x: auto">
 						<div class="panel-heading">
-							<i class="fa fa-group fa-fw"></i> Data Pedagang 
+							<i class="fa fa-check-circle fa-fw"></i> Data Pedagang Aktif
 						</div>
 						<div class="panel-body">
 							<div id="Area1">

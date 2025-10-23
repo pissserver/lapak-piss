@@ -51,8 +51,12 @@
 		if($update){
 			$spv	= $_SESSION['username'];
 			$spvName = executeScalar("select name from admin where username = '".$spv."'");
+			
+			$update2 = mysql_query("update rent set rent_sts = 'Batal', rent_sts2 = 'Batal' where merchant_id = '".$mid."'");
+			$update3 = mysql_query("update lapak set lapak_status = 'Kosong' where lapak_id in (select r.lapak_id from rent r where r.merchant_id = '".$mid."')");
+
 			$insert = mysql_query("insert into nonactive_log (nonactive_id, spv_name, merchant_id, lapak_id, nonactive_reason, nonactive_date) 
-			value('', '".$spvName."', '".$mid."', '', '".$reason."', '".$dt_now."')");
+			value('', '".$spvName."', '".$mid."', '-', '".$reason."', '".$dt_now."')");
 			if($insert){
 				// Alert Information
 				$_SESSION['success'] = true;

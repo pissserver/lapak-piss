@@ -51,7 +51,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-user fa-fw"></i> Detail Data Pedagang
+                            <i class="fa fa-check-circle fa-fw"></i> Detail Data Pedagang Aktif
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" id="formMerchant" name = "formMerchant" method="POST" action="merchant_action.php?task=update&id=<?php echo $r[0]; ?>">
@@ -321,7 +321,7 @@
 									</div>
 									<div class="form-group" >
 										<form action="merchant_action.php?task=deleteRent&id=<?php echo $q2['rent_id']; ?>&merchantID=<?php echo $q2['merchant_id']; ?>" target="_blank" class="form-horizontal" id="formAngs" name="formAngs" method="POST">
-											<button style="margin-top:40px;" class="btn btn-block btn-danger">Hapus Lapak Dari Sewa</button>
+											<button style="margin-top:40px;" class="btn btn-block btn-danger">Nonaktifkan Lapak</button>
 										</form>
 									</div>
 								</div>

@@ -144,21 +144,28 @@
                         <ul class="nav" id="side-menu">
                             <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
 
-                            <li class="<?= isParentActive(['register.php', 'register_edit.php', 'register_acc.php', 'register2.php', 'register_edit2.php', 'register_acc2.php', 'register_view.php', 'register_acc_edit2.php', 'merchant.php', 'merchant_edit.php']); ?>">
-                                <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
+                            <li class="<?= isParentActive(['register.php', 'register_edit.php', 'register_acc.php', 'register2.php', 'register_edit2.php', 'register_acc2.php', 'register_view.php', 'register_acc_edit2.php']); ?>">
+                                <a href="#"><i class="fa fa-file-text fa-fw"></i> Pendaftaran<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a class="<?= isActive(['register.php', 'register_edit.php', 'register_acc.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Lapak Baru</a></li>
+                                    <li><a class="<?= isActive(['register.php', 'register_edit.php', 'register_acc.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Pedagang</a></li>
                                     <li><a class="<?= isActive(['register2.php', 'register_edit2.php', 'register_acc2.php']); ?>" href="register2.php">
 										<table>
 											<tr>
-												<td><i class="fa fa-user-plus fa-fw"></i></td>
+												<td><i class="fa fa-th fa-fw"></i></td>
 												<td>&nbsp;</td>
-												<td>Pendaftaran Tambah Lapak </td>
+												<td>Tambah Lapak </td>
 											</tr>
 										</table>
 									</a></li>
-                                    <li><a class="<?= isActive(['register_view.php', 'register_acc_edit2.php']); ?>" href="register_view.php"><i class="fa fa-user-plus fa-fw"></i> Permohonan Yg Disetujui</a></li>
-                                    <li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pedagang</a></li>
+                                    <li><a class="<?= isActive(['register_view.php', 'register_acc_edit2.php']); ?>" href="register_view.php"><i class="fa fa-check-circle fa-fw"></i> Permohonan Yg Disetujui</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="<?= isParentActive(['merchant.php', 'merchant_edit.php', 'merchant2.php', 'merchant2_edit.php']); ?>">
+                                <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-check-circle fa-fw"></i> Pedagang Aktif</a></li>
+                                    <li><a class="<?= isActive(['merchant2.php', 'merchant2_edit.php']); ?>" href="merchant2.php"><i class="fa fa-times-circle fa-fw"></i> Pedagang NonAktif</a></li>
                                 </ul>
                             </li>
 
@@ -183,13 +190,13 @@
                                 <a href="#"><i class="fa fa-window-close fa-fw"></i> NonAktif<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['nonactive_merchant.php']); ?>" href="nonactive_merchant.php"><i class="fa fa-user-times fa-fw"></i> NonAktif Pedagang</a></li>
-                                    <li><a class="<?= isActive(['nonactive_lapak.php']); ?>" href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li>
+                                    <!-- <li><a class="<?= isActive(['nonactive_lapak.php']); ?>" href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li> -->
                                     <li><a class="<?= isActive(['nonactive_log.php']); ?>" href="nonactive_log.php">
 										<table>
 											<tr>
 												<td><i class="fa fa-hourglass-2 fa-fw"></i></td>
 												<td>&nbsp;</td>
-												<td>Histori NonAktif <br>Pedagang & Lapak </td>
+												<td>Histori NonAktif </td>
 											</tr>
 										</table>
 									</a></li>

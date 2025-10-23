@@ -37,16 +37,19 @@
 								merchant_status2,
 								kat_merchant
 					from 		merchant 
+					where 		merchant_status = 'Aktif'
 					order by 	merchant_id desc";
 		$query 	= mysql_query($sql);
 		$no		= 1;
 		while($data=mysql_fetch_array($query)) {
-		$sql2 	= mysql_query("	select 	l.lapak_name 
-								from 	rent r, lapak l
-								where 	r.lapak_id = l.lapak_id and 
-										r.merchant_id = '".$data['merchant_id']."' and
-										(r.rent_sts2 != 'Pindah' && r.rent_sts2 != 'Batal')
-								order by l.lapak_name limit 7");
+		$sql2 	= mysql_query("	SELECT l.lapak_name 
+								FROM rent r
+								JOIN lapak l ON r.lapak_id = l.lapak_id
+								WHERE r.merchant_id = '".$data['merchant_id']."' 
+								AND (r.rent_sts != 'Batal' AND r.rent_sts2 NOT IN ('Batal', 'Pindah'))
+								ORDER BY l.lapak_name 
+								LIMIT 7
+								");
 		$string	= "";
 		$counter= 0;
 		while($row=mysql_fetch_array($sql2)){

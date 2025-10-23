@@ -40,7 +40,21 @@
 			$sql 	= mysql_query("select * from nonactive_log order by nonactive_date desc limit 100");
 			while($data=mysql_fetch_array($sql)) {
 				$name 	= executeScalar("select merchant_name from merchant where merchant_id = '".$data['merchant_id']."'");
-				$lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$data['lapak_id']."' ");
+				// $lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$data['lapak_id']."' ");
+				$sql2 	= mysql_query("select distinct l.lapak_name from rent r, lapak l
+						where r.lapak_id = l.lapak_id and 
+						r.merchant_id = '".$data['merchant_id']."'
+						order by l.lapak_name limit 7");
+				$string="";
+				$counter=0;
+				while($row=mysql_fetch_array($sql2)){
+					if($counter!=0){
+						$string = ", ".$string;
+					}
+					$string = $row['lapak_name'].$string;
+					$counter++;
+				}
+				$lapak = "".$string;
 		?>
 		<tr>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>

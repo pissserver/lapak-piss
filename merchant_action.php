@@ -120,10 +120,11 @@
 		$merchantID = $_GET['merchantID'];
 		$update = mysql_query("UPDATE rent SET rent_sts = 'Batal', rent_sts2 = 'Pindah' WHERE rent_id = '".$id."'");
 		if ($update) {
+			$update2 = mysql_query("UPDATE lapak SET lapak_status = 'Kosong' WHERE lapak_id = (SELECT lapak_id FROM rent WHERE rent_id = '".$id."')");
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';
-			$_SESSION['message'] = "Lapak berhasil dihapus dari sewa";
+			$_SESSION['message'] = "Lapak berhasil dinonaktifkan dari sewa";
 			echo "<script>
 					window.location=('merchant_edit.php?id=$merchantID')
 				</script>";
