@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Detail Pedagang | PISS</title>
+    <title>Detail Pedagang Aktif | PISS</title>
 
     <?php echo headScript(); ?>
 

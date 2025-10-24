@@ -18,7 +18,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Admin</title>
+    <title>Detail Tambah Lapak | PISS</title>
 
     <?php echo headScript(); ?>
 
@@ -65,15 +65,15 @@
 				<div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-user fa-fw"></i> Detail Pemohon Tambah Lapak
+                            <i class="fa fa-user fa-fw"></i> Detail Tambah Lapak Pedagang
                         </div>
                         <div class="panel-body">
 							<form action="register_action.php?task=update&id=<?php echo $id; ?>" id="formRegisterAcc" name = "formRegisterAcc" method="POST" class="form-horizontal">
 								<fieldset>
 									<div class="row">
 										<div class="col-lg-12" style="padding:0 20px 15px 20px">
-											<label>No. PL</label>
-											<input id="pl" name="pl" value="<?php $idq = sprintf("%03d", $id);echo 'PL'.$idq; ?>" type="text" class="form-control" disabled />
+											<label>No. Form</label>
+											<input id="pl" name="pl" value="<?php $idq = sprintf("%04d", $id);echo 'P-'.$idq; ?>" type="text" class="form-control" disabled />
 										</div>
 									</div>
 
@@ -176,9 +176,9 @@
 
 							<div class="row">
 								<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 10px;">
-									<a style="text-decoration: none;" href="htmltopdf/permohonan_pedagang.php?id=<?php echo $id;?>" target="_blank">
+									<a style="text-decoration: none;" href="htmltopdf/permohonan_lapak.php?id=<?php echo $id;?>" target="_blank">
 										<button style="margin-top:10px;" class="btn btn-block btn-info" type="button">
-											<i class="fa fa-print"></i>&nbsp;&nbsp;Cetak Form Permohonan
+											<i class="fa fa-print"></i>&nbsp;&nbsp;Cetak Surat Permohonan
 										</button>
 									</a>
 								</div>
@@ -188,7 +188,7 @@
 										if($r['req_status']!='Disetujui'){
 											echo '<center>
 											<a style="text-decoration: none;" href="register_acc2.php?id='.$id.'">
-												<button style="margin-top:10px;" class="btn btn-block btn-info">Setujui (Ke form Selanjutnya)</button>
+												<button style="margin-top:10px;" class="btn btn-block btn-success"><i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Lanjut Form Persetujuan</button>
 											</a></center>';
 										}
 										else{

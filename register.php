@@ -18,7 +18,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
     <link rel="shortcut icon" href="img/logo.png" />
-    <title>Permohonan Lapak Baru | PISS</title>
+    <title>Pendaftaran Pedagang | PISS</title>
 
     <?php echo headScript(); ?>
 
@@ -60,7 +60,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-pencil fa-fw"></i> Permohonan Menempati Lapak
+                            <i class="fa fa-pencil fa-fw"></i> Form Pendaftaran Pedagang
                         </div>
                         <div class="panel-body">
                             <form action="register_action.php?task=insert"  id="formRegister" name = "formRegister" method="POST" class="form-horizontal">
@@ -165,7 +165,7 @@
                 <div class="col-md-12" style="margin-top:10px;">
 					<div class="panel panel-primary" style="overflow-x: auto">
 						<div class="panel-heading">
-							<i class="fa fa-user fa-fw"></i> Data Pemohon Lapak 
+							<i class="fa fa-user fa-fw"></i> Data Pendaftaran Pedagang
 						</div>
 						<div class="panel-body">
 							<div id="Area1">

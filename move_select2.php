@@ -46,9 +46,21 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-retweet fa-fw"></i> Pertukaran Lapak
+                            <i class="fa fa-retweet fa-fw"></i> Pertukaran Lapak Antar Pedagang
                         </div>
                         <div class="panel-body">
+							<div class="alert alert-warning" role="alert">
+								<table>
+									<tr>
+										<td style="font-size:20px; padding-right: 10px;">
+											<i class="fa fa-info"></i> 
+										</td>
+										<td>
+											<p style="font-size: 12px; padding-top:10px;"> Pertukaran lapak hanya bisa dilakukan antar pedagang dengan status 'Aktif'.</p>
+										</td>
+									</tr>
+								</table>
+							</div>
                             <form action="move2.php" id="formMove2" name="formMove2" method="POST" class="form-horizontal">
 								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
 									<div class="form-group" style="padding:10px;">
@@ -56,7 +68,7 @@
 										<select class="form-control chzn-select" name="m1" id="m1" autofocus="autofocus" required>
 											<option value="">- Pilih Pedagang 1 -</option>
 											<?php 
-												$sql1 		= mysql_query("select merchant_id, merchant_name, merchant_nick, merchant_type from merchant order by merchant_name");
+												$sql1 		= mysql_query("select merchant_id, merchant_name, merchant_nick, merchant_type from merchant where merchant_status = 'Aktif' order by merchant_name");
 												while($d1 = mysql_fetch_array($sql1))
 											{?>
 												<option value="<?php echo $d1['merchant_id'];?>"><?php echo $d1['merchant_name'].' / '.$d1['merchant_nick'].' ('.$d1['merchant_type'].')';?></option>
@@ -71,7 +83,7 @@
 										<select class="form-control chzn-select" name="m2" id="m2" required>
 											<option value="">- Pilih Pedagang 2 -</option>
 											<?php 
-												$sql1 		= mysql_query("select merchant_id, merchant_name, merchant_nick, merchant_type from merchant order by merchant_name");
+												$sql1 		= mysql_query("select merchant_id, merchant_name, merchant_nick, merchant_type from merchant where merchant_status = 'Aktif' order by merchant_name");
 												while($d1 = mysql_fetch_array($sql1))
 											{?>
 												<option value="<?php echo $d1['merchant_id'];?>"><?php echo $d1['merchant_name'].' / '.$d1['merchant_nick'].' ('.$d1['merchant_type'].')';?></option>

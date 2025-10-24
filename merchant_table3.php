@@ -30,7 +30,7 @@
 			<th style="text-align: center; width:14%;">NAMA</th>
 			<th style="text-align: center; width:25%;">ALAMAT</th>
 			<th style="text-align: center; width:12%;">LAPAK</th>
-			<th style="text-align: center; width:8%;">JUALAN</th>
+			<th style="text-align: center; width:8%;">JENIS PEDAGANG</th>
 			<th style="text-align: center; width:8%;">STATUS</th>
 			<th style="text-align: center; width:8%;">AKSI</th>
 		</tr>
@@ -67,7 +67,11 @@
 			<td style="vertical-align: middle; text-align:left;"><?php echo $data['address1']; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $lapak != NULL ? $lapak : 'Tidak ada'; ; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_type']; ?></td>
-			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_status']; ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<div style="vertical-align: middle; background-color: <?php echo $data['merchant_status'] == 'Aktif' ? 'green' : 'red'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $data['merchant_status'] == 'Aktif' ? 'fa-check' : 'fa-remove'; ?> fa-fw"></i>&nbsp;<?php echo $data['merchant_status']; ?>
+				</div>
+			</td>
 			<td style="vertical-align: middle; text-align:center;"><center>
 				<button class="btn btn-outline btn-block btn-primary btn-xs modalMoveLapak" data-toggle="modal" data-target="#modalMoveLapak" data-id="<?php echo $data['merchant_id']; ?>">
 					<i class="fa fa-retweet"></i>&nbsp;&nbsp;Pindah

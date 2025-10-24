@@ -72,7 +72,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-retweet fa-fw"></i> Data Pertukaran Lapak
+                            <i class="fa fa-retweet fa-fw"></i> Data Pertukaran Lapak Antar Pedagang
                         </div>
                         <div class="panel-body">
                             <?php 
@@ -82,7 +82,7 @@
 									<div class="col-md-6">
 										<div class="panel panel-primary">
 											<div class="panel-heading panel-primary">
-												<i class="fa fa-user"></i>Pedagang 1
+												<i class="fa fa-user"></i>&nbsp;&nbsp;Pedagang 1
 											</div>
 											<div class="panel-body">
 												<div class="form-group" style="padding:10px; margin-top:-10px;">
@@ -108,15 +108,15 @@
 									<div class="col-md-6">
 										<div class="panel panel-success">
 											<div class="panel-heading" style="background-color: green; color: #fff;">
-												<i class="fa fa-user"></i>Pedagang 2
+												<i class="fa fa-user"></i>&nbsp;&nbsp;Pedagang 2
 											</div>
 											<div class="panel-body">
 												<div class="form-group" style="padding:10px; margin-top:-10px;">
-													<label>Pedagang 2</label>
+													<label>Nama Pedagang</label>
 													<input type="text" class="form-control" id="m2" name="m2" value="<?php echo $name2; ?>" disabled>
 												</div>
 												<div class="form-group" style="padding:10px; margin-top:-10px;">
-													<label>Lapak Tujuan</label>
+													<label>Lapak</label>
 													<select class="form-control" name="lapak2" id="lapak2" required>
 														<option value="">- Lapak Yg Akan Dipindah -</option>
 														<?php 
@@ -133,7 +133,7 @@
 								</div>
 
 								<div class="form-group" style="padding:0 15px; margin-top:-10px;">
-									<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-retweet"></i>Tukar</button></center>
+									<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-retweet"></i>&nbsp;&nbsp;Tukar Lapak</button></center>
 								</div>
 							</form>
                         </div>

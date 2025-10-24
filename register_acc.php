@@ -58,7 +58,7 @@
                         <div class="panel-heading">
 							<div class="row">
 								<div class="col-md-6" style="padding-top: 7px;">
-									<i class="fa fa-check fa-fw"></i> Persetujuan Permohonan Lapak
+									<i class="fa fa-check fa-fw"></i> Persetujuan Pendaftaran Pedagang
 								</div>
 								<div class="col-md-6 text-right">
 									<a href="register_edit.php?id=<?php echo $id ?>" style="text-decoration: none;">
@@ -72,9 +72,9 @@
 								<fieldset>
 								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
 									<div class="form-group" style="padding:10px; margin-right:10px;">
-										<label>No. PL</label>
+										<label>No. Pendaftaran</label>
 										<input id="pl" name="pl" value="<?php 
-											$idq = sprintf("%03d", $id);echo 'PL'.$idq; ?>" type="text" class="form-control" disabled /> 
+											$idq = sprintf("%04d", $id);echo 'P-'.$idq; ?>" type="text" class="form-control" disabled /> 
 										<br />
 										<label>Nama</label>
 										<input id="name1" name="name1" value="<?php echo $r['req_name']; ?>" type="text" class="form-control" disabled /> 
@@ -83,17 +83,13 @@
 										<input id="adrs1" name="adrs1" value="<?php echo $r['address1']; ?>" type="text" class="form-control" disabled />
 										<br />
 										<label>Jenis Jualan</label>
-										<select class="form-control" name="type" id="type" disabled>
-											<option value="<?php echo $r['merchant_type']; ?>"><?php echo $r['merchant_type']; ?></option>
-										</select>
+										<input type="text" class="form-control" name="type" id="type" value="<?php echo $r['merchant_type']; ?>" readonly>
 									</div>
 								</div>
 								<div class="col-lg-4" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
 									<div class="form-group" style="padding:10px; margin-right:10px;">
 										<label>Lapak</label>
-										<select class="form-control" name="lapak" id="lapak" disabled>
-											<option value="<?php echo $r['lapak_id']; ?>"><?php echo $lapak; ?></option>
-										</select>
+										<input type="text" class="form-control" name="lapak" id="lapak" 	value="<?php echo $lapak; ?>" readonly>
 										<br />
 										<label>Harga Per (M<sup>2</sup>)</label>
 										<input id="price" name="price" value="<?php echo format_rupiah($price); ?>" type="text" class="form-control" disabled />

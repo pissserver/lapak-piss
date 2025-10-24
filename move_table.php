@@ -44,12 +44,20 @@
 				$akhir	= executeScalar("select lapak_name from lapak where lapak_id='".$data['move_end']."' ");
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td style="text-align:center;"><?php echo $data['merchant_id']; ?></td>
-			<td style="text-align:left;"><?php echo $name; ?></td>
-			<td style="text-align:center;"><?php echo $awal; ?></td>
-			<td style="text-align:center;"><?php echo $akhir; ?></td>
-			<td style="text-align:center;"><?php echo date("d M Y", strtotime($data['move_date'])); ?></td>
+			<td style="text-align:center; vertical-align: middle;"><?php echo $no; ?></td>
+			<td style="text-align:center; vertical-align: middle;"><?php echo $data['merchant_id']; ?></td>
+			<td style="text-align:left; vertical-align: middle;"><?php echo $name; ?></td>
+			<td style="text-align:center; vertical-align: middle;">
+				<div style="vertical-align: middle; background-color: red; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa fa-angle-double-left fa-fw"></i>&nbsp;<?php echo $awal; ?>
+				</div>
+			</td>
+			<td style="text-align:center; vertical-align: middle;">
+				<div style="vertical-align: middle; background-color: green; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa fa-angle-double-right fa-fw"></i>&nbsp;<?php echo $akhir; ?>
+				</div>
+			</td>
+			<td style="text-align:center; vertical-align: middle;"><?php echo date("d M Y", strtotime($data['move_date'])); ?></td>
 		</tr>
 		<?php
 			$no++;

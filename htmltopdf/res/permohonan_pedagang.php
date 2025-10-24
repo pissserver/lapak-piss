@@ -13,7 +13,7 @@
             <tr>
                 <td><b>NO</b></td>
                 <td><b> : </b></td>
-                <td><b><?php echo 'PL'.$idq; ?></b></td>
+                <td><b><?php echo 'P-'.$idq; ?></b></td>
             </tr>
         </table>
     </page_header>
@@ -27,7 +27,7 @@
     </page_footer> -->
     <br/>
 	<div style="font-size: 16px; font-weight: bold; text-align: center; margin-top:30px;">
-		PERMOHONAN MENEMPATI LAPAK
+		SURAT PENDAFTARAN PEDAGANG
 		<br>PASAR INDUK SURABAYA SIDOTOPO
 	</div>
 	<br/><br/><br/><br/>
@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td style="padding-left: 15px; padding-bottom: 10px;">Alias      </td>
-			<td style="padding-bottom: 10px;"> : <?php echo $r['req_nick']; ?> </td>
+			<td style="padding-bottom: 10px;"> : <?php echo $r['req_nick'] != NULL ? $r['req_nick'] : '-'; ?> </td>
 		</tr>
 		<tr>
 			<td>Alamat      </td>
@@ -86,7 +86,7 @@
 		</tr>
 	</table>
     <br /><br />
-	<div style="font-size:14px;">Dengan ini memohon untuk menempati lapak di PISS dan menyetujui melaksanakan ketentuan yang berlaku sebagai berikut :
+	<div style="font-size:14px;">Dengan ini memohon untuk menempati lapak di PISS dan menyetujui serta melaksanakan ketentuan yang berlaku sebagai berikut :
 	<br><br>
 		<table>
 			<tr>
@@ -99,7 +99,7 @@
 			</tr>
 			<tr>
 				<td>3. </td>
-				<td>Segera melakukan aktivitas berjualan maksimun 7 (tujuh) hari kalender sejak disetujui surat permohonan ini.</td>
+				<td>Segera melakukan aktivitas berjualan maksimal 7 (tujuh) hari kalender sejak disetujui surat permohonan ini.</td>
 			</tr>
 		</table>
 	</div>

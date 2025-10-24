@@ -120,7 +120,7 @@
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';
-			$_SESSION['message'] = "Menambah data pemohon lapak";
+			$_SESSION['message'] = "Menambah pendaftar pedagang baru";
 			echo "<script>window.location=('register.php')</script>";
 			exit();
 		}
@@ -128,7 +128,7 @@
 			// Alert Information
 			$_SESSION['success'] = false;
 			$_SESSION['title'] = 'Gagal';
-			$_SESSION['message'] = "Menambah data pemohon lapak";
+			$_SESSION['message'] = "Menambah pendaftar pedagang baru";
 			echo "<script>window.history.back()</script>";
 			exit();
 		}
@@ -661,6 +661,8 @@
 			exit();
 		}
 	}
+	
+
 	
 	elseif ($task == 'delete'){
 		//$delete = mysql_query("delete request where request_id = '".$id."'");
