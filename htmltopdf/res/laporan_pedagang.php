@@ -108,7 +108,7 @@
 				<td style="vertical-align: middle; width:10%; text-align:center; border: solid 1px black;"><?php echo $p1; ?></td>
 				<td style="vertical-align: middle; width:11%; text-align:center; border: solid 1px black;"><?php echo $p2; ?></td>
 				<td style="vertical-align: middle; width:27%; text-align:left; border: solid 1px black;"><?php echo $data['address1']; ?></td>
-				<td style="vertical-align: middle; width:12%; text-align:left; border: solid 1px black;"><?php echo $lapak ?></td>
+				<td style="vertical-align: middle; width:12%; text-align:left; border: solid 1px black;"><?php echo $lapak != NULL ? $lapak : '-' ?></td>
 				<td style="vertical-align: middle; width:6%; text-align:center; border: solid 1px black;"><?php echo $data['merchant_type']; ?></td>
 				<td style="vertical-align: middle; width:7%; text-align:center; border: solid 1px black;"><?php echo $data['merchant_status']; ?></td>
 			</tr>

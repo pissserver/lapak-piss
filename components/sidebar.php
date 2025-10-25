@@ -23,6 +23,14 @@
 	}
 
 	$greetingMessage = greeting();
+
+	if (isset($_SESSION['role'])) {
+		if ($_SESSION['role'] == 'pp') {
+			$username = 'PP - ' . $name;
+		} elseif ($_SESSION['role'] == 'spv') {
+			$username = 'SPV - ' . $name;
+		}
+	}
 ?>
 
 <style>
@@ -55,6 +63,7 @@
     </div>
 			
 	<ul class="nav navbar-top-links navbar-right">
+		<?php include 'components/clock.php'; ?>&nbsp;&nbsp;
 		<?php include 'components/offcanvas_note.php'; ?>
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#" 
@@ -63,7 +72,9 @@
 			onmouseout="this.style.backgroundColor='transparent'">
 				<i class="fa fa-user fa-fw" style="color: #ffffff;"></i>
 				<span style="color: #ffffff;"><?php echo $greetingMessage; ?></span>
-				<b style="text-transform: capitalize; color: #ffffff;"><?php echo $name; ?>&nbsp;</b>
+				<b style="text-transform: capitalize; color: #ffffff;">
+					<?php echo $username; ?>&nbsp;
+				</b>
 				<i id="dropdownIcon" class="fa fa-angle-down" style="color: #ffffff;"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-user" style="width: 200px; margin-right: 10px; margin-top: 10px; border: 3px solid #ffffff; background-color: #428bca; border-radius: 10px;">
@@ -211,15 +222,17 @@
                                 </ul>
                             </li>
 
-							<li class="<?= isParentActive(['admin.php', 'lapak.php', 'lapak_edit.php', 'block.php', 'block_edit.php', 'instalment.php', 'instalment_edit.php']); ?>"> 
-                                <a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-									<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP </a></li>
-                                    <li><a class="<?= isActive(['lapak.php', 'lapak_edit.php']); ?>" href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
-                                    <li><a class="<?= isActive(['block.php', 'block_edit.php']); ?>" href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
-                                    <!-- <li><a class="<?= isActive(['instalment.php', 'instalment_edit.php']); ?>" href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li> -->
-                                </ul>
-                            </li>
+							<?php if($_SESSION['role'] == 'spv'){ ?>
+								<li class="<?= isParentActive(['admin.php', 'lapak.php', 'lapak_edit.php', 'block.php', 'block_edit.php', 'instalment.php', 'instalment_edit.php']); ?>"> 
+									<a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
+									<ul class="nav nav-second-level">
+										<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP </a></li>
+										<li><a class="<?= isActive(['lapak.php', 'lapak_edit.php']); ?>" href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
+										<li><a class="<?= isActive(['block.php', 'block_edit.php']); ?>" href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
+										<!-- <li><a class="<?= isActive(['instalment.php', 'instalment_edit.php']); ?>" href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li> -->
+									</ul>
+								</li>
+							<?php } ?>
                         </ul>
                     </div>
                 </div>

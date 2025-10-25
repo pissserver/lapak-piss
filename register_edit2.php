@@ -230,6 +230,15 @@
 	<script type="text/javascript">
     	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
     </script>
+	<script>
+		$(document).ready(function(){
+            //Modal Password
+            $('#modalPassword').on('shown.bs.modal', function (e) {
+                $("#notifArea").html(alertLoadProcess);
+                $("#data_password").load("password.php",function(){clearNotif();});
+            })
+        });
+	</script>
 	<!-- Sweet Alert -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 		<?php

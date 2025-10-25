@@ -204,6 +204,15 @@
     </script>
 	<!-- Sweet Alert -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+	<script>
+		$(document).ready(function(){
+            //Modal Password
+            $('#modalPassword').on('shown.bs.modal', function (e) {
+                $("#notifArea").html(alertLoadProcess);
+                $("#data_password").load("password.php",function(){clearNotif();});
+            })
+        });
+	</script>
 		<?php
 			// Menampilkan SweetAlert jika session success ada dan bernilai true
 			if (isset($_SESSION['success'])) {

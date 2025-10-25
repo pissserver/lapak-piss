@@ -128,6 +128,15 @@
 		});
 		function clearNotif(){$("#notifArea").html("");}
     </script>
+	<script>
+		$(document).ready(function(){
+            //Modal Password
+            $('#modalPassword').on('shown.bs.modal', function (e) {
+                $("#notifArea").html(alertLoadProcess);
+                $("#data_password").load("password.php",function(){clearNotif();});
+            })
+        });
+	</script>
 	
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

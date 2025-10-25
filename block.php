@@ -162,6 +162,15 @@
 		<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<script src="js/sb-admin-2.js"></script>
+		<script>
+			$(document).ready(function(){
+				//Modal Password
+				$('#modalPassword').on('shown.bs.modal', function (e) {
+					$("#notifArea").html(alertLoadProcess);
+					$("#data_password").load("password.php",function(){clearNotif();});
+				})
+			});
+		</script>
 		<!-- Sweet Alert -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 		<?php

@@ -61,7 +61,7 @@
 									<i class="fa fa-check fa-fw"></i> Persetujuan Permohonan Tambah Lapak
 								</div>
 								<div class="col-md-6 text-right">
-									<a href="register_edit.php?id=<?php echo $id ?>" style="text-decoration: none;">
+									<a href="register_edit2.php?id=<?php echo $id ?>" style="text-decoration: none;">
 										<button style="border: 1px solid #fff;" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit Data</button>
 									</a>
 								</div>
@@ -174,6 +174,15 @@
 		});
 		function clearNotif(){$("#notifArea").html("");}
     </script>
+	<script>
+		$(document).ready(function(){
+            //Modal Password
+            $('#modalPassword').on('shown.bs.modal', function (e) {
+                $("#notifArea").html(alertLoadProcess);
+                $("#data_password").load("password.php",function(){clearNotif();});
+            })
+        });
+	</script>
 	
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
