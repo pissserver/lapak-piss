@@ -117,7 +117,16 @@
 											<select class="form-control chzn-select" name="lapak" id="lapak" required>
 												<option value="">- Pilih Lapak -</option>
 												<?php 
-													$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status = 'Kosong' or lapak_status is NULL ");
+													$sql = mysql_query("
+														SELECT 
+															l.lapak_id, 
+															l.lapak_name, 
+															l.lapak_type 
+														FROM lapak l 
+														JOIN block b ON l.block_id = b.block_id 
+														WHERE (l.lapak_status = 'Kosong' OR l.lapak_status IS NULL)
+														AND b.status_block = 'active'
+													");
 													while($data = mysql_fetch_array($sql))
 												{?>
 													<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>

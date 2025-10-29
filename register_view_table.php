@@ -22,6 +22,7 @@
 			<th style="text-align: center; vertical-align: middle; width:10%;">TELP. RUMAH</th>
 			<th style="text-align: center; vertical-align: middle; width:10%;">TELP. HP</th>
 			<th style="text-align: center; vertical-align: middle; width:10%;">JENIS PEDAGANG</th>
+			<th style="text-align: center; vertical-align: middle; width:10%;">TGL PENGAJUAN</th>
 			<th style="text-align: center; vertical-align: middle; width:8%;">STATUS</th>
 			<th style="text-align: center; vertical-align: middle; width:7%;">AKSI</th>
 		</tr>
@@ -56,14 +57,33 @@
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align: center;">
+				<?php echo date("d M Y", strtotime($data['req_date'])); ?><br>
+				<div style="vertical-align: middle; background-color: #4c575fff; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<?php 
+						if($data['req_reffer'] != ''){
+							echo "Tambah Lapak";
+						} else {
+							echo "Daftar Baru";
+						}
+					?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align: center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['req_status'] == 'Disetujui' ? 'green' : '#EB8317'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
 					<i class="fa <?php echo $data['req_status'] == 'Disetujui' ? 'fa-check' : 'fa-spinner' ?> fa-fw"></i>&nbsp;<?php echo $data['req_status']; ?>
 				</div>
 			</td>
-			<td style="vertical-align: middle; text-align: center;"><center><a style="text-decoration: none;" href="register_edit.php?id=<?php echo $data['req_id']; ?>">
-				<button class="btn btn-outline btn-block btn-primary btn-xs"><i class="fa fa-eye"></i>&nbsp;Lihat Detail</button>
-			</a></center>
-			</td>
+			<?php if($data['req_reffer'] == ''){ ?>
+				<td style="vertical-align: middle; text-align: center;"><center><a style="text-decoration: none;" href="register_edit.php?id=<?php echo $data['req_id']; ?>">
+					<button class="btn btn-outline btn-block btn-primary btn-xs"><i class="fa fa-eye"></i>&nbsp;Lihat Detail</button>
+				</a></center>
+				</td>
+			<?php } else { ?>
+				<td style="vertical-align: middle; text-align: center;"><center><a style="text-decoration: none;" href="register_edit2.php?id=<?php echo $data['req_id']; ?>">
+					<button class="btn btn-outline btn-block btn-primary btn-xs"><i class="fa fa-eye"></i>&nbsp;Lihat Detail</button>
+				</a></center>
+				</td>
+			<?php } ?>
 		</tr>
 		<?php $no++; } ?>
 	</tbody>

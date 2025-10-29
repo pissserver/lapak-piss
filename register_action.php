@@ -238,14 +238,14 @@
 				// Alert Information
 				$_SESSION['success'] = true;
 				$_SESSION['title'] = 'Berhasil';
-				$_SESSION['message'] = "Update data pemohon lapak";
+				$_SESSION['message'] = "Update data";
 				echo "<script>window.location=('register_edit2.php?id=$id')</script>";
 				exit;
 			}else{
 				// Alert Information
 				$_SESSION['success'] = true;
 				$_SESSION['title'] = 'Berhasil';
-				$_SESSION['message'] = "Update data pemohon lapak";
+				$_SESSION['message'] = "Update data";
 				echo "<script>window.location=('register_edit.php?id=$id')</script>";
 				exit;
 			}
@@ -255,7 +255,7 @@
 			// Alert Information
 			$_SESSION['success'] = false;
 			$_SESSION['title'] = 'Gagal';
-			$_SESSION['message'] = "Update data pemohon lapak";
+			$_SESSION['message'] = "Update data";
 			echo "<script>window.history.back()</script>";
 			exit;
 		}
@@ -662,7 +662,43 @@
 		}
 	}
 	
+	elseif($task == 'cancel'){
+		$id		= $_GET['id'];
+		$update	= mysql_query("update request set req_status = 'Dibatalkan' where req_id = '".$id."'");
+		if($update){
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Membatalkan Pendaftaran Pedagang";
+			echo "<script>window.location=('register.php')</script>";
+			exit();
+		}
+		else{
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Membatalkan Pendaftaran Pedagang";
+			echo "<script>window.location=('register.php')</script>";
+			exit();
+		}
+	}
 
+	elseif($task == 'cancel2'){
+		$id		= $_GET['id'];
+		$update	= mysql_query("update request set req_status = 'Dibatalkan' where req_id = '".$id."'");
+		if($update){
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Membatalkan Pendaftaran Pedagang";
+			echo "<script>window.location=('register2.php')</script>";
+			exit();
+		}
+		else{
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Membatalkan Pendaftaran Pedagang";
+			echo "<script>window.location=('register2.php')</script>";
+			exit();
+		}
+	}
 	
 	elseif ($task == 'delete'){
 		//$delete = mysql_query("delete request where request_id = '".$id."'");

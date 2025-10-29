@@ -22,13 +22,14 @@
 			<th style="text-align: center; vertical-align: middle; width:10%;">TELP. RUMAH</th>
 			<th style="text-align: center; vertical-align: middle; width:10%;">TELP. HP</th>
 			<th style="text-align: center; vertical-align: middle; width:10%;">JENIS PEDAGANG</th>
+			<th style="text-align: center; vertical-align: middle; width:10%;">TGL PENDAFTARAN</th>
 			<th style="text-align: center; vertical-align: middle; width:8%;">STATUS</th>
 			<th style="text-align: center; vertical-align: middle; width:7%;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php
-			$sql 	= "select * from request where req_reffer is null order by req_id desc";
+			$sql 	= "select * from request where req_reffer is null and req_status != 'Dibatalkan' order by req_id desc";
 			$query 	= mysql_query($sql);
 			$no		= 1;
 			while($data=mysql_fetch_array($query)){ 
@@ -56,6 +57,9 @@
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align: center;">
+				<?php echo date("d M Y", strtotime($data['req_date'])); ?>
+			</td>
+			<td style="vertical-align: middle; text-align: center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['req_status'] == 'Disetujui' ? 'green' : '#EB8317'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
 					<i class="fa <?php echo $data['req_status'] == 'Disetujui' ? 'fa-check' : 'fa-spinner' ?> fa-fw"></i>&nbsp;<?php echo $data['req_status']; ?>
 				</div>
@@ -68,6 +72,9 @@
 					echo '<center><a style="text-decoration: none;" href="register_acc.php?id='.$data['req_id'].'">
 						<button style="margin-top: 5px;" class="btn btn-outline btn-block btn-success btn-xs"><i class="fa fa-check fa-fw"></i>Setujui</button>
 					</a></center>';
+					echo '<center><a style="text-decoration: none;" data-toggle="modal" data-target="#modalCancel" href="#">
+						<button style="margin-top: 5px;" class="btn btn-outline btn-block btn-danger btn-xs"><i class="fa fa-times fa-fw"></i>Batalkan</button>
+					</a></center>';
 				}
 				else{
 					echo '';
@@ -75,6 +82,38 @@
 			?>
 			</td>
 		</tr>
+
+
+		<!-- Modal Cancel -->
+			<div class="modal fade" id="modalCancel" tabindex="-1" role="dialog" aria-labelledby="modalCancelLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-white" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+							<h5 class="modal-title" id="modalCancelLabel"><b>KONFIRMASI BATAL PENDAFTARAN</b></h5>
+							<button style="margin-top: -20px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Apakah Anda yakin ingin membatalkan pendaftaran pedagang?</p>
+							<div class="bg-primary" 
+								style="color:#fff; padding:4px; border-radius:5px; display:inline-block;">
+								<i class="fa fa-user fa-fw d-in"></i>&nbsp;<?php echo $data['req_name']; ?>
+							</div>
+							<div class="bg-primary" 
+								style="color:#fff; padding:4px; border-radius:5px; display:inline-block;">
+								<i class="fa fa-th fa-fw d-in"></i>&nbsp;<?php echo $lapak; ?>
+							</div>
+							<br><br>
+							<p><b>Catatan:</b> Data pendaftaran yang dibatalkan tidak dapat dikembalikan lagi!</p>
+						</div>
+						<div class="modal-footer d-flex justify-content-between">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+							<a href="register_action.php?task=cancel&id=<?php echo $data['req_id'] ?>" class="btn btn-primary">Ya, batalkan</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		<?php $no++; } ?>
 	</tbody>
 </table>

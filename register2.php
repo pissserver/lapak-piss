@@ -49,6 +49,18 @@
                             <i class="fa fa-pencil fa-fw"></i> Tambah Lapak Pedagang
                         </div>
                         <div class="panel-body">
+							<div class="alert alert-warning" role="alert">
+								<table>
+									<tr>
+										<td style="font-size:20px; padding-right: 10px;">
+											<i class="fa fa-info"></i> 
+										</td>
+										<td>
+											<p style="font-size: 12px; padding-top:10px;"> Tambah lapak hanya bisa untuk pedagang dengan status 'Aktif'.</p>
+										</td>
+									</tr>
+								</table>
+							</div>
                             <form action="register_action.php?task=insert2" id="formRegister" name = "formRegister" method="POST" class="form-horizontal">
 								<div class="col-lg-6" style="padding:10px; margin-top:-20px; margin-bottom:-10px;">
 									<div class="form-group" style="padding:10px;">
@@ -56,7 +68,7 @@
 										<select class="form-control chzn-select" name="merchant" id="merchant">
 											<option value="">- Pilih Pedagang -</option>
 											<?php 
-												$sql1 		= mysql_query("select merchant_id, merchant_name, merchant_nick, merchant_type from merchant order by merchant_name");
+												$sql1 		= mysql_query("select merchant_id, merchant_name, merchant_nick, merchant_type from merchant where merchant_status = 'Aktif' order by merchant_name");
 												while($d1 = mysql_fetch_array($sql1))
 											{?>
 												<option value="<?php echo $d1['merchant_id'];?>"><?php echo $d1['merchant_name'].' / '.$d1['merchant_nick'].' ('.$d1['merchant_id'].')';?></option>
@@ -71,7 +83,16 @@
 										<select class="form-control chzn-select" name="lapak" id="lapak" required>
 											<option value="">- Pilih Lapak -</option>
 											<?php 
-												$sql 		= mysql_query("select lapak_id, lapak_name, lapak_type from lapak where lapak_status = 'Kosong' or lapak_status is NULL");
+												$sql = mysql_query("
+														SELECT 
+															l.lapak_id, 
+															l.lapak_name, 
+															l.lapak_type 
+														FROM lapak l 
+														JOIN block b ON l.block_id = b.block_id 
+														WHERE (l.lapak_status = 'Kosong' OR l.lapak_status IS NULL)
+														AND b.status_block = 'active'
+													");
 												while($data = mysql_fetch_array($sql))
 											{?>
 												<option value="<?php echo $data['lapak_id'];?>"><?php echo $data['lapak_name'].' / '.$data['lapak_type'];?></option>

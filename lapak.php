@@ -73,7 +73,7 @@
 										<select class="form-control" name="block" id="block" autofocus="autofocus" required>
 											<option value="">- Pilih Blok -</option>
 											<?php 
-												$sql 		= mysql_query("select block_id from block where block_now < block_max and block_status = 'Aktif' order by block_id");
+												$sql 		= mysql_query("select block_id from block where block_now < block_max and status_block = 'active' order by block_id");
 												while($data = mysql_fetch_array($sql)){?>
 												<option value="<?php echo $data['block_id'];?>"><?php echo $data['block_id'];?></option>
 											<?php } ?>

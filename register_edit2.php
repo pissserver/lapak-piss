@@ -183,7 +183,20 @@
 									</a>
 								</div>
 
-								<div class="col-lg-12" style="padding:0 20px 0 20px; margin-top: 10px;">
+								<div class="col-lg-6" style="padding:0 20px 0 20px; margin-top: 10px;">
+									<?php 
+										if($r['req_status']!='Disetujui'){
+											echo '<center><a style="text-decoration: none;" data-toggle="modal" data-target="#modalCancel" href="#">
+												<button style="margin-top: 10px;" class="btn btn-block btn-danger"><i class="fa fa-times fa-fw"></i>Batalkan</button>
+											</a></center>';
+										}
+										else{
+											echo '';
+										}
+									?>
+								</div>
+
+								<div class="col-lg-6" style="padding:0 20px 0 20px; margin-top: 10px;">
 									<?php 
 										if($r['req_status']!='Disetujui'){
 											echo '<center>
@@ -203,6 +216,40 @@
 			</div>
         </div>
     </div>
+
+	<!-- Modal Cancel -->
+			<div class="modal fade" id="modalCancel" tabindex="-1" role="dialog" aria-labelledby="modalCancelLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-white" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+							<h5 class="modal-title" id="modalCancelLabel"><b>KONFIRMASI BATAL PENDAFTARAN</b></h5>
+							<button style="margin-top: -20px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Apakah Anda yakin ingin membatalkan pendaftaran pedagang?</p>
+							<div class="bg-primary" 
+								style="color:#fff; padding:4px; border-radius:5px; display:inline-block;">
+								<i class="fa fa-user fa-fw d-in"></i>&nbsp;<?php echo $r['req_name']; ?>
+							</div>
+							<div class="bg-primary" 
+								style="color:#fff; padding:4px; border-radius:5px; display:inline-block;">
+								<?php 
+									$lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$r['lapak_id']."' "); 
+								?>
+								<i class="fa fa-th fa-fw d-in"></i>&nbsp;<?php echo $lapak; ?>
+							</div>
+							<br><br>
+							<p><b>Catatan:</b> Data pendaftaran yang dibatalkan tidak dapat dikembalikan lagi!</p>
+						</div>
+						<div class="modal-footer d-flex justify-content-between">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+							<a href="register_action.php?task=cancel2&id=<?php echo $r['req_id'] ?>" class="btn btn-primary">Ya, batalkan</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
 	<script>
 		$(document).ready(function(){

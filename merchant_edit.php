@@ -320,14 +320,43 @@
 										<textarea class="form-control" cols="20" rows="12" disabled><?php echo $q2['rent_desc'];?></textarea>
 									</div>
 									<div class="form-group" >
-										<form action="merchant_action.php?task=deleteRent&id=<?php echo $q2['rent_id']; ?>&merchantID=<?php echo $q2['merchant_id']; ?>" target="_blank" class="form-horizontal" id="formAngs" name="formAngs" method="POST">
-											<button style="margin-top:40px;" class="btn btn-block btn-danger">Nonaktifkan Lapak</button>
-										</form>
+										<button data-toggle="modal" data-target="#modalNonactive_<?php echo $q2['rent_id']; ?>" style="margin-top:40px;" class="btn btn-block btn-danger">Nonaktifkan Lapak</button>
 									</div>
 								</div>
 							</div>
 						</div>
                     </div>
+
+					<!-- Modal Nonactive -->
+					<div class="modal fade" id="modalNonactive_<?php echo $q2['rent_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalNonactiveLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header bg-primary text-white" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+									<h5 class="modal-title" id="modalNonactiveLabel"><b>KONFIRMASI NONAKTIFKAN LAPAK</b></h5>
+									<button style="margin-top: -20px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>Apakah Anda yakin ingin menonaktifkan lapak?</p>
+									<div class="bg-primary" 
+										style="color:#fff; padding:4px; border-radius:5px; display:inline-block;">
+										<i class="fa fa-user fa-fw d-in"></i>&nbsp;<?php echo $r['merchant_name']; ?>
+									</div>
+									<div class="bg-primary" 
+										style="color:#fff; padding:4px; border-radius:5px; display:inline-block;">
+										<i class="fa fa-th fa-fw d-in"></i>&nbsp;<?php echo $q3['lapak_name']; ?>
+									</div>
+									<br><br>
+									<p><b>Catatan:</b> Lapak yang dinonaktifkan dari pedagang tersebut akan berstatus 'Kosong'!</p>
+								</div>
+								<div class="modal-footer d-flex justify-content-between">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+									<a href="merchant_action.php?task=deleteRent&id=<?php echo $q2['rent_id']; ?>&merchantID=<?php echo $q2['merchant_id']; ?>" class="btn btn-primary">Ya, nonaktifkan</a>
+								</div>
+							</div>
+						</div>
+					</div>
 					<?php } } } ?>
                 </div>
             </div>
