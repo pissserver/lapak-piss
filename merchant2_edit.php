@@ -121,12 +121,15 @@
 										<div class="form-group" style="margin-top: 15px; margin-left: 0px; margin-right: 0px">
 											<label>Jenis Identitas</label>
 											<select class="form-control" name="nid" id="nid" required>
-												<option value="<?php echo $r['nid_type']; ?>"><?php echo $r['nid_type']; ?></option>
-												<option value="KTP">KTP</option>
-												<option value="SIM">SIM</option>
-												<option value="PASPOR">PASPOR</option>
-												<option value="Pelajar">Kartu Pelajar/Mahasiswa</option>
-												<option value="Lainnya">Lainnya</option>
+												<?php if ($r['nid_type'] == '' || $r['nid_type'] == null) : ?>
+													<option selected>Tidak Ada Identitas Diisi</option>
+												<?php endif; ?>
+
+												<option value="KTP" <?php echo ($r['nid_type'] == 'KTP') ? 'selected' : ''; ?>>KTP</option>
+												<option value="SIM" <?php echo ($r['nid_type'] == 'SIM') ? 'selected' : ''; ?>>SIM</option>
+												<option value="PASPOR" <?php echo ($r['nid_type'] == 'PASPOR') ? 'selected' : ''; ?>>PASPOR</option>
+												<option value="Pelajar" <?php echo ($r['nid_type'] == 'Pelajar') ? 'selected' : ''; ?>>Kartu Pelajar/Mahasiswa</option>
+												<option value="Lainnya" <?php echo ($r['nid_type'] == 'Lainnya') ? 'selected' : ''; ?>>Lainnya</option>
 											</select>
 										</div>
 									</div>
