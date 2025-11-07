@@ -234,7 +234,7 @@
 								</li>
 							<?php } ?>
 
-							<li><a class="<?= isActive(['changelog.php']); ?>" href="changelog.php"><i class="fa fa-history fa-fw"></i> Update Log <?php include "new_notification.php"; ?></a></li>
+							<li><a class="<?= isActive(['changelog.php']); ?>" href="changelog.php"><i class="fa fa-history fa-fw"></i> Update Log</a></li>
                         </ul>
                     </div>
                 </div>

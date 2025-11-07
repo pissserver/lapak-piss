@@ -102,7 +102,7 @@
 <!-- Tombol untuk memunculkan offcanvas -->
 <button class="btn btn-canvas btn-primary" onclick="toggleOffcanvas()">
     <i class="fa fa-bell"></i>
-    <div class="notification">7</div>
+    <!-- <div class="notification">7</div> -->
 </button>
 
 <!-- Offcanvas -->
@@ -113,13 +113,13 @@
     </div>
     <div class="offcanvas-body">
         <!-- Jika tidak ada pembaruan sistem -->
-        <!-- <div class="box-update">
+        <div class="box-update">
             <img src="img/update.png" alt="Update Illustration" width="210px">
             <h3 class="text-primary text-uppercase"><b>Tidak ada pembaruan sistem</b></h3>
-        </div> -->
+        </div>
 
         <!-- Jika ada pembaruan sistem -->
-        <table style="margin-bottom:50px;">
+        <!-- <table style="margin-bottom:50px;">
             <tr>
                 <td style="font-size:28px; padding-right: 20px;"> • </td>
                 <td>Sistem versioning lapak 1.2.0</td>
@@ -148,7 +148,7 @@
                 <td style="font-size:28px; padding-right: 20px;"> • </td>
                 <td>Penambahan fitur jam disamping nama akun</td>
             </tr>
-        </table>
+        </table> -->
     </div>
     <div class="offcanvas-footer">
         <p class="text-primary text-uppercase text-center"><b>Version 1.2.0</b></p>
