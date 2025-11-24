@@ -23,14 +23,9 @@
 	}
 
 	$greetingMessage = greeting();
+	$photoUrl	= executeScalar("select photo from admin where username = '".$_SESSION['username']."'");
+	$privileges = executeScalar("SELECT privileges FROM admin WHERE username = '".$_SESSION['username']."'");
 
-	if (isset($_SESSION['role'])) {
-		if ($_SESSION['role'] == 'pp') {
-			$username = 'PP - ' . $name;
-		} elseif ($_SESSION['role'] == 'spv') {
-			$username = 'SPV - ' . $name;
-		}
-	}
 ?>
 
 <style>
@@ -49,6 +44,59 @@
         0% { background-position: 200% center; }
         100% { background-position: -200% center; }
     }
+
+/* Image Profile */
+	.nav-profile-img {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center;
+		border: 2px solid #fff;
+		box-shadow: 0 0 5px rgba(255,255,255,0.7);
+		transition: transform .2s ease-in-out;
+		vertical-align: middle;
+	}
+
+	/* BADGE STYLE */
+	.achievement-badge-head {
+		position: absolute;
+		top: -5px;
+		right: -70px;
+		z-index: 5;
+	}
+
+	.level-badge-nav {
+		display: inline-flex;
+		align-items: center;
+		padding: 4px 10px;
+		border-radius: 30px;
+		font-weight: 600;
+		font-size: 9px;
+		gap: 8px;
+		color: white;
+		/* box-shadow: 0 4px 8px rgba(0,0,0,0.25); */
+		animation: popIn .4s ease;
+	}
+
+	/* ANIMASI */
+	@keyframes popIn {
+		from { transform: scale(.7); opacity: 0; }
+		to   { transform: scale(1); opacity: 1; }
+	}
+
+	/* Color Badge */
+	.level-badge-nav.color-developer-nav {
+		background: linear-gradient(45deg, #524949ff, #000000);
+		color: #fff;
+		/* box-shadow: 0 0 15px #f7c40eff; */
+	}
+	
+	.level-badge-nav.color-manager-nav {
+		background: linear-gradient(45deg, #ef4646ff, #9a0404ff);
+		color: #fff;
+		/* box-shadow: 0 0 15px #f7c40eff; */
+	}
 </style>
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0; background-color: #428bca;">
@@ -70,15 +118,45 @@
 			style="color: #ffffff !important; background-color: transparent !important;"
 			onmouseover="this.style.backgroundColor='rgb(103, 165, 218)'" 
 			onmouseout="this.style.backgroundColor='transparent'">
-				<i class="fa fa-user fa-fw" style="color: #ffffff;"></i>
+				<!-- <i class="fa fa-user fa-fw" style="color: #ffffff;"></i> -->
 				<span style="color: #ffffff;"><?php echo $greetingMessage; ?></span>
 				<b style="text-transform: capitalize; color: #ffffff;">
-					<?php echo $username; ?>&nbsp;
-				</b>
+					<?php 
+						if (isset($_SESSION['role'])) {
+							if ($_SESSION['role'] == 'pp') {
+								echo 'PP - ' . $name;
+							} elseif ($_SESSION['role'] == 'spv') {
+								if ($privileges == 'manager') { ?>
+									<div class="level-badge-nav color-manager-nav">
+										<i class="fa fa-diamond fa-lg"></i>MANAGER
+									</div> <?php echo ' - ' . $name; ?>
+								<?php } elseif ($privileges == 'developer') { ?>
+									<div class="level-badge-nav color-developer-nav">
+										<i class="fa fa-code fa-lg"></i>DEVELOPER
+									</div> <?php echo ' - ' . $name; ?>
+								<?php }
+							}
+						}
+					?>	
+				</b>&nbsp;
+				<img id="previewPhoto" class="nav-profile-img" src="<?php echo $photoUrl ? '../uploads/' . $photoUrl : '../uploads/profile-default.png'; ?>">&nbsp; 
 				<i id="dropdownIcon" class="fa fa-angle-down" style="color: #ffffff;"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-user" style="width: 200px; margin-right: 10px; margin-top: 10px; border: 3px solid #ffffff; background-color: #428bca; border-radius: 10px;">
 				<li>
+					<a href="profile.php" 
+					style="color: #ffffff; font-size: 15px; display: block; padding: 10px; text-decoration: none;"
+					onmouseover="this.style.backgroundColor='rgb(103, 165, 218)'; this.style.color='#ffffff';"
+					onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffff';">
+						<div class="name" style="display: inline-block; padding-right: 100px; padding-left: 10px;">
+							Profil
+						</div>
+						<div class="icon" style="display: inline-block;">
+							<i class="fa fa-user fa-fw" style="color: #ffffff; font-size: 15px;"></i>
+						</div>
+					</a>
+				</li>	
+			<!-- <li>
 					<a data-toggle="modal" data-target="#modalPassword" href="#" 
 					style="color: #ffffff; font-size: 15px; display: block; padding: 10px; text-decoration: none;"
 					onmouseover="this.style.backgroundColor='rgb(103, 165, 218)'; this.style.color='#ffffff';"
@@ -90,7 +168,7 @@
 							<i class="fa fa-lock fa-fw" style="color: #ffffff; font-size: 15px;"></i>
 						</div>
 					</a>
-				</li>
+				</li> -->
 				<li class="divider"></li>
 				<li>
 					<a data-toggle="modal" data-target="#modalLogout" href="#" 
