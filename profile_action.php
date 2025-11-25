@@ -54,7 +54,7 @@
 		session_destroy();
 		echo '<script>
 		localStorage.removeItem("notificationHidden");
-		window.location.href = "../login.html";
+		window.location.href = "login.php";
 		</script>';
 	} else {
 		// UPDATE TANPA LOGOUT
