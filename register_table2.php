@@ -32,6 +32,22 @@
 			$sql 	= "select * from request where req_reffer != '' and req_status != 'Dibatalkan'    order by req_id desc";
 			$query 	= mysql_query($sql);
 			$no		= 1;
+
+			function timeAgo($date)
+			{
+				$now = new DateTime(); // waktu sekarang
+				$reg = new DateTime($date); // waktu register
+				$diff = $now->diff($reg);
+
+				if ($diff->y >= 1) {
+					return $diff->y . " tahun lalu";
+				} elseif ($diff->m >= 1) {
+					return $diff->m . " bulan lalu";
+				} else {
+					return $diff->d . " hari lalu";
+				}
+			}
+
 			while($data=mysql_fetch_array($query)){
 			$lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$data['lapak_id']."' ");
 			//$rid 	= executeScalar("select rent_id from rent where req_id='".$data['req_id']."' ");
@@ -58,6 +74,10 @@
 			</td>
 			<td style="vertical-align: middle; text-align: center;">
 				<?php echo date("d M Y", strtotime($data['req_date'])); ?>
+				<!-- Umur waktu -->
+				<div style="margin-top: 5px; background: #ccc; padding: 3px 10px; border-radius: 5px; display: inline-block; font-size: 12px;">
+					<?php echo timeAgo($data['req_date']); ?>
+				</div>
 			</td>
 			<td style="vertical-align: middle; text-align: center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['req_status'] == 'Disetujui' ? 'green' : '#EB8317'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
