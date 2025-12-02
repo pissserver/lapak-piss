@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    include "connection.php";
+    $version_query = mysql_query("SELECT version, date FROM update_lapak ORDER BY id DESC LIMIT 1");
+    $version_data = mysql_fetch_array($version_query);
 ?>
 
 <!DOCTYPE html>
@@ -72,9 +74,11 @@
                                 >PISS👋</span
                             >
                         </span>
-                        <p class="text-center" style="margin-top: -10px;">Version 1.3.0</p>
+                        <p class="text-center" style="margin-top: -10px">
+                            Version <?php echo $version_data['version']; ?>
+                        </p>
 
-                        <div class="illustration text-center mb-4">
+                        <div class="illustration text-center mb-4 mt-3">
                             <img
                                 src="img/login.png"
                                 alt="Illustration"
