@@ -69,11 +69,14 @@
 	.level-badge-nav {
 		display: inline-flex;
 		align-items: center;
-		padding: 4px 10px;
+		width: fit-content; 
+		padding: 5px 10px;
 		border-radius: 30px;
 		font-weight: 600;
 		font-size: 9px;
-		gap: 8px;
+		gap: 6px;
+		white-space: nowrap; 
+		flex: 0 0 auto;
 		color: white;
 		/* box-shadow: 0 4px 8px rgba(0,0,0,0.25); */
 		animation: popIn .4s ease;
@@ -89,13 +92,200 @@
 	.level-badge-nav.color-developer-nav {
 		background: linear-gradient(45deg, #524949ff, #000000);
 		color: #fff;
-		/* box-shadow: 0 0 15px #f7c40eff; */
+		box-shadow: 0 0 15px #f7c40eff;
 	}
 	
 	.level-badge-nav.color-manager-nav {
 		background: linear-gradient(45deg, #ef4646ff, #9a0404ff);
 		color: #fff;
-		/* box-shadow: 0 0 15px #f7c40eff; */
+		box-shadow: 0 0 15px #f7c40eff;
+	}
+
+	/* Collapse Sidebar */
+	/* Sidebar tetap bisa scroll */
+	.sidebar-nav {
+		overflow-y: auto;
+		scrollbar-width: none;        /* Firefox */
+		-ms-overflow-style: none;     /* IE & Edge lama */
+	}
+
+	/* Chrome, Safari, Edge */
+	.sidebar-nav::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+	.sidebar {
+		width: 230px;
+		transition: all 0.3s ease;
+	}
+
+	/* Content ikut geser */
+	#page-wrapper {
+		margin-left: 240px;
+		transition: all 0.3s ease;
+	}
+
+	/* Mode sidebar kecil */
+	body.sidebar-collapse .sidebar {
+		width: 60px;
+	}
+
+	/* Content ikut mengecil */
+	body.sidebar-collapse #page-wrapper {
+		margin-left: 60px;
+	}
+
+	/* Sembunyikan teks menu */
+	body.sidebar-collapse .sidebar .nav > li > a span,
+	body.sidebar-collapse .sidebar .nav-second-level {
+		display: none;
+	}
+
+	/* Tengah ikon */
+	body.sidebar-collapse .sidebar .nav > li > a {
+		text-align: center;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	/* === PROFILE SAAT COLLAPSE === */
+	body.sidebar-collapse .profile-sidebar {
+		justify-content: center;   /* center horizontal */
+		padding: 15px 0;
+	}
+
+	/* Sembunyikan text */
+	body.sidebar-collapse .profile-sidebar .text-profile {
+		display: none;
+	}
+
+	/* Foto tetap center & proporsional */
+	body.sidebar-collapse .profile-sidebar img {
+		margin: 0;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+	}
+
+	body.sidebar-collapse .profile-sidebar:hover img {
+		transform: scale(1.05);
+		transition: 0.2s;
+	}
+
+
+	.sidebar-toggle-btn {
+		background: transparent;
+		border: none;
+		color: #fff;
+		font-size: 18px;
+		width: 40px;
+		height: 40px;
+		margin-left: 5px;
+		margin-top: 5px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.sidebar-toggle-btn:hover {
+		background: rgba(255,255,255,0.2);
+		border-radius: 4px;
+	}
+
+	/* ===== SIDEBAR DARK MODE ===== */
+	.sidebar {
+		width: 240px;
+		background-color: #1f2937;
+		border-right: 1px solid #2d3748;
+		transition: all 0.3s ease;
+	}
+
+	/* Menu utama */
+	.sidebar .nav > li > a {
+		color: #e5e7eb;
+		padding: 12px 18px;
+		font-size: 14px;
+		transition: all 0.2s ease;
+	}
+
+	/* Icon */
+	.sidebar .nav > li > a i {
+		color: #e5e7eb;
+		width: 20px;
+		text-align: center;
+		margin-right: 8px;
+	}
+
+	/* Hover */
+	.sidebar .nav > li > a:hover {
+		background-color: #374151;
+		color: #ffffff;
+	}
+
+	/* Active menu */
+	.sidebar .nav > li.active > a,
+	.sidebar .nav > li > a.active {
+		background-color: #111827;
+		color: #ffffff;
+	}
+
+	/* Submenu */
+	.sidebar .nav-second-level {
+		background-color: #111827;
+	}
+
+	.sidebar .nav-second-level li a {
+		color: #cbd5f5;
+		padding-left: 40px;
+	}
+
+	.sidebar .nav-second-level li a:hover {
+		background-color: #1f2937;
+		color: #ffffff;
+	}
+
+	.sidebar .nav > li {
+    	border-bottom: 1px solid rgba(255,255,255,0.06);
+	}
+
+	.profile-sidebar {
+		display: flex;
+		align-items: center;
+		padding: 15px;
+		gap: 12px;
+		background-color: #1f2937;
+
+		/* divider */
+		border-bottom: 1px solid rgba(255,255,255,0.08);
+	}
+
+
+	/* Foto */
+	.profile-sidebar img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		object-fit: cover;
+		cursor: pointer;
+	}
+
+	/* Text */
+	.text-profile {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.2;
+	}
+
+	.text-profile b {
+		color: #ffffff;
+		font-size: 16px;
+		margin-bottom: 5px;
+	}
+
+	.text-profile span {
+		color: #9ca3af;     /* abu lembut */
+		font-size: 14px;
 	}
 </style>
 
@@ -107,7 +297,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="dashboard.php" style="color: #ffffff;"><i class="fa fa-building-o fa-fw silhouette"></i> <b class="silhouette">LAPAK PISS</b></a>
+        <a class="navbar-brand" href="dashboard.php" style="color: #ffffff; background-color: #111827; width: 240px;"><i class="fa fa-balance-scale fa-fw silhouette"></i> <b class="silhouette">LAPAK PISS</b></a>
+		<button type="button" class="sidebar-toggle-btn"
+			onclick="toggleSidebar()">
+			<i class="fa fa-bars"></i>
+		</button>
     </div>
 			
 	<ul class="nav navbar-top-links navbar-right">
@@ -118,28 +312,8 @@
 			style="color: #ffffff !important; background-color: transparent !important;"
 			onmouseover="this.style.backgroundColor='rgb(103, 165, 218)'" 
 			onmouseout="this.style.backgroundColor='transparent'">
-				<!-- <i class="fa fa-user fa-fw" style="color: #ffffff;"></i> -->
-				<span style="color: #ffffff;"><?php echo $greetingMessage; ?></span>
-				<b style="text-transform: capitalize; color: #ffffff;">
-					<?php 
-						if (isset($_SESSION['role'])) {
-							if ($_SESSION['role'] == 'pp') {
-								echo 'PP - ' . $name;
-							} elseif ($_SESSION['role'] == 'spv') {
-								if ($privileges == 'manager') { ?>
-									<div class="level-badge-nav color-manager-nav">
-										<i class="fa fa-diamond fa-lg"></i>MANAGER
-									</div> <?php echo ' - ' . $name; ?>
-								<?php } elseif ($privileges == 'developer') { ?>
-									<div class="level-badge-nav color-developer-nav">
-										<i class="fa fa-code fa-lg"></i>DEVELOPER
-									</div> <?php echo ' - ' . $name; ?>
-								<?php }
-							}
-						}
-					?>	
-				</b>&nbsp;
-				<img id="previewPhoto" class="nav-profile-img" src="<?php echo $photoUrl ? '../uploads/' . $photoUrl : '../uploads/profile-default.png'; ?>">&nbsp; 
+				<i class="fa fa-cog" style="color: #ffffff;"></i>&nbsp;
+				<b style="text-transform: capitalize; color: #ffffff;">Pengaturan</b>&nbsp;
 				<i id="dropdownIcon" class="fa fa-angle-down" style="color: #ffffff;"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-user" style="width: 200px; margin-right: 10px; margin-top: 10px; border: 3px solid #ffffff; background-color: #428bca; border-radius: 10px;">
@@ -229,12 +403,44 @@
 			</div>
             
                 <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                    <div class="sidebar-nav navbar-collapse" style="min-height: 100vh;  background-color: #1f2937;">
+						<ul class="nav" id="side-menu" style="margin-bottom: 70px;">
+							<!-- Profile -->
+							<div class="profile-sidebar" id="photoContainerProfile">
+								<img id="previewPhoto" class="nav-profile-img"
+									src="<?php echo $photoUrl ? '../uploads/' . $photoUrl : '../uploads/profile-default.png'; ?>">
+
+								<div class="text-profile">
+									<b style="text-transform: capitalize; color: #ffffff;">
+										<?php 
+											echo $name;
+										?>
+									</b>
+									<span>
+										<?php
+											if ($_SESSION['role'] == 'pp') {
+												echo 'PP';
+											} elseif ($_SESSION['role'] == 'spv') {
+												if ($privileges == 'manager') { ?>
+													<div class="level-badge-nav color-manager-nav">
+														<i class="fa fa-diamond fa-lg"></i>MANAGER
+													</div>
+												<?php } elseif ($privileges == 'developer') { ?>
+													<div class="level-badge-nav color-developer-nav">
+														<i class="fa fa-code fa-lg"></i>DEVELOPER
+													</div>
+												<?php }
+											}
+										?>
+									</span>
+								</div>
+							</div>
+
+							<!-- Navigation -->
+                            <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span></a></li>
 
                             <li class="<?= isParentActive(['register.php', 'register_edit.php', 'register_acc.php', 'register2.php', 'register_edit2.php', 'register_acc2.php', 'register_view.php', 'register_acc_edit2.php']); ?>">
-                                <a href="#"><i class="fa fa-file-text fa-fw"></i> Pendaftaran<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-file-text fa-fw"></i> <span>Pendaftaran</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['register.php', 'register_edit.php', 'register_acc.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Pendaftaran Pedagang</a></li>
                                     <li><a class="<?= isActive(['register2.php', 'register_edit2.php', 'register_acc2.php']); ?>" href="register2.php">
@@ -251,7 +457,7 @@
                             </li>
 
                             <li class="<?= isParentActive(['merchant.php', 'merchant_edit.php', 'merchant2.php', 'merchant2_edit.php']); ?>">
-                                <a href="#"><i class="fa fa-users fa-fw"></i> Pedagang<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-users fa-fw"></i> <span>Pedagang</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-check-circle fa-fw"></i> Pedagang Aktif</a></li>
                                     <li><a class="<?= isActive(['merchant2.php', 'merchant2_edit.php']); ?>" href="merchant2.php"><i class="fa fa-times-circle fa-fw"></i> Pedagang NonAktif</a></li>
@@ -267,7 +473,7 @@
                             </li> -->
 
                             <li class="<?= isParentActive(['move_select.php', 'move.php', 'move_select2.php', 'move2.php', 'move_log.php']); ?>">
-                                <a href="#"><i class="fa fa-retweet fa-fw"></i> Perpindahan Lapak<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-retweet fa-fw"></i> <span>Perpindahan Lapak</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['move_select.php', 'move.php']); ?>" href="move_select.php"><i class="fa fa-retweet fa-fw"></i> Pindah Ke Lapak Kosong</a></li>
                                     <li><a class="<?= isActive(['move_select2.php', 'move2.php']); ?>" href="move_select2.php"><i class="fa fa-retweet fa-fw"></i> Pertukaran Lapak</a></li>
@@ -276,7 +482,7 @@
                             </li>
 
                             <li class="<?= isParentActive(['nonactive_merchant.php', 'nonactive_lapak.php', 'nonactive_log.php']); ?>">
-                                <a href="#"><i class="fa fa-window-close fa-fw"></i> NonAktif<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-window-close fa-fw"></i> <span>NonAktif</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['nonactive_merchant.php']); ?>" href="nonactive_merchant.php"><i class="fa fa-user-times fa-fw"></i> NonAktif Pedagang</a></li>
                                     <!-- <li><a class="<?= isActive(['nonactive_lapak.php']); ?>" href="nonactive_lapak.php"><i class="fa fa-window-close-o fa-fw"></i> NonAktif Lapak</a></li> -->
@@ -293,7 +499,7 @@
                             </li>
 
                             <li class="<?= isParentActive(['report_merchant.php', 'report_credit.php']); ?>">
-                                <a href="#"><i class="fa fa-clipboard fa-fw"></i> Laporan<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-clipboard fa-fw"></i> <span>Laporan</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a class="<?= isActive(['report_merchant.php', 'move.php']); ?>" href="report_merchant.php"><i class="fa fa-group fa-fw"></i> Data Pedagang</a></li>
                                     <!-- <li><a class="<?= isActive(['report_credit.php', 'move.php']); ?>" href="report_credit.php"><i class="fa fa-book fa-fw"></i> Piutang Lapak</a></li> -->
@@ -302,7 +508,7 @@
 
 							<?php if($_SESSION['role'] == 'spv'){ ?>
 								<li class="<?= isParentActive(['admin.php', 'lapak.php', 'lapak_edit.php', 'block.php', 'block_edit.php', 'instalment.php', 'instalment_edit.php']); ?>"> 
-									<a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
+									<a href="#"><i class="fa fa-database fa-fw"></i> <span>Master</span><span class="fa arrow"></span></a>
 									<ul class="nav nav-second-level">
 										<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP </a></li>
 										<li><a class="<?= isActive(['block.php', 'block_edit.php']); ?>" href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
@@ -312,7 +518,7 @@
 								</li>
 							<?php } ?>
 
-							<li><a class="<?= isActive(['changelog.php']); ?>" href="changelog.php"><i class="fa fa-history fa-fw"></i> Update Log</a></li>
+							<li><a class="<?= isActive(['changelog.php']); ?>" href="changelog.php"><i class="fa fa-history fa-fw"></i> <span>Update Log</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -363,6 +569,22 @@
 		$(".dropdown").on("hidden.bs.dropdown", function() {
 			$("#dropdownIcon").removeClass("fa-angle-up").addClass("fa-angle-down");
 		});
+	});
+</script>
+
+<!-- Viewer JS untuk zoom foto profil -->
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+
+		const container = document.getElementById('photoContainerProfile');
+
+		const viewer = new Viewer(container, {
+			navbar: false,
+			toolbar: true,
+			title: false,
+			zoomRatio: 0.5,
+		});
+
 	});
 </script>
 
