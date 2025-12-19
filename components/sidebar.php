@@ -155,7 +155,12 @@
 	}
 
 	/* Sembunyikan text */
-	body.sidebar-collapse .profile-sidebar .text-profile {
+	body.sidebar-collapse .text-profile {
+		display: none;
+	}
+
+	/* SEMBUNYIKAN TEKS */
+	body.sidebar-collapse .profile-info {
 		display: none;
 	}
 
