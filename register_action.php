@@ -191,7 +191,7 @@
 			
 			//Ambil ID Pemohon
 			$rid 	= mysql_insert_id();
-			var_dump($insert);
+			// var_dump($insert);
 			if($insert){
 				//echo "<script>window.location=('register_edit.php?id=".$rid."')</script>";
 				$_SESSION['success'] = true;
