@@ -720,6 +720,8 @@
 										<?php
 											if ($_SESSION['role'] == 'pp') {
 												echo '<span class="role-badge">PP</span>';
+											} if ($_SESSION['role'] == 'keuangan') {
+												echo '<span class="role-badge">KEUANGAN</span>';
 											} elseif ($_SESSION['role'] == 'spv') {
 												if ($privileges == 'manager') { ?>
 													<div class="level-badge-nav color-manager-nav">
@@ -810,7 +812,7 @@
 								<li class="<?= isParentActive(['admin.php', 'lapak.php', 'lapak_edit.php', 'block.php', 'block_edit.php', 'instalment.php', 'instalment_edit.php']); ?>"> 
 									<a href="#"><i class="fa fa-database fa-fw"></i> <span>Master</span><span class="fa arrow"></span></a>
 									<ul class="nav nav-second-level">
-										<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP </a></li>
+										<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP / Keuangan</a></li>
 										<li><a class="<?= isActive(['block.php', 'block_edit.php']); ?>" href="block.php"><i class="fa fa-sort-alpha-asc fa-fw"></i> Block</a></li>
 										<li><a class="<?= isActive(['lapak.php', 'lapak_edit.php']); ?>" href="lapak.php"><i class="fa fa-building fa-fw"></i> Lapak</a></li>
 										<!-- <li><a class="<?= isActive(['instalment.php', 'instalment_edit.php']); ?>" href="instalment.php"><i class="fa fa-clock-o fa-fw"></i> Jangka Waktu Cicilan</a></li> -->
