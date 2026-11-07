@@ -1,38 +1,55 @@
 services:
-    web:
+    app:
         build: .
+        restart: unless-stopped
         ports:
             - "8084:80"
         environment:
             DB_HOST: db
-            DB_USER: root
-            DB_PASS: ""
-            DB_NAME: db_piss
+            DB_USERNAME: root
+            DB_PASSWORD: ""
+            DB_DATABASE: db_piss
         depends_on:
-            - db
-        volumes:
-            - .:/var/www/html
-    phpmyadmin:
-        image: phpmyadmin:5.2-apache
-        ports:
-            - "8085:80"
-        environment:
-            PMA_HOST: db
-            UPLOAD_LIMIT: 256M
-        volumes:
-            - ./docker/phpmyadmin-upload.ini:/usr/local/etc/php/conf.d/upload.ini
-        depends_on:
-            - db
+            db:
+                condition: service_healthy
+
     db:
         image: mysql:5.7
+        restart: unless-stopped
+        command: --max-allowed-packet=512M
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
             MYSQL_DATABASE: db_piss
         ports:
-            - "3307:3306"
+            - "3308:3306"
         volumes:
             - db_data:/var/lib/mysql
-        command: --max_allowed_packet=256M
+        healthcheck:
+            test:
+                [
+                    "CMD-SHELL",
+                    "mysqladmin ping -h 127.0.0.1 -u root --silent",
+                ]
+            interval: 5s
+            timeout: 5s
+            retries: 20
+            start_period: 10s
+
+    phpmyadmin:
+        image: phpmyadmin:5.2-apache
+        restart: unless-stopped
+        ports:
+            - "8085:80"
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+            UPLOAD_LIMIT: 256M
+            MAX_EXECUTION_TIME: 600
+            MEMORY_LIMIT: 512M
+        depends_on:
+            db:
+                condition: service_healthy
 
 volumes:
     db_data:
